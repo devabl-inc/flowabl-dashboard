@@ -1,4 +1,4 @@
-export default {
+ const userProfile = {
   "id": "59aebdec742453efce952Dde",
   "email": "johndoe@ibm.com",
   "name": "John Doe",
@@ -14,3 +14,5 @@ export default {
   "personalizations": {},
   "notificationSettings": {}
 };
+
+export default userProfile;

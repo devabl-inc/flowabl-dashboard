@@ -1,3 +1,5 @@
+
+//@ts-nocheck
 import React from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
@@ -64,10 +66,30 @@ function Navbar(props) {
                     activeClassName={activeClassName}
                     element={NavLink}
                     onClick={onMenuClose}
-                    to={AppPath.Users}
-                    key="/users"
+                    to={AppPath.Account}
+                    key="/account"
                   >
-                    Users
+                    Account
+                  </SideNavLink>
+                  <SideNavLink
+                    large
+                    activeClassName={activeClassName}
+                    element={NavLink}
+                    onClick={onMenuClose}
+                    to={AppPath.Subscription}
+                    key="/subscription"
+                  >
+                    Subscription
+                  </SideNavLink>
+                  <SideNavLink
+                    large
+                    activeClassName={activeClassName}
+                    element={NavLink}
+                    onClick={onMenuClose}
+                    to={AppPath.Usage}
+                    key="/usage"
+                  >
+                    Usage
                   </SideNavLink>
                 </SideNavItems>
               </SideNav>

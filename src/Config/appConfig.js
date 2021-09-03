@@ -12,6 +12,9 @@ export const isTestEnv = process.env.NODE_ENV === "test";
 
 export const AppPath = {
   Root: "/",
+  Account: "/account",
+  Subscription: "/subscription",
+  Usage: "/usage",
   Users: "/users",
   UsersCurrent: "/users/current",
   UsersList: "/users/list",

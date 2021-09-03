@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React from "react";
 import { useQuery } from "react-query";
 import { ErrorBoundary, Loading } from "@boomerang-io/carbon-addons-boomerang-react";

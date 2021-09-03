@@ -34,16 +34,18 @@ function Users() {
           </Tabs>
         }
         actions={
+          <div>
           <Button
             renderIcon={Save16}
             iconDescription="Save"
             onClick={() => {
               console.log("Do something here!");
             }}
-            size="field"
+            size="hello"
           >
             Update Users
           </Button>
+          </div>
         }
       />
       <Switch>

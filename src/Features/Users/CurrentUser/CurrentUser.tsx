@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React from "react";
 import { CodeSnippet } from "@boomerang-io/carbon-addons-boomerang-react";
 

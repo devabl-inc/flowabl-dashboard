@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React, { Suspense, lazy } from "react";
 import PropTypes from "prop-types";
 import { Switch, Route } from "react-router-dom";
@@ -9,7 +10,9 @@ Main.propTypes = {
   user: PropTypes.object.isRequired,
 };
 
-const Users = lazy(() => import(/* webpackChunkName: "Users" */ "Features/Users"));
+const Account = lazy(() => import(/* webpackChunkName: "Users" */ "Features/Account"));
+const Subscription = lazy(() => import(/* webpackChunkName: "Users" */ "Features/Subscription"));
+const Usage = lazy(() => import(/* webpackChunkName: "Users" */ "Features/Usage"));
 
 function Main({ user }) {
   return (
@@ -24,14 +27,20 @@ function Main({ user }) {
         <Switch>
           <Route exact path={AppPath.Root}>
             <article className={styles.welcome}>
-              <h1>Hello!</h1>
-              <p>Welcome to the Create React App Boomerang Template.</p>
+              <h1>Welcome!</h1>
+              <p>Boomerang Flow Dashboard :0</p>
               <br />
               <p>Select the hamburger menu to navigate to other pages.</p>
             </article>
           </Route>
-          <Route path={AppPath.Users}>
-            <Users user={user} />
+          <Route path={AppPath.Account}>
+            <Account />
+          </Route>
+          <Route path={AppPath.Subscription}>
+            <Subscription />
+          </Route>
+          <Route path={AppPath.Usage}>
+            <Usage  />
           </Route>
           <Route path={"*"}>
             <Error404 />
