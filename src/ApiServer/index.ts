@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { Server, Serializer, Model } from "miragejs";
 import { inflections } from "inflected";
 import { serviceUrl } from "Config/servicesConfig";

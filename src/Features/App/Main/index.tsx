@@ -10,9 +10,9 @@ Main.propTypes = {
   user: PropTypes.object.isRequired,
 };
 
-const Account = lazy(() => import(/* webpackChunkName: "Users" */ "Features/Account"));
+const Profile = lazy(() => import(/* webpackChunkName: "Users" */ "Features/Profile"));
 const Subscription = lazy(() => import(/* webpackChunkName: "Users" */ "Features/Subscription"));
-const Usage = lazy(() => import(/* webpackChunkName: "Users" */ "Features/Usage"));
+const Support = lazy(() => import(/* webpackChunkName: "Users" */ "Features/Support"));
 
 function Main({ user }) {
   return (
@@ -33,14 +33,14 @@ function Main({ user }) {
               <p>Select the hamburger menu to navigate to other pages.</p>
             </article>
           </Route>
-          <Route path={AppPath.Account}>
-            <Account />
+          <Route path={AppPath.Profile}>
+            <Profile />
           </Route>
           <Route path={AppPath.Subscription}>
             <Subscription />
           </Route>
-          <Route path={AppPath.Usage}>
-            <Usage  />
+          <Route path={AppPath.Support}>
+            <Support  />
           </Route>
           <Route path={"*"}>
             <Error404 />

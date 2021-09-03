@@ -66,8 +66,8 @@ function Navbar(props) {
                     activeClassName={activeClassName}
                     element={NavLink}
                     onClick={onMenuClose}
-                    to={AppPath.Account}
-                    key="/account"
+                    to={AppPath.Profile}
+                    key="/Profile"
                   >
                     Account
                   </SideNavLink>
@@ -77,7 +77,7 @@ function Navbar(props) {
                     element={NavLink}
                     onClick={onMenuClose}
                     to={AppPath.Subscription}
-                    key="/subscription"
+                    key="/Subscription"
                   >
                     Subscription
                   </SideNavLink>
@@ -86,8 +86,8 @@ function Navbar(props) {
                     activeClassName={activeClassName}
                     element={NavLink}
                     onClick={onMenuClose}
-                    to={AppPath.Usage}
-                    key="/usage"
+                    to={AppPath.Support}
+                    key="/Support"
                   >
                     Usage
                   </SideNavLink>

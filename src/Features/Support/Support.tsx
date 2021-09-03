@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Account() {
+export default function Support() {
     return (
         <div>
-            Account!
+            Support!
         </div>
     )
 }

@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Usage() {
+export default function Profile() {
     return (
         <div>
-            Usage!
+            Profile!
         </div>
     )
 }
