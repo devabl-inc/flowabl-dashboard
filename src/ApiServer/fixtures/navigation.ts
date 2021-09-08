@@ -10,10 +10,10 @@ const navigation = {
     "notifications.enabled": false
   },
   "platform": {
-    "name": "IBM Boomerang Platform",
+    "name": "Flowabl",
     "version": "5.0.0",
     "signOutUrl": "ibm.com",
-    "platformName": "Boomerang Flow",
+    "platformName": "Flowabl",
     "displayLogo": false,
     "privateTeams": false,
     "sendMail": true

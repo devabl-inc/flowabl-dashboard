@@ -1,13 +1,28 @@
-.container {
-  background-color: var(--cds-ui-background);
-  flex: 1;
-  margin-top: 3rem;
-  min-height: calc(100vh - 3rem);
-  min-width: 60rem;
-  width: 100%;
-}
+
 
 .welcome {
   text-align: center;
-  padding-top: 5rem;
+  padding: 1rem 2rem;
+}
+
+.tileContainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.tile {
+  width: 16rem;
+  height: 16rem;
+  background: var(--cds-field);
+  border-radius: 0.25rem;
+  box-shadow: 0 10px 25px 3px var(--cds-hover-ui);
+}
+
+.tileTitle {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+}
+
+.buttonsContainer {
+  margin-top: 4rem;
 }

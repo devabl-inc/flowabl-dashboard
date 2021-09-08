@@ -1,0 +1,52 @@
+.container {
+    overflow: hidden;
+}
+.contentContainer {
+    margin: 4rem;
+}
+
+
+.tilesContainer {
+    margin: 2rem 2rem;
+    display: flex;
+    gap: 4rem;
+    justify-content: center;
+    flex-flow: wrap;
+
+  }
+  
+  .tile {
+    display: flex;
+    font-weight: 500;
+    flex-direction: column;
+    width: 20rem;
+    height: 20rem;
+    background: var(--cds-field);
+    padding: 0 1rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 10px 25px 3px var(--cds-hover-ui);
+    cursor: pointer;
+    
+    li {
+        line-height: 2;
+    }
+
+    &[data-status='active'] {
+        opacity: 0.625;
+    }
+  }
+  
+  .tileTitle {
+    margin-top: 1rem;
+    font-size: 1.25rem;
+    margin-bottom: 1rem; 
+    font-weight: 600;
+  }
+
+  .buttonsContainer {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    margin-top: 4rem;
+  }
+  
