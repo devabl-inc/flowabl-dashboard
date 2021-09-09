@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, RadioTile, TileGroup, UnorderedList, ListItem, FeatureHeader, FeatureHeaderTitle, FeatureHeaderSubtitle } from "@boomerang-io/carbon-addons-boomerang-react";
+import { Button, RadioTile, UnorderedList, ListItem, FeatureHeader, FeatureHeaderTitle, FeatureHeaderSubtitle } from "@boomerang-io/carbon-addons-boomerang-react";
 import { Delete16 } from "@carbon/icons-react";
 import styles from "./Subscription.module.scss";
 
