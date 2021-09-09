@@ -3,6 +3,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import { ErrorBoundary, Loading } from "@boomerang-io/carbon-addons-boomerang-react";
 import AppContext from "State/appContext";
+import Chatwoot from "Components/Chatwoot";
 import ErrorDragon from "Components/ErrorDragon";
 import Navbar from "./Navbar";
 import Main from "./Main";
@@ -35,6 +36,7 @@ export function App() {
       <ErrorBoundary errorComponent={ErrorDragon}>
         <AppContext.Provider value={{ user: userData, navigation: navigationData }}>
           <Main user={userData} />
+          <Chatwoot />
         </AppContext.Provider>
       </ErrorBoundary>
     </>

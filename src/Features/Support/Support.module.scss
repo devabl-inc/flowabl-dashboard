@@ -1,55 +1,53 @@
 @import "Styles/mixins";
 
 .contentContainer {
-    display: flex;
-    justify-content: center;
-    padding: 4rem;
+  display: flex;
+  justify-content: center;
+  padding: 4rem;
 }
 
 .tilesContainer {
-    display: flex;
-    gap: 1rem;  
-    flex-wrap: wrap;
-    max-width: 80rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  max-width: 80rem;
+}
 
-  }
-  
-  .tile {
+.tile {
+  color: var(--cds-text-01);
+  display: flex;
+  font-weight: 500;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 24rem;
+  height: 12rem;
+  background: var(--cds-field);
+  border-radius: 0.25rem;
+  //box-shadow: 0 10px 25px 3px var(--cds-hover-ui);
+  cursor: pointer;
+  padding: 1rem;
+
+  &:hover {
     color: var(--cds-text-01);
-    display: flex;
-    font-weight: 500;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-    width: 24rem;
-    height: 12rem;
-    background: var(--cds-field);
-    border-radius: 0.25rem;
-    //box-shadow: 0 10px 25px 3px var(--cds-hover-ui);
-    cursor: pointer;
-    padding: 1rem;
-
-    &:hover {
-        color: var(--cds-text-01);
-        text-decoration: none;
-    }
-
-    &:focus {
-        @include focus-outline($offset: -0.125rem);
-      }
-
-      svg {
-          fill: var(--cds-text-01);
-      }
+    text-decoration: none;
   }
-  
-  .tileTitle {
-    color: var(--cds-text-01);
-    font-size: 1.125rem;
-    line-height: 1.4375rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
+
+  &:focus {
+    @include focus-outline($offset: -0.125rem);
   }
-  
+
+  svg {
+    fill: var(--cds-text-01);
+  }
+}
+
+.tileTitle {
+  color: var(--cds-text-01);
+  font-size: 1.125rem;
+  line-height: 1.4375rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}

@@ -1,32 +1,31 @@
 .container {
-    margin: 2rem 4rem;
+  margin: 2rem 4rem;
 }
 
-.infoContainer { 
-    width: 20rem;
-    > * + * {
-        margin-top: 1rem;
-    }
+.infoContainer {
+  width: 20rem;
+  > * + * {
+    margin-top: 1rem;
+  }
 }
 
 .infoLabel {
-    font-size: 0.925rem;
-    color: var(--cds-text-02);
-    line-height: 1.5;
+  font-size: 0.925rem;
+  color: var(--cds-text-02);
+  line-height: 1.5;
 }
 
 .infoText {
 }
 
 .buttonsContainer {
-    display: flex;
-    justify-content: flex-start;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-top: 2rem;
+}
 
-  .infoContainer {
-      display: flex;
-      flex-direction: column;
-  }
-  
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+}

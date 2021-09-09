@@ -1,63 +1,60 @@
 .container {
-    overflow: hidden;
+  overflow: hidden;
 }
 .contentContainer {
-    margin: 2rem 4rem;
-    width: 20rem;
-    > * + * {
-        margin-top: 1rem;
-    }
+  margin: 2rem 4rem;
+  width: 20rem;
+  > * + * {
+    margin-top: 1rem;
+  }
 }
 
 .contentLabel {
-    color: var(--cds-text-02);
-    line-height: 1.5;  
-    font-size: 0.925rem;
+  color: var(--cds-text-02);
+  line-height: 1.5;
+  font-size: 0.925rem;
 }
 
-.contentText { 
+.contentText {
 }
-
 
 .tilesContainer {
-    margin: 2rem 4rem;
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    flex-flow: wrap;
+  margin: 2rem 4rem;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-flow: wrap;
+}
 
-  }
-  
-  .tile {
-    display: flex;
-    font-weight: 500;
-    flex-direction: column;
-    width: 20rem;
-    height: 20rem;
-    background: var(--cds-field);
-    border-radius: 0.25rem;
-    box-shadow: 0 10px 25px 3px var(--cds-hover-ui);
-    cursor: pointer;
-    
-    li {
-        line-height: 2;
-    }
+.tile {
+  display: flex;
+  font-weight: 500;
+  flex-direction: column;
+  width: 20rem;
+  height: 20rem;
+  background: var(--cds-field);
+  border-radius: 0.25rem;
+  box-shadow: 0 10px 25px 3px var(--cds-hover-ui);
+  cursor: pointer;
 
-    &[data-status='active'] {
-        opacity: 0.625;
-    }
-  }
-  
-  .tileTitle {
-    margin-top: 1rem;
-    font-size: 1.25rem;
-    margin-bottom: 1rem; 
-    font-weight: 600;
+  li {
+    line-height: 2;
   }
 
-  .buttonsContainer {
-      display: flex;
-      justify-content: flex-start;
-      margin: 4rem;
+  &[data-status="active"] {
+    opacity: 0.625;
   }
-  
+}
+
+.tileTitle {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: flex-start;
+  margin: 4rem;
+}
