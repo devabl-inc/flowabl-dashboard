@@ -3,13 +3,26 @@
 }
 .contentContainer {
     margin: 2rem 4rem;
+    width: 20rem;
+    > * + * {
+        margin-top: 1rem;
+    }
+}
+
+.contentLabel {
+    color: var(--cds-text-02);
+    line-height: 1.5;  
+    font-size: 0.925rem;
+}
+
+.contentText { 
 }
 
 
 .tilesContainer {
-    margin: 2rem 2rem;
+    margin: 2rem 4rem;
     display: flex;
-    gap: 4rem;
+    gap: 2rem;
     justify-content: center;
     flex-flow: wrap;
 
@@ -22,7 +35,6 @@
     width: 20rem;
     height: 20rem;
     background: var(--cds-field);
-    padding: 0 1rem;
     border-radius: 0.25rem;
     box-shadow: 0 10px 25px 3px var(--cds-hover-ui);
     cursor: pointer;
@@ -45,8 +57,7 @@
 
   .buttonsContainer {
       display: flex;
-      justify-content: center;
-      gap: 1rem;
-    margin-top: 4rem;
+      justify-content: flex-start;
+      margin: 4rem;
   }
   

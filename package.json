@@ -5,6 +5,8 @@
   "dependencies": {
     "@boomerang-io/carbon-addons-boomerang-react": "1.2.3",
     "@boomerang-io/styles": "^0.0.2",
+    "@carbon/icons-react": "^10.37.0",
+    "@carbon/pictograms-react": "^11.17.0",
     "@commitlint/cli": "8.1.0",
     "@commitlint/config-conventional": "8.1.0",
     "@cypress/webpack-preprocessor": "^5.4.1",
@@ -14,8 +16,8 @@
     "@testing-library/react-hooks": "^3.3.0",
     "@testing-library/user-event": "^12.0.2",
     "axios": "0.21.1",
-    "carbon-components": "10.41.0",
-    "carbon-components-react": "7.41.0",
+    "carbon-components": "10.43.0",
+    "carbon-components-react": "7.43.0",
     "classnames": "2.2.6",
     "commitizen": "4.0.3",
     "copyfiles": "2.3.0",
@@ -129,6 +131,7 @@
   "devDependencies": {
     "@types/carbon-components-react": "^7.36.1",
     "@types/carbon__icons-react": "^10.31.2",
+    "@types/carbon__pictograms-react": "^11.9.1",
     "@types/react": "^17.0.19",
     "@types/react-dom": "^17.0.9",
     "@types/react-helmet": "^6.1.2",

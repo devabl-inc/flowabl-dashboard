@@ -1,12 +1,28 @@
-.infoContainer { 
+.container {
     margin: 2rem 4rem;
+}
+
+.infoContainer { 
+    width: 20rem;
+    > * + * {
+        margin-top: 1rem;
+    }
+}
+
+.infoLabel {
+    font-size: 0.925rem;
+    color: var(--cds-text-02);
+    line-height: 1.5;
+}
+
+.infoText {
 }
 
 .buttonsContainer {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1rem;
-  margin-top: 4rem;
+    margin-top: 2rem;
   }
 
   .infoContainer {

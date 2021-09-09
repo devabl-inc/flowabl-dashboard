@@ -11,8 +11,8 @@ const navigation = {
   },
   "platform": {
     "name": "Flowabl",
-    "version": "5.0.0",
-    "signOutUrl": "ibm.com",
+    "version": "0.1.0",
+    "signOutUrl": "flowable.io",
     "platformName": "Flowabl",
     "displayLogo": false,
     "privateTeams": false,
