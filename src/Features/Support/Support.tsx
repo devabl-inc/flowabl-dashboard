@@ -31,7 +31,7 @@ export default function Support() {
               <Chat16 />
             </div>
           </Tile>
-          <ClickableTile light className={styles.tile} href="mailto:admin@flowabl.io?subject=Hi!">
+          <ClickableTile light className={styles.tile} href="mailto:hello@flowabl.io?subject=Hi!">
             <Envelope />
             <h2 className={styles.tileTitle}>Email</h2>
           </ClickableTile>
