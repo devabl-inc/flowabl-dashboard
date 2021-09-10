@@ -16,7 +16,7 @@ export default function Profile() {
   };
   return (
     <article>
-      <FeatureHeader>
+      <FeatureHeader includeBorder={false}>
         <FeatureHeaderTitle>Profile</FeatureHeaderTitle>
         <FeatureHeaderSubtitle>All that we know about you</FeatureHeaderSubtitle>
       </FeatureHeader>

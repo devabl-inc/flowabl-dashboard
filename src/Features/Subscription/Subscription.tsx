@@ -20,7 +20,7 @@ export default function Subscription() {
 
   return (
     <>
-      <FeatureHeader>
+      <FeatureHeader includeBorder={false}>
         <FeatureHeaderTitle>Subscription</FeatureHeaderTitle>
         <FeatureHeaderSubtitle>What you are getting for your money</FeatureHeaderSubtitle>
       </FeatureHeader>

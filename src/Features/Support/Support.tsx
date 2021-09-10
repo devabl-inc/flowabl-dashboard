@@ -23,7 +23,7 @@ export default function Support() {
 
   return (
     <article className={styles.container}>
-      <FeatureHeader>
+      <FeatureHeader includeBorder={false}>
         <FeatureHeaderTitle>Support</FeatureHeaderTitle>
         <FeatureHeaderSubtitle>How can we help?</FeatureHeaderSubtitle>
       </FeatureHeader>
