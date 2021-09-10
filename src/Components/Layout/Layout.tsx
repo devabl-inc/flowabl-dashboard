@@ -1,7 +1,7 @@
 //@ts-nocheck
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { SideNav, SideNavItems, SideNavLink } from "carbon-components-react/lib/components/UIShell";
+import { SideNav, SideNavItems, SideNavLink } from "carbon-components-react";
 import { AppPath } from "Config/appConfig";
 import styles from "./Layout.module.scss";
 
@@ -19,7 +19,7 @@ const Layout = (props: any) => (
       >
         <SideNavItems>
           <SideNavLink exact large activeClassName={activeClassName} element={NavLink} to={AppPath.Root} key="/">
-            Overview
+            Welcome
           </SideNavLink>
           <SideNavLink large activeClassName={activeClassName} element={NavLink} to={AppPath.Profile} key="/Profile">
             Profile

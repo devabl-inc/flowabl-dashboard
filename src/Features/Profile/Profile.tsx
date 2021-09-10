@@ -21,18 +21,24 @@ export default function Profile() {
         <FeatureHeaderSubtitle>All that we know about you</FeatureHeaderSubtitle>
       </FeatureHeader>
       <div className={styles.container}>
-        <dl className={styles.infoContainer}>
-          <div>
-            <dd className={styles.infoLabel}>Name</dd>
-            <dt className={styles.infoText}>
-              <TextInput value={name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)} />
-            </dt>
-          </div>
-          <div>
-            <dd className={styles.infoLabel}>Email</dd>
-            <dt className={styles.infoText}>user@flowabl.io</dt>
-          </div>
-        </dl>
+        <section>
+          <h2 className={styles.sectionTitle}>Your info</h2>
+          <dl className={styles.infoContainer}>
+            <div>
+              <dd className={styles.infoLabel}>Name</dd>
+              <dt className={styles.infoText}>
+                <TextInput
+                  value={name}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+                />
+              </dt>
+            </div>
+            <div>
+              <dd className={styles.infoLabel}>Email</dd>
+              <dt className={styles.infoText}>user@flowabl.io</dt>
+            </div>
+          </dl>
+        </section>
         <section className={styles.buttonsContainer}>
           <Button kind="danger--tertiary">Cancel</Button>
           <Button>Save</Button>

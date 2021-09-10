@@ -1,3 +1,5 @@
+import Layout from "./index";
+
 it("pass", () => {
-  expect(true).toBe(true);
+  expect(<Layout />).toBe(true);
 });

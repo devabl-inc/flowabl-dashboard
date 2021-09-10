@@ -1,3 +1,5 @@
+import Profile from "./index";
+
 it("pass", () => {
-    expect(true).toBe(true)
-})
+  expect(<Profile />).toBe(true);
+});

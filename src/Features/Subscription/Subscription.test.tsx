@@ -1,3 +1,5 @@
+import Subscription from "./index";
+
 it("pass", () => {
-    expect(true).toBe(true)
+  expect(<Subscription />).toBe(true);
 });

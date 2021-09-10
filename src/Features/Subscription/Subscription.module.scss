@@ -1,8 +1,8 @@
 .container {
   overflow: hidden;
+  margin: 2.5rem;
 }
 .contentContainer {
-  margin: 2rem 4rem;
   width: 20rem;
   > * + * {
     margin-top: 1rem;
@@ -15,14 +15,20 @@
   font-size: 0.925rem;
 }
 
-// .contentText {
-// }
+.section {
+  margin-bottom: 2rem;
+}
+
+.sectionTitle {
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
 
 .tilesContainer {
-  margin: 2rem 4rem;
+  margin: 2rem 0rem;
   display: flex;
   gap: 2rem;
-  justify-content: center;
   flex-flow: wrap;
 }
 
@@ -52,5 +58,5 @@
 .buttonsContainer {
   display: flex;
   justify-content: flex-start;
-  margin: 4rem;
+  margin: 4rem 0rem;
 }

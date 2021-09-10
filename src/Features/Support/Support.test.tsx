@@ -1,3 +1,5 @@
+import Support from "./index";
+
 it("pass", () => {
-    expect(true).toBe(true)
+  expect(<Support />).toBe(true);
 });
