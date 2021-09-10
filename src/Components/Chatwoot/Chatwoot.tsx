@@ -1,5 +1,6 @@
 //@ts-nocheck
 import React from "react";
+import { CHATWOOT_TOKEN } from "Config/appConfig";
 
 class ChatwootWidget extends React.Component {
   componentDidMount() {
@@ -20,7 +21,7 @@ class ChatwootWidget extends React.Component {
       g.async = !0;
       g.onload = function () {
         window.chatwootSDK.run({
-          websiteToken: "85PBKcBEQUiTBni6TAJTz5CF",
+          websiteToken: CHATWOOT_TOKEN,
           baseUrl: BASE_URL,
         });
       };

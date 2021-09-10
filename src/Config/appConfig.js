@@ -26,3 +26,8 @@ export const AppLink = {
   UsersCurrent: () => "/users/current",
   UsersList: () => "/users/list",
 };
+
+// TO REPLACE WITH ENV VARIABLE
+export const CHATWOOT_TOKEN = "85PBKcBEQUiTBni6TAJTz5CF";
+export const DOCS_URL = "https://www.useboomerang.io/docs";
+export const SUPPORT_EMAIL = "hello@flowabl.io";

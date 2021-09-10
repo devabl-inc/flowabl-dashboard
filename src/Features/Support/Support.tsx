@@ -6,6 +6,7 @@ import {
   FeatureHeaderTitle,
   FeatureHeaderSubtitle,
 } from "@boomerang-io/carbon-addons-boomerang-react";
+import { DOCS_URL, SUPPORT_EMAIL } from "Config/appConfig";
 import { Launch16, Chat16 } from "@carbon/icons-react";
 import { Advocate, BugVirusMalware, Envelope, QuestionAndAnswer, TextLayout, Tools } from "@carbon/pictograms-react";
 import styles from "./Support.module.scss";
@@ -24,21 +25,21 @@ export default function Support() {
       </FeatureHeader>
       <div className={styles.contentContainer}>
         <section className={styles.tilesContainer}>
-          <Tile light className={styles.tile} onClick={handleOnClick} role="button" tabIndex="0">
+          <ClickableTile light className={styles.tile} handleClick={handleOnClick} role="button" tabIndex="0">
             <QuestionAndAnswer />
             <div className={styles.tileTitle}>
               <h2>Chat</h2>
               <Chat16 />
             </div>
-          </Tile>
-          <ClickableTile light className={styles.tile} href="mailto:hello@flowabl.io?subject=Hi!">
+          </ClickableTile>
+          <ClickableTile light className={styles.tile} href={`mailto:${SUPPORT_EMAIL}?subject=Hi!`}>
             <Envelope />
             <h2 className={styles.tileTitle}>Email</h2>
           </ClickableTile>
           <ClickableTile
             light
             className={styles.tile}
-            href="https://www.useboomerang.io/docs"
+            href={DOCS_URL}
             target="_blank"
             rel="noopen nofollow"
             aria-describedby="#new-window-aria-desc-0"
@@ -49,27 +50,27 @@ export default function Support() {
               <Launch16 aria-label="Documentation opens in new tab" />
             </div>
           </ClickableTile>
-          <Tile light className={styles.tile} onClick={handleOnClick} role="button" tabIndex="0">
+          <ClickableTile light className={styles.tile} handleClick={handleOnClick} role="button" tabIndex="0">
             <BugVirusMalware />
             <div className={styles.tileTitle}>
               <h2>Report a bug</h2>
               <Chat16 />
             </div>
-          </Tile>
-          <Tile light className={styles.tile} onClick={handleOnClick} role="button" tabIndex="0">
+          </ClickableTile>
+          <ClickableTile light className={styles.tile} handleClick={handleOnClick} role="button" tabIndex="0">
             <Tools />
             <div className={styles.tileTitle}>
               <h2>Request a feature</h2>
               <Chat16 />
             </div>
-          </Tile>
-          <Tile light className={styles.tile} onClick={handleOnClick} role="button" tabIndex="0">
+          </ClickableTile>
+          <ClickableTile light className={styles.tile} handleClick={handleOnClick} role="button" tabIndex="0">
             <Advocate />
             <div className={styles.tileTitle}>
               <h2>Request workflow help (premium only)</h2>
               <Chat16 />
             </div>
-          </Tile>
+          </ClickableTile>
         </section>
       </div>
     </article>
