@@ -13,8 +13,6 @@ import styles from "./Support.module.scss";
 export default function Support() {
   const handleOnClick = () => {
     //@ts-ignore
-    console.log(window.$chatwoot);
-    //@ts-ignore
     window.$chatwoot.toggle();
   };
 
@@ -26,7 +24,7 @@ export default function Support() {
       </FeatureHeader>
       <div className={styles.contentContainer}>
         <section className={styles.tilesContainer}>
-          <Tile light onClick={handleOnClick} className={styles.tile} role="button" tabIndex="0">
+          <Tile light className={styles.tile} onClick={handleOnClick} role="button" tabIndex="0">
             <QuestionAndAnswer />
             <div className={styles.tileTitle}>
               <h2>Chat</h2>
@@ -51,21 +49,21 @@ export default function Support() {
               <Launch16 aria-label="Documentation opens in new tab" />
             </div>
           </ClickableTile>
-          <Tile light className={styles.tile} role="button" tabIndex="0">
+          <Tile light className={styles.tile} onClick={handleOnClick} role="button" tabIndex="0">
             <BugVirusMalware />
             <div className={styles.tileTitle}>
               <h2>Report a bug</h2>
               <Chat16 />
             </div>
           </Tile>
-          <Tile light className={styles.tile} role="button" tabIndex="0">
+          <Tile light className={styles.tile} onClick={handleOnClick} role="button" tabIndex="0">
             <Tools />
             <div className={styles.tileTitle}>
               <h2>Request a feature</h2>
               <Chat16 />
             </div>
           </Tile>
-          <Tile light onClick={handleOnClick} className={styles.tile} role="button" tabIndex="0">
+          <Tile light className={styles.tile} onClick={handleOnClick} role="button" tabIndex="0">
             <Advocate />
             <div className={styles.tileTitle}>
               <h2>Request workflow help (premium only)</h2>
