@@ -21,6 +21,36 @@ const Layout = (props: any) => (
           <SideNavLink exact large activeClassName={activeClassName} element={NavLink} to={AppPath.Root} key="/">
             Welcome
           </SideNavLink>
+          <SideNavLink
+            exact
+            large
+            activeClassName={activeClassName}
+            element={NavLink}
+            to={"/overview2"}
+            key="/overview2"
+          >
+            Welcome2
+          </SideNavLink>
+          <SideNavLink
+            exact
+            large
+            activeClassName={activeClassName}
+            element={NavLink}
+            to={"/overview3"}
+            key="/overview3"
+          >
+            Welcome3
+          </SideNavLink>
+          <SideNavLink
+            exact
+            large
+            activeClassName={activeClassName}
+            element={NavLink}
+            to={"/overview4"}
+            key="/overview4"
+          >
+            Welcome4
+          </SideNavLink>
           <SideNavLink large activeClassName={activeClassName} element={NavLink} to={AppPath.Profile} key="/Profile">
             Profile
           </SideNavLink>

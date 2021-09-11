@@ -1,17 +1,18 @@
 import React from "react";
-import { Button, FeatureHeaderTitle } from "@boomerang-io/carbon-addons-boomerang-react";
-import { Rocket24, Upgrade24, WorkspaceImport24, Events24 } from "@carbon/icons-react";
+import { Button, FeatureHeaderTitle, Link } from "@boomerang-io/carbon-addons-boomerang-react";
+import { Link as RRLink } from "react-router-dom";
+import { Rocket24, Upgrade24, WorkspaceImport24, Events24, Help24 } from "@carbon/icons-react";
 import styles from "./Overview.module.scss";
 
 export default function Overview() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1>Welcome</h1>
+        <h1 style={{ color: "white" }}>Welcome</h1>
       </div>
       <div className={styles.content}>
         <FeatureHeaderTitle>
-          <span style={{ color: "white" }}> Hello, user! </span>
+          <span> Hello, user! </span>
           <span role="img" aria-label="Hi!">
             👋
           </span>
@@ -21,29 +22,44 @@ export default function Overview() {
           with make your experience a good one.
         </p>
         <section className={styles.buttonsContainer}>
-          <Button kind="secondary" renderIcon={Rocket24}>
+          <Button renderIcon={Rocket24} style={{ background: "#003d73" }}>
             Launch Flowabl
           </Button>
         </section>
         <CheckoutSection
           title="Create your first workflow"
-          text="Creating your first workflow is simple. Go to the app and do this. Do that. Etc. etc. look at the documentation if you have any questions!"
-          icon={<Rocket24 fill="#df86a1" />}
+          text={
+            <span>
+              Creating your first workflow is simple. Go to the app and do this. Do that. Etc. etc. look at the
+              documentation if you have any questions. <Link href="/">Launch Flowabl to get started!</Link>
+            </span>
+          }
+          icon={<Rocket24 fill="#009d9a" />}
         />
         <CheckoutSection
           title="Create a team"
           text="Creating your first workflow is simple. Go to the app and do this. Do that. Etc. etc. look at the documentation if you have any questions!"
-          icon={<Events24 fill="#df86a1" />}
+          icon={<Events24 fill="#017288" />}
         />
         <CheckoutSection
           title="Use a template"
           text="We have a number of handy, pre-built workflwo templates to get started quickly. Go to the app and do this. Do that. Etc. etc. look at the documentation if you have any questions!"
-          icon={<WorkspaceImport24 fill="#df86a1" />}
+          icon={<WorkspaceImport24 fill="#00597e" />}
         />
         <CheckoutSection
           title="Embrace, extend, and embrace again"
           text="Extend Flowabl with custom workflows. Contribute to the growing ecosystem of actions in the open source."
-          icon={<Upgrade24 fill="#df86a1" />}
+          icon={<Upgrade24 fill="#003d73" />}
+        />
+        <CheckoutSection
+          title="Need to do more?"
+          text={
+            <span>
+              Are you running out of executions? Or need to create more workflows? You can upgrade your subscription
+              tier at any time. <RRLink to="/subscription">Head to the subscription page</RRLink> to see your options.
+            </span>
+          }
+          icon={<Help24 fill="#061727" />}
         />
       </div>
     </div>

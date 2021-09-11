@@ -35,10 +35,6 @@
   &:focus {
     @include focus-outline($offset: -0.125rem);
   }
-
-  svg {
-    fill: var(--cds-text-01);
-  }
 }
 
 .tileTitle {

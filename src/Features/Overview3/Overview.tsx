@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, FeatureHeaderTitle } from "@boomerang-io/carbon-addons-boomerang-react";
-import { Rocket24, Upgrade24, WorkspaceImport24, Events24 } from "@carbon/icons-react";
+import { Rocket24 } from "@carbon/icons-react";
 import styles from "./Overview.module.scss";
 
 export default function Overview() {
@@ -28,22 +28,38 @@ export default function Overview() {
         <CheckoutSection
           title="Create your first workflow"
           text="Creating your first workflow is simple. Go to the app and do this. Do that. Etc. etc. look at the documentation if you have any questions!"
-          icon={<Rocket24 fill="#df86a1" />}
+          icon={
+            <span role="img" aria-label="Hi!">
+              🚀
+            </span>
+          }
         />
         <CheckoutSection
           title="Create a team"
           text="Creating your first workflow is simple. Go to the app and do this. Do that. Etc. etc. look at the documentation if you have any questions!"
-          icon={<Events24 fill="#df86a1" />}
+          icon={
+            <span role="img" aria-label="Hi!">
+              👩‍👩‍👦
+            </span>
+          }
         />
         <CheckoutSection
           title="Use a template"
           text="We have a number of handy, pre-built workflwo templates to get started quickly. Go to the app and do this. Do that. Etc. etc. look at the documentation if you have any questions!"
-          icon={<WorkspaceImport24 fill="#df86a1" />}
+          icon={
+            <span role="img" aria-label="Hi!">
+              💕
+            </span>
+          }
         />
         <CheckoutSection
           title="Embrace, extend, and embrace again"
           text="Extend Flowabl with custom workflows. Contribute to the growing ecosystem of actions in the open source."
-          icon={<Upgrade24 fill="#df86a1" />}
+          icon={
+            <span role="img" aria-label="Hi!">
+              🥰
+            </span>
+          }
         />
       </div>
     </div>

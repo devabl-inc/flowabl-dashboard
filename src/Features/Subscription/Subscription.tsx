@@ -48,7 +48,7 @@ export default function Subscription() {
           </dl>
         </section>
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Manage Subscription (coming soon!)</h2>
+          <h2 className={styles.sectionTitle}>Manage subscription (coming soon!)</h2>
           <div className={styles.tilesContainer}>
             <RadioTile
               disabled
