@@ -22,9 +22,11 @@ export default function Overview() {
           with make your experience a good one.
         </p>
         <section className={styles.buttonsContainer}>
-          <Button renderIcon={Rocket24} style={{ background: "#003d73" }}>
-            Launch Flowabl
-          </Button>
+          <a rel="noopener nofollow noreferrer" target="_blank" href="https://app.flowabl.io/apps/flow/workflows">
+            <Button renderIcon={Rocket24} style={{ background: "#003d73" }}>
+              Launch Flowabl
+            </Button>
+          </a>
         </section>
         <CheckoutSection
           title="Create your first workflow"
@@ -33,7 +35,7 @@ export default function Overview() {
               Creating your first workflow is simple. Start from scratch or from a template. Take a look at the
               documentation if you have any questions.{" "}
               <Link
-                rel="noopener nofollow"
+                rel="noopener nofollow noreferrer"
                 target="_blank"
                 href="https://app.flowabl.io/apps/flow/workflows"
                 style={{ display: "inline-flex", alignItems: "center" }}

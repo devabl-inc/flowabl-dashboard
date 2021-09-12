@@ -48,7 +48,7 @@ export default function Support() {
             className={styles.tile}
             href={DOCS_URL}
             target="_blank"
-            rel="noopen nofollow"
+            rel="noopen nofollow noreferrer"
             aria-describedby="#new-window-aria-desc-0"
           >
             <TextLayout fill="#009d9a" />
