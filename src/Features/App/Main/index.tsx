@@ -12,9 +12,6 @@ Main.propTypes = {
 };
 
 const Overview = lazy(() => import(/* webpackChunkName: "Overview" */ "Features/Overview"));
-const Overview2 = lazy(() => import(/* webpackChunkName: "Overview2" */ "Features/Overview2"));
-const Overview3 = lazy(() => import(/* webpackChunkName: "Overview3" */ "Features/Overview3"));
-const Overview4 = lazy(() => import(/* webpackChunkName: "Overview4" */ "Features/Overview4"));
 const Profile = lazy(() => import(/* webpackChunkName: "Profile" */ "Features/Profile"));
 const Subscription = lazy(() => import(/* webpackChunkName: "Subscription" */ "Features/Subscription"));
 const Support = lazy(() => import(/* webpackChunkName: "Support" */ "Features/Support"));
@@ -33,15 +30,6 @@ function Main({ user }) {
           <Switch>
             <Route exact path={AppPath.Root}>
               <Overview />
-            </Route>
-            <Route exact path={"/overview2"}>
-              <Overview2 />
-            </Route>
-            <Route exact path={"/overview3"}>
-              <Overview3 />
-            </Route>
-            <Route exact path={"/overview4"}>
-              <Overview4 />
             </Route>
             <Route path={AppPath.Profile}>
               <Profile />

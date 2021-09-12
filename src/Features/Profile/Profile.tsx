@@ -10,7 +10,7 @@ import { Delete16 } from "@carbon/icons-react";
 import styles from "./Profile.module.scss";
 
 export default function Profile() {
-  const [name, setName] = React.useState("Bob");
+  const [name, setName] = React.useState("Ada");
   const handleDelete = () => {
     alert(`Are you sure? Everything will be gone.`);
   };
@@ -35,13 +35,15 @@ export default function Profile() {
             </div>
             <div>
               <dd className={styles.infoLabel}>Email</dd>
-              <dt className={styles.infoText}>user@flowabl.io</dt>
+              <dt className={styles.infoText}>ada@flowabl.io</dt>
             </div>
           </dl>
         </section>
         <section className={styles.buttonsContainer}>
-          <Button kind="danger--tertiary">Cancel</Button>
-          <Button>Save</Button>
+          <Button disabled={name === "Ada" || name === ""} kind="danger--tertiary">
+            Cancel
+          </Button>
+          <Button disabled={name === "Ada" || name === ""}>Update</Button>
         </section>
         <section className={styles.buttonsContainer}>
           <Button kind="danger" renderIcon={Delete16} onClick={handleDelete}>

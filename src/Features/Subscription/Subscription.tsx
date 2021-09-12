@@ -18,6 +18,10 @@ export default function Subscription() {
     setSelected(tier);
   };
 
+  const handleDelete = () => {
+    alert(`Are you sure? Everything will be gone.`);
+  };
+
   return (
     <>
       <FeatureHeader includeBorder={false}>
@@ -113,7 +117,7 @@ export default function Subscription() {
           </div>
         </section>
         <section className={styles.buttonsContainer}>
-          <Button kind="danger" renderIcon={Delete16}>
+          <Button kind="danger" renderIcon={Delete16} onClick={handleDelete}>
             Cancel Subscription
           </Button>
         </section>
