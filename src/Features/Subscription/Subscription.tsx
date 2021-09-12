@@ -18,8 +18,8 @@ export default function Subscription() {
     setSelected(tier);
   };
 
-  const handleDelete = () => {
-    alert(`Are you sure? Everything will be gone.`);
+  const handleCancel = () => {
+    alert(`Are you sure? You will be dropped down to the free tier.`);
   };
 
   return (
@@ -117,7 +117,7 @@ export default function Subscription() {
           </div>
         </section>
         <section className={styles.buttonsContainer}>
-          <Button kind="danger" renderIcon={Delete16} onClick={handleDelete}>
+          <Button kind="danger" renderIcon={Delete16} onClick={handleCancel}>
             Cancel Subscription
           </Button>
         </section>
