@@ -4,7 +4,5 @@
  * and added to the window as a global variable by the @boomerang/boomerang-webapp-server
  * MAY NOT BE NEEDED
  */
-export const BASE_LAUNCH_ENV_URL =
-  window._SERVER_DATA && window._SERVER_DATA.BASE_LAUNCH_ENV_URL
-    ? window._SERVER_DATA.BASE_LAUNCH_ENV_URL
-    : '';
+export const PRODUCT_ENV_URL =
+  window._SERVER_DATA && window._SERVER_DATA.PRODUCT_ENV_URL ? window._SERVER_DATA.PRODUCT_ENV_URL : "";

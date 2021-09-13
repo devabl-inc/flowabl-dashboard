@@ -32,7 +32,6 @@ export const AppLink = {
 export const CHATWOOT_TOKEN = "85PBKcBEQUiTBni6TAJTz5CF";
 export const DOCS_URL = "https://www.useboomerang.io/docs";
 export const SUPPORT_EMAIL = "hello@flowabl.io";
-export const PROD_URL = "https://flowabl.io";
 export const DEV_URL = "http://localhost:3000";
 
 export const Tiers: Record<string, Tier> = {

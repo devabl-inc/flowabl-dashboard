@@ -2,7 +2,7 @@ declare global {
   interface Window {
     _SERVER_DATA: {
       APP_ROOT: string;
-      BASE_LAUNCH_ENV_URL: string;
+      PRODUCT_ENV_URL: string;
       PRODUCT_SERVICE_ENV_URL: string;
       [key: string]: string;
     };

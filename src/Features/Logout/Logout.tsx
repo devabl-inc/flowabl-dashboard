@@ -29,7 +29,7 @@ export default function Logout() {
         >
           Log Out
         </Button>
-        <p style={{ marginTop: "0.5rem" }}>You'll be redirected to the Flowabl home page</p>
+        <p style={{ marginTop: "0.5rem" }}>You'll be redirected to the Flowabl home page.</p>
       </section>
     </article>
   );

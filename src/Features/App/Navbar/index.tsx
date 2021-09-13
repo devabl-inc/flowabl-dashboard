@@ -1,19 +1,16 @@
-
 //@ts-nocheck
 import React from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import { UIShell } from "@boomerang-io/carbon-addons-boomerang-react";
-import { BASE_LAUNCH_ENV_URL } from "Config/platformUrlConfig";
+import { PRODUCT_ENV_URL } from "Config/platformUrlConfig";
 import { BASE_URL } from "Config/servicesConfig";
 
 const defaultUIShellProps = {
   baseServiceUrl: BASE_URL,
   renderLogo: false,
-  baseLaunchEnvUrl: BASE_LAUNCH_ENV_URL,
+  baseLaunchEnvUrl: PRODUCT_ENV_URL,
 };
-
-
 
 const skipToContentProps = {
   href: "#content",

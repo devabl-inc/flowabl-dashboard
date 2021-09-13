@@ -11,7 +11,8 @@ import {
   User,
 } from "firebase/auth";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { isProdEnv, PROD_URL, Tiers } from "Config/appConfig";
+import { PRODUCT_ENV_URL } from "Config/platformUrlConfig";
+import { isProdEnv, Tiers } from "Config/appConfig";
 import { FlowablSubscription } from "Utils/types";
 
 const googleProvider = new GoogleAuthProvider();
@@ -103,7 +104,7 @@ export const AuthProvider = ({ children }) => {
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (!user && isProdEnv) {
-        window.location.href = PROD_URL;
+        window.location.href = PRODUCT_ENV_URL;
       }
 
       setUser(user);
