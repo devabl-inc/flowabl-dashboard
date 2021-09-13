@@ -25,7 +25,7 @@ export default function Overview() {
           with make your experience a good one.
         </p>
         <p style={{ marginTop: "1rem" }}>
-          Tier: <strong>{subscription.name}</strong>
+          Tier: <strong>{subscription?.name ?? ""}</strong>
         </p>
         <section className={styles.buttonsContainer}>
           <a rel="noopener nofollow noreferrer" target="_blank" href="https://app.flowabl.io/apps/flow/workflows">

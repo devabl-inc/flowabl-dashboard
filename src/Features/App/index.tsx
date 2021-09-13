@@ -25,7 +25,7 @@ export function App() {
     queryFn: resolver.query(navigationUrl),
   });
 
-  if (isDevEnv && !user) {
+  if (isDevEnv && !user && !isAuthenticating) {
     return (
       <>
         <Navbar />
