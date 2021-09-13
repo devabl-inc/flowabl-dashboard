@@ -6,14 +6,18 @@ import {
   FeatureHeaderSubtitle,
   TextInput,
 } from "@boomerang-io/carbon-addons-boomerang-react";
+import { useAuth } from "Hooks/useFirebase";
 import { Delete16 } from "@carbon/icons-react";
 import styles from "./Profile.module.scss";
 
 export default function Profile() {
-  const [name, setName] = React.useState("Ada");
+  const { user } = useAuth();
+  const [name, setName] = React.useState(user.displayName);
+
   const handleDelete = () => {
     alert(`Are you sure? Everything will be gone.`);
   };
+
   return (
     <article>
       <FeatureHeader includeBorder={false}>

@@ -1,37 +1,28 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { Server, Response } from "miragejs";
-import Root from './Root';
-import { startApiServer } from "./ApiServer";
-import 'Config/axiosGlobalConfig';
+import React from "react";
+import ReactDOM from "react-dom";
+import Root from "./Root";
+import "Config/axiosGlobalConfig";
 import "Styles/styles.scss";
-import * as serviceWorker from './serviceWorker';
 
-if (window.Cypress) {
-  new Server({
-    environment: "test",
-    routes() {
-      const methods = ["get", "put", "patch", "post", "delete"];
-      methods.forEach((method) => {
-        this[method]("/*", async (schema, request) => {
-          const [status, headers, body] = await window.handleFromCypress(request);
-          return new Response(status, headers, body);
-        });
-      });
-    },
-  });
-} else {
-  if (
-    (process.env.NODE_ENV === "development" || process.env.SERVICE_MODE === "local") &&
-    !process.env.REACT_APP_PORT_FORWARD
-  ) {
-    startApiServer({ environment: "development", timing: 400 });
+async function main() {
+  if (process.env.NODE_ENV === "development") {
+    if (window.location.pathname === "/BMRG_APP_ROOT_CONTEXT") {
+      window.location.pathname = "/BMRG_APP_ROOT_CONTEXT/";
+      return;
+    }
+    const { worker } = require("./mocks/browser");
+    await worker.start({
+      onUnhandledRequest: "bypass",
+      serviceWorker: {
+        url: "/BMRG_APP_ROOT_CONTEXT/mockServiceWorker.js",
+      },
+    });
   }
+  ReactDOM.render(
+    <React.StrictMode>
+      <Root />
+    </React.StrictMode>,
+    document.getElementById("app")
+  );
 }
-
-render(<Root />, document.getElementById('app'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+main();

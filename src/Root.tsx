@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ReactQueryConfigProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query-devtools";
 import { ErrorBoundary } from "@boomerang-io/carbon-addons-boomerang-react";
+import { AuthProvider } from "Hooks/useFirebase";
 import ErrorDragon from "Components/ErrorDragon";
 import App from "Features/App";
 import { APP_ROOT, isDevEnv, isTestEnv } from "Config/appConfig";
@@ -15,7 +16,9 @@ function Root() {
         config={{ queries: { retry: isDevEnv || isTestEnv ? 0 : 3 }, mutations: { throwOnError: true } }}
       >
         <BrowserRouter basename={APP_ROOT}>
-          <App />
+          <AuthProvider>
+            <App />
+          </AuthProvider>
         </BrowserRouter>
       </ReactQueryConfigProvider>
     </ErrorBoundary>

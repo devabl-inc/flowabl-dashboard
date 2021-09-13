@@ -7,12 +7,12 @@ import {
 } from "@boomerang-io/carbon-addons-boomerang-react";
 import { DOCS_URL, SUPPORT_EMAIL } from "Config/appConfig";
 import { Launch16, Chat16, App16 } from "@carbon/icons-react";
-import Advocate from "@carbon/pictograms-react/lib/advocate";
-import BugVirusMalware from "@carbon/pictograms-react/lib/bug--virus--malware";
-import Envelope from "@carbon/pictograms-react/lib/envelope";
-import QuestionAndAnswer from "@carbon/pictograms-react/lib/question--and--answer";
-import TextLayout from "@carbon/pictograms-react/lib/text--layout";
-import Tools from "@carbon/pictograms-react/lib/tools";
+import Advocate from "@carbon/pictograms-react/es/advocate";
+import BugVirusMalware from "@carbon/pictograms-react/es/bug--virus--malware";
+import Envelope from "@carbon/pictograms-react/es/envelope";
+import QuestionAndAnswer from "@carbon/pictograms-react/es/question--and--answer";
+import TextLayout from "@carbon/pictograms-react/es/text--layout";
+import Tools from "@carbon/pictograms-react/es/tools";
 import styles from "./Support.module.scss";
 
 export default function Support() {

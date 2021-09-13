@@ -33,6 +33,9 @@ export function startApiServer({ environment = "test", timing = 0 } = {}) {
       this.timing = timing;
 
       // Allow unhandled requests on the current domain to pass through
+      this.passthrough("https://identitytoolkit.googleapis.com/**");
+      this.passthrough("https://firebaseinstallations.googleapis.com/**");
+      this.passthrough("https://firestore.googleapis.com/**");
       this.passthrough();
 
       this.get("/info", () => []);

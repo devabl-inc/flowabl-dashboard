@@ -1,10 +1,12 @@
 import React from "react";
 import { Button, FeatureHeaderTitle, Link } from "@boomerang-io/carbon-addons-boomerang-react";
 import { Link as RRLink } from "react-router-dom";
+import { useAuth } from "Hooks/useFirebase";
 import { Rocket24, Upgrade24, WorkspaceImport24, Events24, Help24, Launch16 } from "@carbon/icons-react";
 import styles from "./Overview.module.scss";
 
 export default function Overview() {
+  const { user, signInWithPopup, logout } = useAuth();
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -12,7 +14,7 @@ export default function Overview() {
       </div>
       <div className={styles.content}>
         <FeatureHeaderTitle>
-          <span> Hello, Ada! </span>
+          <span>{`Hello, ${user?.displayName ?? "Ada!"} `}</span>
           <span role="img" aria-label="Hi!">
             👋
           </span>
@@ -21,6 +23,26 @@ export default function Overview() {
           Thanks for taking a look. We want you to get the most out of Flowabl. Here are a few things to get started
           with make your experience a good one.
         </p>
+        {process.env.NODE_ENV === "development" && !user && (
+          <Button
+            onClick={(e: any) => {
+              e.preventDefault();
+              signInWithPopup();
+            }}
+          >
+            Sign in
+          </Button>
+        )}
+        {user && (
+          <Button
+            onClick={(e: any) => {
+              e.preventDefault();
+              logout();
+            }}
+          >
+            Log Out
+          </Button>
+        )}
         <section className={styles.buttonsContainer}>
           <a rel="noopener nofollow noreferrer" target="_blank" href="https://app.flowabl.io/apps/flow/workflows">
             <Button renderIcon={Rocket24} style={{ background: "#003d73" }}>
