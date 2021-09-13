@@ -1,1 +1,1 @@
-declare module '@boomerang-io/carbon-addons-boomerang-react';
+declare module "@boomerang-io/carbon-addons-boomerang-react";

@@ -1,20 +1,21 @@
 //@ts-nocheck
 import React from "react";
 import { useQuery } from "react-query";
-import { ErrorBoundary, Loading } from "@boomerang-io/carbon-addons-boomerang-react";
 import AppContext from "State/appContext";
-//import { useAuth } from "Hooks/useFirebase";
+import { useAuth } from "Hooks/useFirebase";
 import Chatwoot from "Components/Chatwoot";
+import { Button, ErrorBoundary, Loading } from "@boomerang-io/carbon-addons-boomerang-react";
 import ErrorDragon from "Components/ErrorDragon";
 import Navbar from "./Navbar";
 import Main from "./Main";
+import { isDevEnv } from "Config/appConfig";
 import { serviceUrl, resolver } from "Config/servicesConfig";
 
 const userUrl = serviceUrl.resourceUserProfile();
 const navigationUrl = serviceUrl.resourceNavigation();
 
 export function App() {
-  //const { user } = useAuth();
+  const { user, isAuthenticating, signInWithPopup } = useAuth();
   const userQuery = useQuery({
     queryKey: userUrl,
     queryFn: resolver.query(userUrl),
@@ -24,7 +25,27 @@ export function App() {
     queryFn: resolver.query(navigationUrl),
   });
 
-  if (userQuery.isLoading || navQuery.isLoading) {
+  if (isDevEnv && !user) {
+    return (
+      <>
+        <Navbar />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "calc(100vh - 3rem)",
+          }}
+        >
+          <p style={{ marginBottom: "1rem" }}>Running in DEVELOPMENT mode, please sign in</p>
+          <Button onClick={signInWithPopup}>Sign in</Button>
+        </div>
+      </>
+    );
+  }
+
+  if (userQuery.isLoading || navQuery.isLoading || isAuthenticating) {
     return <Loading />;
   }
 

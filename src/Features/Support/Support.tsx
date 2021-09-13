@@ -17,7 +17,6 @@ import styles from "./Support.module.scss";
 
 export default function Support() {
   const handleOnClick = () => {
-    //@ts-ignore
     window.$chatwoot.toggle();
   };
 

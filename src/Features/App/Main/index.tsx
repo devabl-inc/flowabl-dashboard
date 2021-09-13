@@ -15,6 +15,7 @@ const Overview = lazy(() => import(/* webpackChunkName: "Overview" */ "Features/
 const Profile = lazy(() => import(/* webpackChunkName: "Profile" */ "Features/Profile"));
 const Subscription = lazy(() => import(/* webpackChunkName: "Subscription" */ "Features/Subscription"));
 const Support = lazy(() => import(/* webpackChunkName: "Support" */ "Features/Support"));
+const Logout = lazy(() => import(/* webpackChunkName: "Logout" */ "Features/Logout"));
 
 function Main({ user }) {
   return (
@@ -39,6 +40,9 @@ function Main({ user }) {
             </Route>
             <Route path={AppPath.Support}>
               <Support />
+            </Route>
+            <Route path={AppPath.Logout}>
+              <Logout />
             </Route>
             <Route path={"*"}>
               <Error404 />

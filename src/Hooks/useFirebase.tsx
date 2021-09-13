@@ -11,6 +11,8 @@ import {
   User,
 } from "firebase/auth";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import { isProdEnv, PROD_URL, Tiers } from "Config/appConfig";
+import { FlowablSubscription } from "Utils/types";
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -33,7 +35,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = React.useState<User>(null);
-  const [subscription, setSubscription] = React.useState(null);
+  const [subscription, setSubscription] = React.useState<FlowablSubscription>(null);
   const [isAuthenticating, setIsAuthenticating] = React.useState(true);
 
   const signInWithPopup = async () => {
@@ -100,21 +102,24 @@ export const AuthProvider = ({ children }) => {
 
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (!user && isProdEnv) {
+        window.location.href = PROD_URL;
+      }
+
       setUser(user);
       setIsAuthenticating(false);
 
-      if (user !== null) {
-        console.log(user);
-        try {
-          console.log(db);
-          const collectionRef = collection(db, "customers", user.uid, "subscriptions");
-          const q = query(collectionRef, where("status", "in", ["trialing", "active"]));
-          const querySnapshot = await getDocs(q);
-          console.log("Document data:", querySnapshot.docs);
-          setSubscription(querySnapshot.docs);
-        } catch (e) {
-          console.log(e);
+      try {
+        const collectionRef = collection(db, "customers", user.uid, "subscriptions");
+        const q = query(collectionRef, where("status", "in", ["trialing", "active"]));
+        const querySnapshot = await getDocs(q);
+        if (querySnapshot.docs?.length > 0) {
+          setSubscription(querySnapshot.docs[0]);
+        } else {
+          setSubscription({ price: 0, product: Tiers.Free, interval: "monthly", name: "Free" });
         }
+      } catch (e) {
+        console.log(e);
       }
     });
     return () => unsubscribe();

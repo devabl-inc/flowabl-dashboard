@@ -1,3 +1,4 @@
+import { Tier } from "Utils/types";
 /**
  * Used for setting up the root context that the application is server on
  * This allows the app to be easily deployed out to multiple environments without recompiling
@@ -9,19 +10,19 @@ export const APP_ROOT =
 
 export const isDevEnv = process.env.NODE_ENV === "development";
 export const isTestEnv = process.env.NODE_ENV === "test";
+export const isProdEnv = process.env.NODE_ENV === "production";
 
 export const AppPath = {
   Root: "/",
   Profile: "/profile",
   Subscription: "/subscription",
-  Support: "/usage",
-  Users: "/users",
-  UsersCurrent: "/users/current",
-  UsersList: "/users/list",
+  Support: "/support",
+  Logout: "/logout",
 };
 
 export const AppLink = {
   Root: () => "/",
+  Subscription: "/subscription",
   Users: () => "/users",
   UsersCurrent: () => "/users/current",
   UsersList: () => "/users/list",
@@ -31,3 +32,12 @@ export const AppLink = {
 export const CHATWOOT_TOKEN = "85PBKcBEQUiTBni6TAJTz5CF";
 export const DOCS_URL = "https://www.useboomerang.io/docs";
 export const SUPPORT_EMAIL = "hello@flowabl.io";
+export const PROD_URL = "https://flowabl.io";
+export const DEV_URL = "http://localhost:3000";
+
+export const Tiers: Record<string, Tier> = {
+  Free: "free",
+  Starter: "starter",
+  Maker: "maker",
+  Premium: "premium",
+};

@@ -36,6 +36,9 @@ const Layout = (props: any) => (
           <SideNavLink large activeClassName={activeClassName} element={NavLink} to={AppPath.Support} key="/Support">
             Support
           </SideNavLink>
+          <SideNavLink large activeClassName={activeClassName} element={NavLink} to={AppPath.Logout} key="/Logout">
+            Logout
+          </SideNavLink>
         </SideNavItems>
       </SideNav>
       <div id="content" className={styles.main}>
