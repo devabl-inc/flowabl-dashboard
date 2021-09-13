@@ -1,6 +1,6 @@
 //@ts-nocheck
 import React from "react";
-import { useQuery } from "react-query";
+//import { useQuery } from "react-query";
 import AppContext from "State/appContext";
 import { useAuth } from "Hooks/useFirebase";
 import Chatwoot from "Components/Chatwoot";
@@ -9,21 +9,21 @@ import ErrorDragon from "Components/ErrorDragon";
 import Navbar from "./Navbar";
 import Main from "./Main";
 import { isDevEnv } from "Config/appConfig";
-import { serviceUrl, resolver } from "Config/servicesConfig";
+// import { serviceUrl, resolver } from "Config/servicesConfig";
 
-const userUrl = serviceUrl.resourceUserProfile();
-const navigationUrl = serviceUrl.resourceNavigation();
+// const userUrl = serviceUrl.resourceUserProfile();
+// const navigationUrl = serviceUrl.resourceNavigation();
 
 export function App() {
   const { user, isAuthenticating, signInWithPopup } = useAuth();
-  const userQuery = useQuery({
-    queryKey: userUrl,
-    queryFn: resolver.query(userUrl),
-  });
-  const navQuery = useQuery({
-    queryKey: navigationUrl,
-    queryFn: resolver.query(navigationUrl),
-  });
+  // const userQuery = useQuery({
+  //   queryKey: userUrl,
+  //   queryFn: resolver.query(userUrl),
+  // });
+  // const navQuery = useQuery({
+  //   queryKey: navigationUrl,
+  //   queryFn: resolver.query(navigationUrl),
+  // });
 
   if (isDevEnv && !user && !isAuthenticating) {
     return (
@@ -45,20 +45,20 @@ export function App() {
     );
   }
 
-  if (userQuery.isLoading || navQuery.isLoading || isAuthenticating) {
+  if (!user || isAuthenticating) {
     return <Loading />;
   }
 
-  if (userQuery.error || navQuery.error) {
-    return <ErrorDragon />;
-  }
+  // if (userQuery.error || navQuery.error) {
+  //   return <ErrorDragon />;
+  // }
 
   return (
     <>
-      <Navbar navigation={navQuery.data} user={userQuery.data} />
+      <Navbar navigation={{}} user={user} />
       <ErrorBoundary errorComponent={ErrorDragon}>
-        <AppContext.Provider value={{ user: userQuery.data, navigation: navQuery.data }}>
-          <Main user={userQuery.data} />
+        <AppContext.Provider value={{ user, navigation: {} }}>
+          <Main user={user} />
           <Chatwoot />
         </AppContext.Provider>
       </ErrorBoundary>

@@ -38,7 +38,7 @@ function Navbar(props) {
           requirePlatformConsent={false}
           onTutorialClick={props.handleOnTutorialClick}
           renderLogo={navigation?.platform?.displayLogo}
-          companyName={navigation?.platform?.platformName}
+          companyName={navigation?.platform?.platformName ?? "Flowabl"}
           skipToContentProps={skipToContentProps}
         />
       </>
