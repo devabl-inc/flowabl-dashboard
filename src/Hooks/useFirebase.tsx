@@ -114,7 +114,10 @@ export const AuthProvider = ({ children }) => {
         const q = query(collectionRef, where("status", "in", ["trialing", "active"]));
         const querySnapshot = await getDocs(q);
         if (querySnapshot.docs?.length > 0) {
-          setSubscription(querySnapshot.docs[0]);
+          const sub = querySnapshot.docs[0].data();
+          const product = (await sub.product.get()).data();
+          const price = (await sub.price.get()).data();
+          setSubscription({ price: price, product: product, interval: price.interval, name: product });
         } else {
           setSubscription({ price: 0, product: Tiers.Free, interval: "monthly", name: "Free" });
         }

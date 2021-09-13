@@ -2,12 +2,12 @@ import React from "react";
 import { Button, FeatureHeaderTitle, Link } from "@boomerang-io/carbon-addons-boomerang-react";
 import { Link as RRLink } from "react-router-dom";
 import { useAuth } from "Hooks/useFirebase";
+import { AppLink } from "Config/appConfig";
 import { Rocket24, Upgrade24, WorkspaceImport24, Events24, Help24, Launch16 } from "@carbon/icons-react";
 import styles from "./Overview.module.scss";
-import { AppLink } from "Config/appConfig";
 
 export default function Overview() {
-  const { user } = useAuth();
+  const { user, subscription } = useAuth();
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -25,7 +25,7 @@ export default function Overview() {
           with make your experience a good one.
         </p>
         <p style={{ marginTop: "1rem" }}>
-          Tier: <strong>Free</strong>
+          Tier: <strong>{subscription.name}</strong>
         </p>
         <section className={styles.buttonsContainer}>
           <a rel="noopener nofollow noreferrer" target="_blank" href="https://app.flowabl.io/apps/flow/workflows">
