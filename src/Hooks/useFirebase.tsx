@@ -11,8 +11,7 @@ import {
   User,
 } from "firebase/auth";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { PRODUCT_ENV_URL } from "Config/platformUrlConfig";
-import { isProdEnv, Tiers } from "Config/appConfig";
+import { Tiers } from "Config/appConfig";
 import { FlowablSubscription } from "Utils/types";
 
 const googleProvider = new GoogleAuthProvider();
@@ -42,7 +41,7 @@ export const AuthProvider = ({ children }) => {
   const signInWithPopup = async () => {
     try {
       const result = await fbSignInWithPopup(auth, googleProvider);
-      console.log(result);
+
       // This gives you a Google Access Token. You can use it to access the Google API.
       //const credential = GoogleAuthProvider.credentialFromResult(result);
       //const token = credential.accessToken;
@@ -51,7 +50,7 @@ export const AuthProvider = ({ children }) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       const credential = GoogleAuthProvider.credentialFromError(error);
-      console.log({ credential, error, errorCode, errorMessage });
+      console.error({ credential, error, errorCode, errorMessage });
       // // The email of the user's account used.
       // const email = error.email;
       // // The AuthCredential type that was used.
@@ -103,10 +102,6 @@ export const AuthProvider = ({ children }) => {
 
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (!user && !isAuthenticating && isProdEnv) {
-        window.location.href = PRODUCT_ENV_URL;
-      }
-
       setUser(user);
       setIsAuthenticating(false);
 

@@ -1,3 +1,4 @@
+//@ts-nocheck
 import axios, { CancelToken } from "axios";
 import portForwardMap from "../setupPortForwarding";
 const REACT_APP_PORT_FORWARD = process.env.REACT_APP_PORT_FORWARD;
