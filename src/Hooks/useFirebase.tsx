@@ -103,7 +103,7 @@ export const AuthProvider = ({ children }) => {
 
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (!user && isProdEnv) {
+      if (!user && !isAuthenticating && isProdEnv) {
         window.location.href = PRODUCT_ENV_URL;
       }
 
@@ -127,7 +127,7 @@ export const AuthProvider = ({ children }) => {
       }
     });
     return () => unsubscribe();
-  }, []);
+  }, [isAuthenticating]);
 
   const values = {
     user,
