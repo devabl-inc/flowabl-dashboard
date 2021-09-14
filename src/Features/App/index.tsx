@@ -12,10 +12,17 @@ import { PRODUCT_ENV_URL } from "Config/platformUrlConfig";
 export function App() {
   const { user, isAuthenticating, signInWithPopup } = useAuth();
 
+  // things are loading
   if (isAuthenticating) {
-    return <Loading />;
+    return (
+      <>
+        <Navbar navigation={{}} user={{}} />
+        <Loading />
+      </>
+    );
   }
 
+  // if we have tried to authenticate and the user doesn't exist
   if (!user && !isAuthenticating) {
     if (isProdEnv) {
       window.location.href = PRODUCT_ENV_URL;
@@ -40,17 +47,22 @@ export function App() {
     }
   }
 
-  return (
-    <>
-      <Navbar navigation={{}} user={user ?? {}} />
-      <ErrorBoundary errorComponent={ErrorDragon}>
-        <AppContext.Provider value={{ user: user ?? {}, navigation: {} }}>
-          <Main user={user ?? {}} />
-          <Chatwoot />
-        </AppContext.Provider>
-      </ErrorBoundary>
-    </>
-  );
+  // only show the app if we have a user
+  if (user) {
+    return (
+      <>
+        <Navbar navigation={{}} user={user ?? {}} />
+        <ErrorBoundary errorComponent={ErrorDragon}>
+          <AppContext.Provider value={{ user: user ?? {}, navigation: {} }}>
+            <Main user={user ?? {}} />
+            <Chatwoot />
+          </AppContext.Provider>
+        </ErrorBoundary>
+      </>
+    );
+  }
+
+  return null;
 }
 
 export default App;
