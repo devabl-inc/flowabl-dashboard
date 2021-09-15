@@ -5,7 +5,6 @@ import {
   FeatureHeaderTitle,
   FeatureHeaderSubtitle,
 } from "@boomerang-io/carbon-addons-boomerang-react";
-import Layout from "Components/Layout";
 import { useAuth } from "Hooks/useFirebase";
 import { Delete16 } from "@carbon/icons-react";
 import styles from "./Profile.module.scss";
@@ -19,27 +18,26 @@ export default function Profile() {
   };
 
   return (
-    <Layout>
-      <article>
-        <FeatureHeader includeBorder={false}>
-          <FeatureHeaderTitle>Profile</FeatureHeaderTitle>
-          <FeatureHeaderSubtitle>What we know about you</FeatureHeaderSubtitle>
-        </FeatureHeader>
-        <div className={styles.container}>
-          <section>
-            <h2 className={styles.sectionTitle}>Your info</h2>
-            <dl className={styles.infoContainer}>
-              <div>
-                <dd className={styles.infoLabel}>Name</dd>
-                <dt className={styles.infoText}>{user?.displayName ?? ""}</dt>
-              </div>
-              <div>
-                <dd className={styles.infoLabel}>Email</dd>
-                <dt className={styles.infoText}>{user?.email ?? ""}</dt>
-              </div>
-            </dl>
-          </section>
-          {/* <section className={styles.buttonsContainer}>
+    <article>
+      <FeatureHeader includeBorder={false}>
+        <FeatureHeaderTitle>Profile</FeatureHeaderTitle>
+        <FeatureHeaderSubtitle>What we know about you</FeatureHeaderSubtitle>
+      </FeatureHeader>
+      <div className={styles.container}>
+        <section>
+          <h2 className={styles.sectionTitle}>Your info</h2>
+          <dl className={styles.infoContainer}>
+            <div>
+              <dd className={styles.infoLabel}>Name</dd>
+              <dt className={styles.infoText}>{user?.displayName ?? ""}</dt>
+            </div>
+            <div>
+              <dd className={styles.infoLabel}>Email</dd>
+              <dt className={styles.infoText}>{user?.email ?? ""}</dt>
+            </div>
+          </dl>
+        </section>
+        {/* <section className={styles.buttonsContainer}>
             <Button disabled={name === user.displayName || name === ""} kind="danger--tertiary">
               Cancel
             </Button>
@@ -47,13 +45,12 @@ export default function Profile() {
               Update
             </Button>
           </section> */}
-          <section className={styles.buttonsContainer}>
-            <Button kind="danger" renderIcon={Delete16} onClick={handleDelete}>
-              Delete Account
-            </Button>
-          </section>
-        </div>
-      </article>
-    </Layout>
+        <section className={styles.buttonsContainer}>
+          <Button disabled kind="danger" renderIcon={Delete16} onClick={handleDelete}>
+            Delete Account (coming soon!)
+          </Button>
+        </section>
+      </div>
+    </article>
   );
 }

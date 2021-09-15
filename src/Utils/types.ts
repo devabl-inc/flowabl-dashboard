@@ -6,7 +6,7 @@ declare global {
       PRODUCT_SERVICE_ENV_URL: string;
       [key: string]: string;
     };
-    $chatwoot: { toggle: () => void };
+    $crisp: { push: (args: Array<string>) => void };
   }
 }
 

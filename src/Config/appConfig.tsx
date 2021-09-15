@@ -35,7 +35,8 @@ export const AppLink = {
 // TO REPLACE WITH ENV VARIABLE
 export const CHATWOOT_TOKEN = "85PBKcBEQUiTBni6TAJTz5CF";
 export const APP_URL = "https://app.flowabl.io/apps/flow/workflows";
-export const DOCS_URL = "https://www.useboomerang.io/docs";
+export const OSS_URL = "https://useboomerang.io/flow ";
+export const DOCS_URL = "https://useboomerang.io/docs";
 export const SUPPORT_EMAIL = "hello@flowabl.io";
 export const DEV_URL = "http://localhost:3000";
 

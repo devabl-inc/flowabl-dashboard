@@ -1,18 +1,20 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { Switch, Route } from "react-router-dom";
-import { DelayedRender, Error404, NotificationsContainer, Loading } from "@boomerang-io/carbon-addons-boomerang-react";
+import { Error404, NotificationsContainer } from "@boomerang-io/carbon-addons-boomerang-react";
 import Login from "Features/Login";
-import Signup from "Features/Signup";
-import Overview from "Features/Overview";
-import Profile from "Features/Profile";
-import Subscription from "Features/Subscription";
-import Support from "Features/Support";
-import Logout from "Features/Logout";
 import Layout from "Components/Layout";
 import PrivateRoute from "Components/PrivateRoute";
+import SuspenseBoundary from "Components/SuspenseBoundary";
 import { AppPath } from "Config/appConfig";
 import { User } from "@firebase/auth";
 import styles from "./main.module.scss";
+
+const Overview = React.lazy(() => import(/* webpackChunkName: "Overview" */ "Features/Overview"));
+const Profile = React.lazy(() => import(/* webpackChunkName: "Profile" */ "Features/Profile"));
+const Subscription = React.lazy(() => import(/* webpackChunkName: "Subscription" */ "Features/Subscription"));
+const Support = React.lazy(() => import(/* webpackChunkName: "Support" */ "Features/Support"));
+const Logout = React.lazy(() => import(/* webpackChunkName: "Logout" */ "Features/Logout"));
+const Signup = React.lazy(() => import(/* webpackChunkName: "Signup" */ "Features/Signup"));
 
 interface MainProps {
   user: User;
@@ -20,45 +22,51 @@ interface MainProps {
 
 function Main({ user }: MainProps) {
   return (
-    <div className={styles.container}>
-      <Suspense
-        fallback={
-          <DelayedRender>
-            <Loading />
-          </DelayedRender>
-        }
-      >
-        <Switch>
-          <PrivateRoute exact path={AppPath.Signup} condition={Boolean(!user)} redirectPath="">
+    <main id="content" className={styles.container}>
+      <Switch>
+        <PrivateRoute exact path={AppPath.Signup} condition={Boolean(!user)} redirectPath="">
+          <SuspenseBoundary>
             <Signup />
-          </PrivateRoute>
-          <PrivateRoute exact path={AppPath.Login} condition={Boolean(!user)} redirectPath="">
+          </SuspenseBoundary>
+        </PrivateRoute>
+        <PrivateRoute exact path={AppPath.Login} condition={Boolean(!user)} redirectPath="">
+          <SuspenseBoundary>
             <Login />
-          </PrivateRoute>
-          <PrivateRoute exact path={AppPath.Root} condition={Boolean(user)}>
+          </SuspenseBoundary>
+        </PrivateRoute>
+        <PrivateRoute exact path={AppPath.Root} condition={Boolean(user)}>
+          <Layout>
             <Overview />
-          </PrivateRoute>
-          <PrivateRoute exact path={AppPath.Profile} condition={Boolean(user)}>
+          </Layout>
+        </PrivateRoute>
+        <PrivateRoute exact path={AppPath.Profile} condition={Boolean(user)}>
+          <Layout>
             <Profile />
-          </PrivateRoute>
-          <PrivateRoute exact path={AppPath.Subscription} condition={Boolean(user)}>
+          </Layout>
+        </PrivateRoute>
+        <PrivateRoute exact path={AppPath.Subscription} condition={Boolean(user)}>
+          <Layout>
             <Subscription />
-          </PrivateRoute>
-          <PrivateRoute exact path={AppPath.Support} condition={Boolean(user)}>
+          </Layout>
+        </PrivateRoute>
+        <PrivateRoute exact path={AppPath.Support} condition={Boolean(user)}>
+          <Layout>
             <Support />
-          </PrivateRoute>
-          <PrivateRoute exact path={AppPath.Logout} condition={Boolean(user)}>
+          </Layout>
+        </PrivateRoute>
+        <PrivateRoute exact path={AppPath.Logout} condition={Boolean(user)}>
+          <Layout>
             <Logout />
-          </PrivateRoute>
-          <Route path={"*"}>
-            <Layout>
-              <Error404 />
-            </Layout>
-          </Route>
-        </Switch>
-      </Suspense>
+          </Layout>
+        </PrivateRoute>
+        <Route path={"*"}>
+          <Layout>
+            <Error404 />
+          </Layout>
+        </Route>
+      </Switch>
       <NotificationsContainer enableMultiContainer />
-    </div>
+    </main>
   );
 }
 

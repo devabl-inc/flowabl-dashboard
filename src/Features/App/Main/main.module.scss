@@ -1,4 +1,16 @@
+:global {
+  .bx--header {
+    background-color: #061727 !important;
+  }
 
+  .bx--header__name:focus {
+    border-color: var(--cds-inverse-support-02) !important;
+  }
+
+  .bx--skip-to-content:focus {
+    border-color: var(--cds-inverse-support-02) !important;
+  }
+}
 
 .welcome {
   text-align: center;

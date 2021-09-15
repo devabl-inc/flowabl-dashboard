@@ -9,7 +9,6 @@ import {
   FeatureHeaderTitle,
   FeatureHeaderSubtitle,
 } from "@boomerang-io/carbon-addons-boomerang-react";
-import Layout from "Components/Layout";
 import { Delete16 } from "@carbon/icons-react";
 import { Tiers } from "Config/appConfig";
 import { Tier } from "Utils/types";
@@ -32,12 +31,12 @@ export default function Subscription() {
   };
 
   return (
-    <Layout>
+    <article>
       <FeatureHeader includeBorder={false}>
         <FeatureHeaderTitle>Subscription</FeatureHeaderTitle>
         <FeatureHeaderSubtitle>What you are getting for your money</FeatureHeaderSubtitle>
       </FeatureHeader>
-      <article className={styles.container}>
+      <div className={styles.container}>
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Your subscription</h2>
           <dl className={styles.contentContainer}>
@@ -52,9 +51,11 @@ export default function Subscription() {
               <dd className={styles.contentText}>
                 {" "}
                 <UnorderedList>
-                  <ListItem>Visual Workflow Editor</ListItem>
-                  <ListItem>Single User</ListItem>
-                  <ListItem>2 Workflows</ListItem>
+                  <ListItem>Visual workflow editor</ListItem>
+                  <ListItem>Single user</ListItem>
+                  <ListItem>10 executions per month </ListItem>
+                  <ListItem>30 min per execution duration</ListItem>
+                  <ListItem>Insights for 30 days</ListItem>
                 </UnorderedList>
               </dd>
             </div>
@@ -72,9 +73,9 @@ export default function Subscription() {
             >
               <h2 className={styles.tileTitle}>Free</h2>
               <UnorderedList>
-                <ListItem>Visual Workflow Editor</ListItem>
-                <ListItem>Single User</ListItem>
-                <ListItem>2 Workflows</ListItem>
+                <ListItem>Visual workflow editor</ListItem>
+                <ListItem>Single user</ListItem>
+                <ListItem>2 workflows</ListItem>
               </UnorderedList>
             </RadioTile>
             <RadioTile
@@ -86,9 +87,9 @@ export default function Subscription() {
             >
               <h2 className={styles.tileTitle}>Tier 1</h2>
               <UnorderedList>
-                <ListItem>Visual Workflow Editor</ListItem>
-                <ListItem>Single User</ListItem>
-                <ListItem>10 Workflows</ListItem>
+                <ListItem>Visual workflow editor</ListItem>
+                <ListItem>Single user</ListItem>
+                <ListItem>10 workflows</ListItem>
               </UnorderedList>
             </RadioTile>
             <RadioTile
@@ -100,11 +101,11 @@ export default function Subscription() {
             >
               <h2 className={styles.tileTitle}>Tier 2</h2>
               <UnorderedList>
-                <ListItem>Visual Workflow Editor</ListItem>
-                <ListItem>Unlimited Users</ListItem>
-                <ListItem>50 Workflows</ListItem>
-                <ListItem>Unlimited Tasks</ListItem>
-                <ListItem>Premium Support</ListItem>
+                <ListItem>Visual workflow editor</ListItem>
+                <ListItem>Unlimited users</ListItem>
+                <ListItem>50 workflows</ListItem>
+                <ListItem>Unlimited tasks</ListItem>
+                <ListItem>Premium support</ListItem>
               </UnorderedList>
             </RadioTile>
             <RadioTile
@@ -116,21 +117,21 @@ export default function Subscription() {
             >
               <h2 className={styles.tileTitle}>Tier 3</h2>
               <UnorderedList>
-                <ListItem>Visual Workflow Editor</ListItem>
-                <ListItem>Unlimited Users</ListItem>
-                <ListItem>250 Workflows</ListItem>
-                <ListItem>Unlimited Tasks</ListItem>
-                <ListItem>Premium Support</ListItem>
+                <ListItem>Visual workflow editor</ListItem>
+                <ListItem>Unlimited users</ListItem>
+                <ListItem>250 workflows</ListItem>
+                <ListItem>Unlimited tasks</ListItem>
+                <ListItem>Premium support</ListItem>
               </UnorderedList>
             </RadioTile>
           </div>
         </section>
         <section className={styles.buttonsContainer}>
-          <Button kind="danger" renderIcon={Delete16} onClick={handleCancel}>
+          <Button disabled kind="danger" renderIcon={Delete16} onClick={handleCancel}>
             Cancel Subscription
           </Button>
         </section>
-      </article>
-    </Layout>
+      </div>
+    </article>
   );
 }

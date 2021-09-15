@@ -1,11 +1,11 @@
 import React from "react";
 import AppContext from "State/appContext";
 import { useAuth } from "Hooks/useFirebase";
-import Chatwoot from "Components/Chatwoot";
+import { Header, HeaderName, SkipToContent } from "carbon-components-react";
 import { ErrorBoundary, Loading } from "@boomerang-io/carbon-addons-boomerang-react";
 import ErrorDragon from "Components/ErrorDragon";
 import Main from "./Main";
-import Navbar from "./Navbar";
+import { AppLink } from "Config/appConfig";
 
 export function App() {
   const { user, isAuthenticating } = useAuth();
@@ -17,14 +17,24 @@ export function App() {
 
   return (
     <>
-      {user && <Navbar navigation={{}} user={user ?? {}} />}
+      {user && <LocalHeader />}
       <ErrorBoundary errorComponent={ErrorDragon}>
         <AppContext.Provider value={{ user: user ?? {}, navigation: {} }}>
           <Main user={user} />
-          {user && <Chatwoot />}
         </AppContext.Provider>
       </ErrorBoundary>
     </>
+  );
+}
+
+function LocalHeader() {
+  return (
+    <Header aria-label="flowabl">
+      <SkipToContent href="#content" />
+      <HeaderName href={AppLink.Root()} prefix="">
+        flowabl
+      </HeaderName>
+    </Header>
   );
 }
 

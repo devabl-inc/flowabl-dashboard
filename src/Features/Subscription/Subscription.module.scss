@@ -1,5 +1,4 @@
 .container {
-  overflow: hidden;
   margin: 2.5rem;
 }
 .contentContainer {
@@ -13,6 +12,14 @@
   color: var(--cds-text-02);
   line-height: 1.5;
   font-size: 0.925rem;
+  margin-bottom: 0.25rem;
+}
+
+.contentText {
+  ul li {
+    list-style: initial;
+    margin-left: 1.125rem;
+  }
 }
 
 .section {

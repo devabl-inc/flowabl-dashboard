@@ -2,7 +2,9 @@
 $carbon--theme: $carbon--theme--boomerang;
 $carbon-addons-bmrg--theme: boomerang;
 
+//import this first to override styles of header in addons
 @import "~@boomerang-io/carbon-addons-boomerang-react/styles/scss/styles";
+@import "carbon-components/scss/components/ui-shell/header";
 @import "carbon-components/scss/components/code-snippet/code-snippet";
 @import "carbon-components/scss/components/structured-list/structured-list";
 @import "carbon-components/scss/components/tile/tile";

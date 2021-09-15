@@ -60,7 +60,7 @@ export default function Login() {
             <div className="form-wrapper">
               <h2 className="heading-3">Log in to flowabl.io</h2>
               <div className="form-box">
-                <h3 className="signup-terms-and-conditions">Use your social profile to login</h3>
+                <h3 className="signup-terms-and-conditions">Use your social profile to log in</h3>
                 <div className="social-box">
                   <button id="loginGoogle" className="social-login w-inline-block" onClick={() => signInWithPopup("")}>
                     <img
