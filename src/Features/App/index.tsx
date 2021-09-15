@@ -5,7 +5,7 @@ import { Header, HeaderName, SkipToContent } from "carbon-components-react";
 import { ErrorBoundary, Loading } from "@boomerang-io/carbon-addons-boomerang-react";
 import ErrorDragon from "Components/ErrorDragon";
 import Main from "./Main";
-import { AppLink } from "Config/appConfig";
+import { AppLink, MARKETING_URL } from "Config/appConfig";
 
 export function App() {
   const { user, isAuthenticating } = useAuth();
@@ -31,8 +31,8 @@ function LocalHeader() {
   return (
     <Header aria-label="Flowabl">
       <SkipToContent href="#content" />
-      <HeaderName href={AppLink.Root()} prefix="">
-        Flowabl
+      <HeaderName href={MARKETING_URL} prefix="">
+        <img src="./logo.svg" alt="Flowabl logo" height="16px" />
       </HeaderName>
     </Header>
   );

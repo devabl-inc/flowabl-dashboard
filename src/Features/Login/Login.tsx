@@ -64,7 +64,7 @@ export default function Login() {
           <div className="page-container _2">
             <div className="block-2">
               <div className="form-wrapper">
-                <h2 className="heading-3">Log in to flowable.io</h2>
+                <h2 className="heading-3">Log in to flowabl.io</h2>
                 <div className="form-box">
                   <h3 className="signup-terms-and-conditions">Use your social profile to log in</h3>
                   <div className="social-box">

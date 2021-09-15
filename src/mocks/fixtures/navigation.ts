@@ -12,7 +12,7 @@ const navigation = {
   platform: {
     name: "Flowabl",
     version: "0.1.0",
-    signOutUrl: "flowable.io",
+    signOutUrl: "flowabl.io",
     platformName: "Flowabl",
     displayLogo: false,
     privateTeams: false,
