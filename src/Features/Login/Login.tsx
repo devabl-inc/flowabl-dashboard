@@ -11,6 +11,7 @@ export default function Login() {
     <>
       <Helmet>
         <title>{`Login | flowabl`}</title>
+        <meta name="description" content="Login page for flowabl" />
       </Helmet>
       <div className="webflow">
         <div className="page-wrapper-2">

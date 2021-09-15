@@ -35,32 +35,32 @@ function Main({ user }: MainProps) {
           </SuspenseBoundary>
         </PrivateRoute>
         <PrivateRoute exact path={AppPath.Root} condition={Boolean(user)}>
-          <Layout title="Welcome">
+          <Layout title="Welcome" description="Welcome page for flowabl">
             <Overview />
           </Layout>
         </PrivateRoute>
         <PrivateRoute exact path={AppPath.Profile} condition={Boolean(user)}>
-          <Layout title="Profile">
+          <Layout title="Profile" description="Profile page for flowabl">
             <Profile />
           </Layout>
         </PrivateRoute>
         <PrivateRoute exact path={AppPath.Subscription} condition={Boolean(user)}>
-          <Layout title="Subscription">
+          <Layout title="Subscription" description="Subscription page for flowabl">
             <Subscription />
           </Layout>
         </PrivateRoute>
         <PrivateRoute exact path={AppPath.Support} condition={Boolean(user)}>
-          <Layout title="Support">
+          <Layout title="Support" description="Support page for flowabl">
             <Support />
           </Layout>
         </PrivateRoute>
         <PrivateRoute exact path={AppPath.Logout} condition={Boolean(user)}>
-          <Layout title="Logout">
+          <Layout title="Logout" description="Logout page for flowabl">
             <Logout />
           </Layout>
         </PrivateRoute>
         <Route path={"*"}>
-          <Layout title="404">
+          <Layout title="404" description="404 page not found for flowabl">
             <Error404 />
           </Layout>
         </Route>

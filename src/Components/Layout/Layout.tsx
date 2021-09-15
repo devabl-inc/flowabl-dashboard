@@ -12,6 +12,7 @@ const activeClassName = "bx--side-nav__link--current";
 interface LayoutProps {
   children: React.ReactNode;
   title: string;
+  description: string;
 }
 
 function Layout(props: LayoutProps) {
@@ -19,6 +20,7 @@ function Layout(props: LayoutProps) {
     <>
       <Helmet>
         <title>{`${props.title} | flowabl`}</title>
+        <meta name="description" content={props.description} />
       </Helmet>
       <div className={styles.container}>
         <SideNav
