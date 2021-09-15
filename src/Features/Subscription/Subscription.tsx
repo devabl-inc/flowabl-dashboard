@@ -9,6 +9,7 @@ import {
   FeatureHeaderTitle,
   FeatureHeaderSubtitle,
 } from "@boomerang-io/carbon-addons-boomerang-react";
+import Layout from "Components/Layout";
 import { Delete16 } from "@carbon/icons-react";
 import { Tiers } from "Config/appConfig";
 import { Tier } from "Utils/types";
@@ -16,18 +17,22 @@ import styles from "./Subscription.module.scss";
 
 export default function Subscription() {
   const { subscription } = useAuth();
-  const [selectedTier, setSelectedTier] = React.useState<Tier>(subscription.product);
+  const [selectedTier, setSelectedTier] = React.useState<Tier>(subscription?.product);
+
+  React.useEffect(() => {
+    setSelectedTier(subscription?.product);
+  }, [subscription]);
 
   const handleOnClick = (tier: Tier) => () => {
     setSelectedTier(tier);
   };
 
   const handleCancel = () => {
-    alert(`Are you sure? You will be dropped down to the free tier.`);
+    alert(`Are you sure? You will be dropped down to the 'free' tier.`);
   };
 
   return (
-    <>
+    <Layout>
       <FeatureHeader includeBorder={false}>
         <FeatureHeaderTitle>Subscription</FeatureHeaderTitle>
         <FeatureHeaderSubtitle>What you are getting for your money</FeatureHeaderSubtitle>
@@ -126,6 +131,6 @@ export default function Subscription() {
           </Button>
         </section>
       </article>
-    </>
+    </Layout>
   );
 }

@@ -10,12 +10,6 @@ declare global {
   }
 }
 
-export interface User {
-  name: string;
-  email: string;
-  created: string;
-}
-
 export interface FlowablSubscription {
   price: number;
   product: Tier;

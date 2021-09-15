@@ -1,5 +1,6 @@
 //@ts-nocheck
 import React from "react";
+import { useHistory } from "react-router";
 import { auth, db } from "Config/firebaseConfig";
 import {
   onAuthStateChanged,
@@ -20,7 +21,7 @@ interface AuthContextInterface {
   user: User;
   subscription: DocumentReference;
   isAuthenticating: boolean;
-  signInWithPopup: () => void;
+  signInWithPopup: (redirectPath?: string) => void;
   signInWithEmailLink: () => void;
   signInWithPopup: () => void;
   sendSignInLinkToEmail: () => void;
@@ -37,8 +38,9 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = React.useState<User>(null);
   const [subscription, setSubscription] = React.useState<FlowablSubscription>(null);
   const [isAuthenticating, setIsAuthenticating] = React.useState(true);
+  const history = useHistory();
 
-  const signInWithPopup = async () => {
+  const signInWithPopup = async (redirectPath?: string) => {
     try {
       const result = await fbSignInWithPopup(auth, googleProvider);
 
@@ -46,6 +48,9 @@ export const AuthProvider = ({ children }) => {
       //const credential = GoogleAuthProvider.credentialFromResult(result);
       //const token = credential.accessToken;
       setUser(result.user);
+      if (redirectPath) {
+        history.push(redirectPath);
+      }
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;

@@ -33,9 +33,9 @@
 }
 
 .tile {
-  display: flex;
+  display: flex !important;
   font-weight: 500;
-  flex-direction: column;
+  flex-direction: column !important;
   width: 20rem;
   height: 20rem;
   background: var(--cds-field);

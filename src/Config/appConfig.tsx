@@ -18,11 +18,15 @@ export const AppPath = {
   Subscription: "/subscription",
   Support: "/support",
   Logout: "/logout",
+  Login: "/login",
+  Signup: "/signup",
 };
 
 export const AppLink = {
   Root: () => "/",
-  Subscription: "/subscription",
+  Login: () => "/login",
+  Signup: () => "/signup",
+  Subscription: () => "/subscription",
   Users: () => "/users",
   UsersCurrent: () => "/users/current",
   UsersList: () => "/users/list",
@@ -30,6 +34,7 @@ export const AppLink = {
 
 // TO REPLACE WITH ENV VARIABLE
 export const CHATWOOT_TOKEN = "85PBKcBEQUiTBni6TAJTz5CF";
+export const APP_URL = "https://app.flowabl.io/apps/flow/workflows";
 export const DOCS_URL = "https://www.useboomerang.io/docs";
 export const SUPPORT_EMAIL = "hello@flowabl.io";
 export const DEV_URL = "http://localhost:3000";

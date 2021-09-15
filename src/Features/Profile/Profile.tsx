@@ -4,59 +4,56 @@ import {
   FeatureHeader,
   FeatureHeaderTitle,
   FeatureHeaderSubtitle,
-  TextInput,
 } from "@boomerang-io/carbon-addons-boomerang-react";
+import Layout from "Components/Layout";
 import { useAuth } from "Hooks/useFirebase";
-import { Delete16, Save16 } from "@carbon/icons-react";
+import { Delete16 } from "@carbon/icons-react";
 import styles from "./Profile.module.scss";
 
 export default function Profile() {
   const { user } = useAuth();
-  const [name, setName] = React.useState(user?.displayName ?? "");
+  //const [name, setName] = React.useState(user?.displayName ?? "");
 
   const handleDelete = () => {
-    alert(`Are you sure? Everything will be gone.`);
+    alert(`Are you sure? All of your data will be gone.`);
   };
 
   return (
-    <article>
-      <FeatureHeader includeBorder={false}>
-        <FeatureHeaderTitle>Profile</FeatureHeaderTitle>
-        <FeatureHeaderSubtitle>All that we know about you</FeatureHeaderSubtitle>
-      </FeatureHeader>
-      <div className={styles.container}>
-        <section>
-          <h2 className={styles.sectionTitle}>Your info</h2>
-          <dl className={styles.infoContainer}>
-            <div>
-              <dd className={styles.infoLabel}>Name</dd>
-              <dt className={styles.infoText}>
-                <TextInput
-                  value={name}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
-                />
-              </dt>
-            </div>
-            <div>
-              <dd className={styles.infoLabel}>Email</dd>
-              <dt className={styles.infoText}>ada@flowabl.io</dt>
-            </div>
-          </dl>
-        </section>
-        <section className={styles.buttonsContainer}>
-          <Button disabled={name === user.displayName || name === ""} kind="danger--tertiary">
-            Cancel
-          </Button>
-          <Button renderIcon={Save16} disabled={name === user.displayName || name === ""}>
-            Update
-          </Button>
-        </section>
-        <section className={styles.buttonsContainer} style={{ marginTop: "8rem" }}>
-          <Button kind="danger" renderIcon={Delete16} onClick={handleDelete}>
-            Delete Account
-          </Button>
-        </section>
-      </div>
-    </article>
+    <Layout>
+      <article>
+        <FeatureHeader includeBorder={false}>
+          <FeatureHeaderTitle>Profile</FeatureHeaderTitle>
+          <FeatureHeaderSubtitle>What we know about you</FeatureHeaderSubtitle>
+        </FeatureHeader>
+        <div className={styles.container}>
+          <section>
+            <h2 className={styles.sectionTitle}>Your info</h2>
+            <dl className={styles.infoContainer}>
+              <div>
+                <dd className={styles.infoLabel}>Name</dd>
+                <dt className={styles.infoText}>{user?.displayName ?? ""}</dt>
+              </div>
+              <div>
+                <dd className={styles.infoLabel}>Email</dd>
+                <dt className={styles.infoText}>{user?.email ?? ""}</dt>
+              </div>
+            </dl>
+          </section>
+          {/* <section className={styles.buttonsContainer}>
+            <Button disabled={name === user.displayName || name === ""} kind="danger--tertiary">
+              Cancel
+            </Button>
+            <Button renderIcon={Save16} disabled={name === user.displayName || name === ""}>
+              Update
+            </Button>
+          </section> */}
+          <section className={styles.buttonsContainer}>
+            <Button kind="danger" renderIcon={Delete16} onClick={handleDelete}>
+              Delete Account
+            </Button>
+          </section>
+        </div>
+      </article>
+    </Layout>
   );
 }

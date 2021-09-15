@@ -29,7 +29,7 @@ function Navbar(props) {
     return (
       <>
         <Helmet>
-          <title>{`Dashboard | ${navigation?.platform?.platformName ?? "Flowabl"}`}</title>
+          <title>{`Dashboard | ${navigation?.platform?.platformName ?? "flowabl"}`}</title>
         </Helmet>
         <UIShell
           {...defaultUIShellProps}
@@ -38,7 +38,7 @@ function Navbar(props) {
           requirePlatformConsent={false}
           onTutorialClick={props.handleOnTutorialClick}
           renderLogo={navigation?.platform?.displayLogo}
-          companyName={navigation?.platform?.platformName ?? "Flowabl"}
+          companyName={navigation?.platform?.platformName ?? "flowabl"}
           skipToContentProps={skipToContentProps}
         />
       </>
