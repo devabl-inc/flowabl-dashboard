@@ -35,32 +35,32 @@ function Main({ user }: MainProps) {
           </SuspenseBoundary>
         </PrivateRoute>
         <PrivateRoute exact path={AppPath.Root} condition={Boolean(user)}>
-          <Layout>
+          <Layout title="Welcome">
             <Overview />
           </Layout>
         </PrivateRoute>
         <PrivateRoute exact path={AppPath.Profile} condition={Boolean(user)}>
-          <Layout>
+          <Layout title="Profile">
             <Profile />
           </Layout>
         </PrivateRoute>
         <PrivateRoute exact path={AppPath.Subscription} condition={Boolean(user)}>
-          <Layout>
+          <Layout title="Subscription">
             <Subscription />
           </Layout>
         </PrivateRoute>
         <PrivateRoute exact path={AppPath.Support} condition={Boolean(user)}>
-          <Layout>
+          <Layout title="Support">
             <Support />
           </Layout>
         </PrivateRoute>
         <PrivateRoute exact path={AppPath.Logout} condition={Boolean(user)}>
-          <Layout>
+          <Layout title="Logout">
             <Logout />
           </Layout>
         </PrivateRoute>
         <Route path={"*"}>
-          <Layout>
+          <Layout title="404">
             <Error404 />
           </Layout>
         </Route>
