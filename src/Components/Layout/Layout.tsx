@@ -19,7 +19,7 @@ function Layout(props: LayoutProps) {
   return (
     <>
       <Helmet>
-        <title>{`${props.title} | flowabl`}</title>
+        <title>{`${props.title} | Flowabl`}</title>
         <meta name="description" content={props.description} />
       </Helmet>
       <div className={styles.container}>

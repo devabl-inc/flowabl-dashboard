@@ -21,7 +21,7 @@ export default function Overview() {
           </span>
         </h2>
         <p style={{ marginTop: "1rem" }}>
-          Thanks for taking a look! We want you to get the most out of flowabl. Here are a few things to get started
+          Thanks for taking a look! We want you to get the most out of Flowabl. Here are a few things to get started
           with to make your experience a good one.
         </p>
         <p style={{ marginTop: "1rem" }}>
@@ -30,7 +30,7 @@ export default function Overview() {
         <section className={styles.buttonsContainer}>
           <a rel="noopener nofollow noreferrer" target="_blank" href={APP_URL}>
             <Button renderIcon={Rocket24} style={{ background: "#003d73" }}>
-              Launch flowabl
+              Launch Flowabl
             </Button>
           </a>
         </section>
@@ -46,7 +46,7 @@ export default function Overview() {
                 href={APP_URL}
                 style={{ display: "inline-flex", alignItems: "center" }}
               >
-                Launch flowabl to get started! <Launch16 style={{ marginLeft: "0.25rem" }} />
+                Launch Flowabl to get started! <Launch16 style={{ marginLeft: "0.25rem" }} />
               </Link>
             </span>
           }
@@ -80,7 +80,7 @@ export default function Overview() {
           title="Embrace, extend, and embrace again"
           text={
             <span>
-              Extend flowabl with custom tasks and workflows. Contribute to the growing ecosystem of tasks in the open
+              Extend Flowabl with custom tasks and workflows. Contribute to the growing ecosystem of tasks in the open
               source project,{" "}
               <Link
                 rel="noopener nofollow noreferrer"
@@ -100,7 +100,7 @@ export default function Overview() {
           text={
             <span>
               Listen for events to trigger workflows. Take action on manual tasks. Hold off with approvals. You are in
-              control of your workflows with flowabl.
+              control of your workflows with Flowabl.
             </span>
           }
           icon={<ThumbsUp24 fill="#061727" />}

@@ -10,10 +10,10 @@ const navigation = {
     "notifications.enabled": false,
   },
   platform: {
-    name: "flowabl",
+    name: "Flowabl",
     version: "0.1.0",
     signOutUrl: "flowable.io",
-    platformName: "flowabl",
+    platformName: "Flowabl",
     displayLogo: false,
     privateTeams: false,
     sendMail: true,

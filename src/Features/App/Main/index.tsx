@@ -35,32 +35,32 @@ function Main({ user }: MainProps) {
           </SuspenseBoundary>
         </PrivateRoute>
         <PrivateRoute exact path={AppPath.Root} condition={Boolean(user)}>
-          <Layout title="Welcome" description="Welcome page for flowabl">
+          <Layout title="Welcome" description="Welcome page for Flowabl">
             <Overview />
           </Layout>
         </PrivateRoute>
         <PrivateRoute exact path={AppPath.Profile} condition={Boolean(user)}>
-          <Layout title="Profile" description="Profile page for flowabl">
+          <Layout title="Profile" description="Profile page for Flowabl">
             <Profile />
           </Layout>
         </PrivateRoute>
         <PrivateRoute exact path={AppPath.Subscription} condition={Boolean(user)}>
-          <Layout title="Subscription" description="Subscription page for flowabl">
+          <Layout title="Subscription" description="Subscription page for Flowabl">
             <Subscription />
           </Layout>
         </PrivateRoute>
         <PrivateRoute exact path={AppPath.Support} condition={Boolean(user)}>
-          <Layout title="Support" description="Support page for flowabl">
+          <Layout title="Support" description="Support page for Flowabl">
             <Support />
           </Layout>
         </PrivateRoute>
         <PrivateRoute exact path={AppPath.Logout} condition={Boolean(user)}>
-          <Layout title="Logout" description="Logout page for flowabl">
+          <Layout title="Logout" description="Logout page for Flowabl">
             <Logout />
           </Layout>
         </PrivateRoute>
         <PrivateRoute path={"*"} condition={Boolean(user)}>
-          <Layout title="404" description="404 page not found for flowabl">
+          <Layout title="404" description="404 page not found for Flowabl">
             <Error404 />
           </Layout>
         </PrivateRoute>

@@ -29,10 +29,10 @@ export function App() {
 
 function LocalHeader() {
   return (
-    <Header aria-label="flowabl">
+    <Header aria-label="Flowabl">
       <SkipToContent href="#content" />
       <HeaderName href={AppLink.Root()} prefix="">
-        flowabl
+        Flowabl
       </HeaderName>
     </Header>
   );

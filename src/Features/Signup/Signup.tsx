@@ -10,8 +10,8 @@ export default function Signup() {
   return (
     <>
       <Helmet>
-        <title>{`Signup | flowabl`}</title>
-        <meta name="description" content="Signup page for flowabl" />
+        <title>{`Signup | Flowabl`}</title>
+        <meta name="description" content="Signup page for Flowabl" />
       </Helmet>
       <div className="webflow">
         <div className="page-wrapper-2">
@@ -57,7 +57,7 @@ export default function Signup() {
                   </div>
                 </div>
                 <div className="legal-box _2">
-                  <div className="legal-text">© 2021 flowabl Ltd. All rights reserved.</div>
+                  <div className="legal-text">© 2021 Flowabl Ltd. All rights reserved.</div>
                 </div>
               </div>
             </div>
@@ -67,7 +67,7 @@ export default function Signup() {
               <div className="form-wrapper">
                 <h2 className="heading-3">Get Started!</h2>
                 <div className="form-box">
-                  <h3 className="signup-terms-and-conditions">Use your social profile to register</h3>
+                  <h3 className="signup-terms-and-conditions">Use your social profile to sign up</h3>
                   <div className="social-box">
                     <button
                       id="loginGoogle"
@@ -194,7 +194,7 @@ export default function Signup() {
                 </div>
               </div>
               <div className="legal-box _2-copy">
-                <div className="legal-text _3">© 2020 MyBusiness Ltd. All rights reserved.</div>
+                <div className="legal-text _3">© 2021 Flowabl Ltd. All rights reserved.</div>
               </div>
             </div>
           </div>
