@@ -38,8 +38,8 @@ export default function Overview() {
           title="Create your first workflow"
           text={
             <span>
-              Creating your first workflow is simple. Start from scratch or from a template. Take a look at the
-              documentation if you have any questions.{" "}
+              Creating your first workflow is simple. Start from scratch or a template and start dragging and dropping
+              your way to automation.{" "}
               <Link
                 rel="noopener nofollow noreferrer"
                 target="_blank"
@@ -57,16 +57,16 @@ export default function Overview() {
           text={
             <span>
               We have a number of handy, pre-built workflow templates for common use cases to get started quickly. Have
-              a look at{" "}
+              a{" "}
               <Link
                 rel="noopener nofollow noreferrer"
                 target="_blank"
                 href={DOCS_URL}
                 style={{ display: "inline-flex", alignItems: "center" }}
               >
-                the documentation <Launch16 style={{ marginLeft: "0.25rem" }} />
+                look at the documentation <Launch16 style={{ marginLeft: "0.25rem" }} />
               </Link>{" "}
-              if you have any questions!"
+              or reach out to support if you have any questions.
             </span>
           }
           icon={<WorkspaceImport24 fill="#00597e" />}
@@ -80,8 +80,8 @@ export default function Overview() {
           title="Embrace, extend, and embrace again"
           text={
             <span>
-              Extend flowabl with custom workflows. Contribute to the growing ecosystem of actions in the open source
-              project,{" "}
+              Extend flowabl with custom tasks and workflows. Contribute to the growing ecosystem of tasks in the open
+              source project,{" "}
               <Link
                 rel="noopener nofollow noreferrer"
                 target="_blank"

@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import { Error404, NotificationsContainer } from "@boomerang-io/carbon-addons-boomerang-react";
 import Login from "Features/Login";
 import Layout from "Components/Layout";
@@ -59,11 +59,11 @@ function Main({ user }: MainProps) {
             <Logout />
           </Layout>
         </PrivateRoute>
-        <Route path={"*"}>
+        <PrivateRoute path={"*"} condition={Boolean(user)}>
           <Layout title="404" description="404 page not found for flowabl">
             <Error404 />
           </Layout>
-        </Route>
+        </PrivateRoute>
       </Switch>
       <NotificationsContainer enableMultiContainer />
     </main>
