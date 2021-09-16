@@ -5,7 +5,7 @@ import { Header, HeaderName, SkipToContent } from "carbon-components-react";
 import { ErrorBoundary, Loading } from "@boomerang-io/carbon-addons-boomerang-react";
 import ErrorDragon from "Components/ErrorDragon";
 import Main from "./Main";
-import { AppLink, MARKETING_URL } from "Config/appConfig";
+import { MARKETING_URL } from "Config/appConfig";
 
 export function App() {
   const { user, isAuthenticating } = useAuth();
