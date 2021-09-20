@@ -1,7 +1,7 @@
 //@ts-nocheck
 import axios, { CancelToken } from "axios";
-import portForwardMap from "../setupPortForwarding";
-const REACT_APP_PORT_FORWARD = process.env.REACT_APP_PORT_FORWARD;
+// import portForwardMap from "../setupPortForwarding";
+// const REACT_APP_PORT_FORWARD = process.env.REACT_APP_PORT_FORWARD;
 
 /**
  * if port forwarding is enabled, then check to see if service is in config map
@@ -10,13 +10,13 @@ const REACT_APP_PORT_FORWARD = process.env.REACT_APP_PORT_FORWARD;
  * @param {string} baseUrl - base of the serivce url
  * @param {sring} serviceContextPath - additional path for the service context e.g. /admin
  */
-function determineUrl(baseUrl, serviceContextPath) {
-  if (REACT_APP_PORT_FORWARD && portForwardMap[serviceContextPath]) {
-    return serviceContextPath;
-  } else {
-    return baseUrl + serviceContextPath;
-  }
-}
+// function determineUrl(baseUrl, serviceContextPath) {
+//   if (REACT_APP_PORT_FORWARD && portForwardMap[serviceContextPath]) {
+//     return serviceContextPath;
+//   } else {
+//     return baseUrl + serviceContextPath;
+//   }
+// }
 
 /**
  * Used for communicating with the CORE services
