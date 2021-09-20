@@ -24,7 +24,7 @@ import axios, { CancelToken } from "axios";
  * and added to the window as a global variable by the @boomerang/boomerang-webapp-server
  */
 export const BASE_URL = window._SERVER_DATA
-  ? window._SERVER_DATA?.PRODUCT_ENV_URL ?? "https://dashboard.flowabl.io/"
+  ? window._SERVER_DATA?.PRODUCT_SERVICE_ENV_URL ?? "https://dashboard.flowabl.io"
   : "/api";
 
 export const serviceUrl = {

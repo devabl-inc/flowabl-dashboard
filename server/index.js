@@ -76,7 +76,7 @@ function createBoomerangServer({
    * Add endpoint for posting to notion
    */
   const notion = new Client({
-    auth: "secret_prA8oJ4vzP6DbglMAbSV21deUnuQyF8RKge8qY8go8T",
+    auth: process.env.NOTION_API_KEY,
   });
 
   app.post("/features", async (req, res) => {
@@ -85,7 +85,7 @@ function createBoomerangServer({
         path: "pages",
         method: "POST",
         body: {
-          parent: { database_id: "93496b6c3037448eacb6eb09ab98090b" },
+          parent: { database_id: process.env.NOTION_DB_ID },
           properties: {
             Feature: {
               title: [
