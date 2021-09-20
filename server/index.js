@@ -7,6 +7,7 @@ const serialize = require("serialize-javascript");
 const boomerangLogger = require("@boomerang-io/logger-middleware")("webapp-spa-server/index.js");
 const health = require("@cloudnative/health-connect");
 const defaultHtmlHeadInjectDataKeys = require("./config").defaultHtmlHeadInjectDataKeys;
+const { Client } = require("@notionhq/client");
 
 // Get logger function
 const logger = boomerangLogger.logger;
@@ -64,6 +65,7 @@ function createBoomerangServer({
   // Parsing
   const bodyParser = require("body-parser");
   app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.json());
 
   // Initialize healthchecker and add routes
   const healthchecker = new health.HealthChecker();
@@ -73,10 +75,52 @@ function createBoomerangServer({
   /**
    * Add endpoint for posting to notion
    */
-  const jsonParser = bodyParser.json();
-  app.post("/bugs", jsonParser, (req, res) => {
-    const q = JSON.parse(req.body.query);
-    res.json(q);
+  const notion = new Client({
+    auth: "secret_prA8oJ4vzP6DbglMAbSV21deUnuQyF8RKge8qY8go8T",
+  });
+
+  app.post("/features", async (req, res) => {
+    try {
+      const response = await notion.request({
+        path: "pages",
+        method: "POST",
+        body: {
+          parent: { database_id: "93496b6c3037448eacb6eb09ab98090b" },
+          properties: {
+            Feature: {
+              title: [
+                {
+                  text: {
+                    content: req.body.feature,
+                  },
+                },
+              ],
+            },
+            Description: {
+              rich_text: [
+                {
+                  text: {
+                    content: req.body.description,
+                  },
+                },
+              ],
+            },
+            Benefit: {
+              rich_text: [
+                {
+                  text: {
+                    content: req.body.benefit,
+                  },
+                },
+              ],
+            },
+          },
+        },
+      });
+      res.json(response);
+    } catch (e) {
+      res.json(e);
+    }
   });
 
   // Create endpoint for the app serve static assets

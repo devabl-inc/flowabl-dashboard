@@ -120,7 +120,7 @@ export const AuthProvider = ({ children }) => {
           const price = (await sub.price.get()).data();
           setSubscription({ price: price, product: product, interval: price.interval, name: product });
         } else {
-          setSubscription({ price: 0, product: Tiers.Maker, interval: "monthly", name: "Early Access (maker)" });
+          setSubscription({ price: 0, product: Tiers.Maker, interval: "monthly", name: "Maker - Early Access" });
         }
       } catch (e) {
         console.log(e);

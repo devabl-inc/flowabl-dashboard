@@ -39,7 +39,7 @@ export const PRODUCT_SERVICE_ENV_URL =
 export const BASE_URL = BASE_SERVICE_ENV_URL;
 
 export const serviceUrl = {
-  resourceBugs: () => `${BASE_URL}/bugs`,
+  resourceFeatures: () => `${BASE_URL}/features`,
   resourceNavigation: () => `${BASE_URL}/navigation`,
   resourceUserProfile: () => `${BASE_URL}/profile`,
 };
@@ -60,7 +60,7 @@ export const cancellableResolver = ({ url, method, body, ...config }) => {
 export const resolver = {
   query: (url) => () => axios.get(url).then((response) => response.data),
   postMutation: (request) => axios.post(request),
-  postCreateBug: (request) => axios.post(serviceUrl.resourceBugs(), request),
+  postCreateBug: (request) => axios.post(serviceUrl.resourceFeatures(), request),
   patchMutation: (request) => axios.patch(request),
   putMutation: (request) => axios.put(request),
 };
