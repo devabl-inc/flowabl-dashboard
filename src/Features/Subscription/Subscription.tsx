@@ -8,27 +8,32 @@ import {
   FeatureHeader,
   FeatureHeaderTitle,
   FeatureHeaderSubtitle,
+  Loading,
 } from "@boomerang-io/carbon-addons-boomerang-react";
 import { Delete16 } from "@carbon/icons-react";
-import { Tiers } from "Config/appConfig";
-import { Tier } from "Utils/types";
+import { SubscriptionConfigs, Tiers } from "Config/appConfig";
+import { FlowablSubscription } from "Utils/types";
 import styles from "./Subscription.module.scss";
 
 export default function Subscription() {
   const { subscription } = useAuth();
-  const [selectedTier, setSelectedTier] = React.useState<Tier>(subscription?.product);
+  const [selectedTier, setSelectedTier] = React.useState<FlowablSubscription>(subscription);
 
   React.useEffect(() => {
-    setSelectedTier(subscription?.product);
+    setSelectedTier(subscription);
   }, [subscription]);
 
-  const handleOnClick = (tier: Tier) => () => {
-    setSelectedTier(tier);
+  const handleOnClick = (subscription: FlowablSubscription) => () => {
+    setSelectedTier(subscription);
   };
 
   const handleCancel = () => {
     alert(`Are you sure? You will be dropped down to the 'free' tier.`);
   };
+
+  if (!selectedTier) {
+    return <Loading />;
+  }
 
   return (
     <article>
@@ -43,7 +48,7 @@ export default function Subscription() {
             <div>
               <dt className={styles.contentLabel}>Tier</dt>
               <dd className={styles.contentText}>
-                You are on the <strong>{selectedTier}</strong> tier
+                You are on the <strong>{selectedTier.name}</strong> tier.
               </dd>
             </div>
             <div>
@@ -66,10 +71,10 @@ export default function Subscription() {
           <div className={styles.tilesContainer}>
             <RadioTile
               disabled
-              checked={selectedTier === Tiers.Free}
+              checked={selectedTier.product === Tiers.Free}
               value={Tiers.Free}
               className={styles.tile}
-              onClick={handleOnClick(Tiers.Free)}
+              onClick={handleOnClick(SubscriptionConfigs[Tiers.Free])}
             >
               <h2 className={styles.tileTitle}>Free</h2>
               <UnorderedList>
@@ -80,12 +85,12 @@ export default function Subscription() {
             </RadioTile>
             <RadioTile
               disabled
-              checked={selectedTier === Tiers.Starter}
+              checked={selectedTier.product === Tiers.Starter}
               value={Tiers.Starter}
               className={styles.tile}
-              onClick={handleOnClick(Tiers.Starter)}
+              onClick={handleOnClick(SubscriptionConfigs[Tiers.Starter])}
             >
-              <h2 className={styles.tileTitle}>Tier 1</h2>
+              <h2 className={styles.tileTitle}>Starter</h2>
               <UnorderedList>
                 <ListItem>Visual workflow editor</ListItem>
                 <ListItem>Single user</ListItem>
@@ -94,12 +99,12 @@ export default function Subscription() {
             </RadioTile>
             <RadioTile
               disabled
-              checked={selectedTier === Tiers.Maker}
+              checked={selectedTier.product === Tiers.Maker}
               value={Tiers.Maker}
               className={styles.tile}
-              onClick={handleOnClick(Tiers.Maker)}
+              onClick={handleOnClick(SubscriptionConfigs[Tiers.Maker])}
             >
-              <h2 className={styles.tileTitle}>Tier 2</h2>
+              <h2 className={styles.tileTitle}>Maker</h2>
               <UnorderedList>
                 <ListItem>Visual workflow editor</ListItem>
                 <ListItem>Unlimited users</ListItem>
@@ -110,12 +115,12 @@ export default function Subscription() {
             </RadioTile>
             <RadioTile
               disabled
-              checked={selectedTier === Tiers.Premium}
+              checked={selectedTier.product === Tiers.Premium}
               className={styles.tile}
               value={Tiers.Premium}
-              onClick={handleOnClick(Tiers.Premium)}
+              onClick={handleOnClick(SubscriptionConfigs[Tiers.Premium])}
             >
-              <h2 className={styles.tileTitle}>Tier 3</h2>
+              <h2 className={styles.tileTitle}>Premium</h2>
               <UnorderedList>
                 <ListItem>Visual workflow editor</ListItem>
                 <ListItem>Unlimited users</ListItem>

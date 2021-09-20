@@ -19,7 +19,7 @@ const googleProvider = new GoogleAuthProvider();
 
 interface AuthContextInterface {
   user: User;
-  subscription: DocumentReference;
+  subscription: FlowablSubscription;
   isAuthenticating: boolean;
   signInWithPopup: (redirectPath?: string) => void;
   signInWithEmailLink: () => void;
@@ -120,7 +120,7 @@ export const AuthProvider = ({ children }) => {
           const price = (await sub.price.get()).data();
           setSubscription({ price: price, product: product, interval: price.interval, name: product });
         } else {
-          setSubscription({ price: 0, product: Tiers.Free, interval: "monthly", name: "Free" });
+          setSubscription({ price: 0, product: Tiers.Maker, interval: "monthly", name: "Early Access (maker)" });
         }
       } catch (e) {
         console.log(e);

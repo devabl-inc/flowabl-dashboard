@@ -34,20 +34,14 @@ export const BASE_SERVICE_ENV_URL =
 export const PRODUCT_SERVICE_ENV_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:8000/api"
-    : window._SERVER_DATA && window._SERVER_DATA.PRODUCT_SERVICE_ENV_URL;
+    : (window._SERVER_DATA && window._SERVER_DATA?.PRODUCT_SERVICE_ENV_URL) ?? "/";
 
 export const BASE_URL = BASE_SERVICE_ENV_URL;
-export const BASE_SERVICE_PRODUCT_URL = determineUrl(PRODUCT_SERVICE_ENV_URL, "/product");
-export const BASE_SERVICE_ADMIN_URL = determineUrl(BASE_SERVICE_ENV_URL, "/admin");
-export const BASE_SERVICE_LAUNCHPAD_URL = determineUrl(BASE_SERVICE_ENV_URL, "/launchpad");
-export const BASE_SERVICE_USERS_URL = determineUrl(BASE_SERVICE_ENV_URL, "/users");
-export const BASE_SERVICE_AUTH_URL = determineUrl(BASE_SERVICE_ENV_URL, "/auth");
-export const BASE_SERVICE_STATUS_URL = determineUrl(BASE_SERVICE_ENV_URL, "/status");
 
 export const serviceUrl = {
-  resourceUserProfile: () => `${BASE_SERVICE_USERS_URL}/profile`,
-  resourceNavigation: () => `${BASE_SERVICE_USERS_URL}/navigation`,
-  resourceUsers: () => `${BASE_SERVICE_USERS_URL}/users`,
+  resourceBugs: () => `${BASE_URL}/bugs`,
+  resourceNavigation: () => `${BASE_URL}/navigation`,
+  resourceUserProfile: () => `${BASE_URL}/profile`,
 };
 
 export const cancellableResolver = ({ url, method, body, ...config }) => {
@@ -66,6 +60,7 @@ export const cancellableResolver = ({ url, method, body, ...config }) => {
 export const resolver = {
   query: (url) => () => axios.get(url).then((response) => response.data),
   postMutation: (request) => axios.post(request),
+  postCreateBug: (request) => axios.post(serviceUrl.resourceBugs(), request),
   patchMutation: (request) => axios.patch(request),
   putMutation: (request) => axios.put(request),
 };

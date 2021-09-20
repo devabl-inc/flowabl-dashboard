@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Boomerang Webapp Express Server",
   "scripts": {
-    "start": "boomerang-webapp-server serve",
+    "start": "node index.js",
     "dev": "boomerang-webapp-server serve -p \".env.local\""
   },
   "contributors": [
