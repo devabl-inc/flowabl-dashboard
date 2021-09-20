@@ -23,19 +23,9 @@ import axios, { CancelToken } from "axios";
  * This value is passed into the container at run time by the helm chart
  * and added to the window as a global variable by the @boomerang/boomerang-webapp-server
  */
-export const BASE_SERVICE_ENV_URL = window._SERVER_DATA ? window._SERVER_DATA?.BASE_SERVICE_ENV_URL ?? "/" : "/api";
-
-/**
- * Used for communicating with the main product services for this application
- * This value is passed into the container at run time by the helm chart
- * and added to the window as a global variable by the @boomerang/boomerang-webapp-server
- */
-export const PRODUCT_SERVICE_ENV_URL =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:8000/api"
-    : (window._SERVER_DATA && window._SERVER_DATA?.PRODUCT_SERVICE_ENV_URL) ?? "/";
-
-export const BASE_URL = BASE_SERVICE_ENV_URL;
+export const BASE_URL = window._SERVER_DATA
+  ? window._SERVER_DATA?.PRODUCT_ENV_URL ?? "https://dashboard.flowabl.io/"
+  : "/api";
 
 export const serviceUrl = {
   resourceFeatures: () => `${BASE_URL}/features`,
