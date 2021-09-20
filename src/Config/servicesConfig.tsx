@@ -23,8 +23,7 @@ import axios, { CancelToken } from "axios";
  * This value is passed into the container at run time by the helm chart
  * and added to the window as a global variable by the @boomerang/boomerang-webapp-server
  */
-export const BASE_SERVICE_ENV_URL =
-  process.env.NODE_ENV === "production" ? window._SERVER_DATA && window._SERVER_DATA.BASE_SERVICE_ENV_URL : "/api";
+export const BASE_SERVICE_ENV_URL = window._SERVER_DATA ? window._SERVER_DATA?.BASE_SERVICE_ENV_URL ?? "/" : "/api";
 
 /**
  * Used for communicating with the main product services for this application

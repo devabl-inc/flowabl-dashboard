@@ -57,10 +57,11 @@ export default function Subscription() {
                 {" "}
                 <UnorderedList>
                   <ListItem>Visual workflow editor</ListItem>
-                  <ListItem>Single user</ListItem>
-                  <ListItem>10 executions per month </ListItem>
-                  <ListItem>30 min per execution duration</ListItem>
-                  <ListItem>Insights for 30 days</ListItem>
+                  <ListItem>Unlimited users</ListItem>
+                  <ListItem>Custom Tasks</ListItem>
+                  <ListItem>50 workflows</ListItem>
+                  <ListItem>200 executions per month</ListItem>
+                  <ListItem>Premium support</ListItem>
                 </UnorderedList>
               </dd>
             </div>
@@ -76,7 +77,7 @@ export default function Subscription() {
               className={styles.tile}
               onClick={handleOnClick(SubscriptionConfigs[Tiers.Free])}
             >
-              <h2 className={styles.tileTitle}>Free</h2>
+              <h2 className={styles.tileTitle}>EXPLORER</h2>
               <UnorderedList>
                 <ListItem>Visual workflow editor</ListItem>
                 <ListItem>Single user</ListItem>
@@ -108,8 +109,9 @@ export default function Subscription() {
               <UnorderedList>
                 <ListItem>Visual workflow editor</ListItem>
                 <ListItem>Unlimited users</ListItem>
+                <ListItem>Custom Tasks</ListItem>
                 <ListItem>50 workflows</ListItem>
-                <ListItem>Unlimited tasks</ListItem>
+                <ListItem>200 executions per month</ListItem>
                 <ListItem>Premium support</ListItem>
               </UnorderedList>
             </RadioTile>
@@ -120,11 +122,13 @@ export default function Subscription() {
               value={Tiers.Premium}
               onClick={handleOnClick(SubscriptionConfigs[Tiers.Premium])}
             >
-              <h2 className={styles.tileTitle}>Premium</h2>
+              <h2 className={styles.tileTitle}>Scaler</h2>
               <UnorderedList>
                 <ListItem>Visual workflow editor</ListItem>
                 <ListItem>Unlimited users</ListItem>
+                <ListItem>Custom Tasks</ListItem>
                 <ListItem>250 workflows</ListItem>
+                <ListItem>1000 executions per month</ListItem>
                 <ListItem>Unlimited tasks</ListItem>
                 <ListItem>Premium support</ListItem>
               </UnorderedList>
