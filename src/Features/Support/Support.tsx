@@ -79,7 +79,7 @@ export default function Support() {
             </div>
           </ClickableTile>
           <ComposedModal
-            composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
+            composedModalProps={{ selectorPrimaryFocus: 'input[id="feature"]' }}
             modalHeaderProps={{
               title: "Request a feature",
               subtitle: "What would you like to see in Flowabl?",

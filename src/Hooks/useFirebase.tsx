@@ -48,6 +48,12 @@ export const AuthProvider = ({ children }) => {
       //const credential = GoogleAuthProvider.credentialFromResult(result);
       //const token = credential.accessToken;
       setUser(result.user);
+
+      // Set up chat
+      if (result.user?.email) {
+        window.$crisp.push(["set", "user:email", result.user.email]);
+      }
+
       if (redirectPath) {
         history.push(redirectPath);
       }
