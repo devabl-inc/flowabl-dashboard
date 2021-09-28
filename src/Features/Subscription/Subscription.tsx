@@ -56,12 +56,16 @@ export default function Subscription() {
               <dd className={styles.contentText}>
                 {" "}
                 <UnorderedList>
-                  <ListItem>Visual workflow editor</ListItem>
-                  <ListItem>Unlimited users</ListItem>
+                  <ListItem>Visual Workflow Editor</ListItem>
+                  <ListItem>Teams</ListItem>
                   <ListItem>Custom Tasks</ListItem>
                   <ListItem>50 workflows</ListItem>
                   <ListItem>200 executions per month</ListItem>
-                  <ListItem>Premium support</ListItem>
+                  <ListItem>5 concurrent executions</ListItem>
+                  <ListItem>2 hr execution duration</ListItem>
+                  <ListItem>Persistent Storage</ListItem>
+                  <ListItem>Insights for 1 year</ListItem>
+                  <ListItem>Premium support (addon)</ListItem>
                 </UnorderedList>
               </dd>
             </div>
@@ -77,11 +81,14 @@ export default function Subscription() {
               className={styles.tile}
               onClick={handleOnClick(SubscriptionConfigs[Tiers.Free])}
             >
-              <h2 className={styles.tileTitle}>EXPLORER</h2>
+              <h2 className={styles.tileTitle}>Explorer</h2>
               <UnorderedList>
-                <ListItem>Visual workflow editor</ListItem>
-                <ListItem>Single user</ListItem>
+                <ListItem>Visual Workflow Editor</ListItem>
+                <ListItem>Single User</ListItem>
                 <ListItem>2 workflows</ListItem>
+                <ListItem>10 executions per month</ListItem>
+                <ListItem>30 min execution duration</ListItem>
+                <ListItem>Insights for 30 days</ListItem>
               </UnorderedList>
             </RadioTile>
             <RadioTile
@@ -93,9 +100,14 @@ export default function Subscription() {
             >
               <h2 className={styles.tileTitle}>Starter</h2>
               <UnorderedList>
-                <ListItem>Visual workflow editor</ListItem>
-                <ListItem>Single user</ListItem>
+                <ListItem>Visual Workflow Editor</ListItem>
+                <ListItem>Single User</ListItem>
                 <ListItem>10 workflows</ListItem>
+                <ListItem>40 executions per month</ListItem>
+                <ListItem>2 concurrent executions</ListItem>
+                <ListItem>2 hr execution duration</ListItem>
+                <ListItem>Persistent Storage</ListItem>
+                <ListItem>Insights for 90 days</ListItem>
               </UnorderedList>
             </RadioTile>
             <RadioTile
@@ -107,12 +119,16 @@ export default function Subscription() {
             >
               <h2 className={styles.tileTitle}>Maker</h2>
               <UnorderedList>
-                <ListItem>Visual workflow editor</ListItem>
-                <ListItem>Unlimited users</ListItem>
+                <ListItem>Visual Workflow Editor</ListItem>
+                <ListItem>Teams</ListItem>
                 <ListItem>Custom Tasks</ListItem>
                 <ListItem>50 workflows</ListItem>
                 <ListItem>200 executions per month</ListItem>
-                <ListItem>Premium support</ListItem>
+                <ListItem>5 concurrent executions</ListItem>
+                <ListItem>2 hr execution duration</ListItem>
+                <ListItem>Persistent Storage</ListItem>
+                <ListItem>Insights for 1 year</ListItem>
+                <ListItem>Premium support (addon)</ListItem>
               </UnorderedList>
             </RadioTile>
             <RadioTile
@@ -124,13 +140,19 @@ export default function Subscription() {
             >
               <h2 className={styles.tileTitle}>Scaler</h2>
               <UnorderedList>
-                <ListItem>Visual workflow editor</ListItem>
-                <ListItem>Unlimited users</ListItem>
+                <ListItem>Visual Workflow Editor</ListItem>
+                <ListItem>Teams</ListItem>
                 <ListItem>Custom Tasks</ListItem>
-                <ListItem>250 workflows</ListItem>
-                <ListItem>1000 executions per month</ListItem>
-                <ListItem>Unlimited tasks</ListItem>
-                <ListItem>Premium support</ListItem>
+                <ListItem>500 workflows</ListItem>
+                <ListItem>2,000 executions per month</ListItem>
+                <ListItem>5 concurrent executions</ListItem>
+                <ListItem>24 hr execution duration</ListItem>
+                <ListItem>Persistent Storage</ListItem>
+                <ListItem>Insights for 1 year</ListItem>
+                <ListItem>Premium support (addon)</ListItem>
+                <ListItem>Custom Workflows (addon)</ListItem>
+                <ListItem>Roadmap Partnership (addon)</ListItem>
+                <ListItem>Dedicated Instance (addon)</ListItem>
               </UnorderedList>
             </RadioTile>
           </div>
