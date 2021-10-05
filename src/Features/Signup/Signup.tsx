@@ -20,8 +20,8 @@ export default function Signup() {
               <div className="content-wrapper">
                 <a href={PRODUCT_ENV_URL} className="brand w-nav-brand">
                   <img
-                    src="https://uploads-ssl.webflow.com/60d12e51cd5e87607f0568c9/60d185e9238281478de5036e_brandmark-design.svg"
-                    alt=""
+                    src="https://uploads-ssl.webflow.com/60d12e51cd5e87607f0568c9/614de26b3d8f9c9a66cc9e09_logo.svg"
+                    alt="Flowabl logo"
                     className="image"
                   />
                 </a>
@@ -57,7 +57,7 @@ export default function Signup() {
                   </div>
                 </div>
                 <div className="legal-box _2">
-                  <div className="legal-text">© 2021 Flowabl Ltd. All rights reserved.</div>
+                  <div className="legal-text">© 2021 Devabl, Inc. All rights reserved.</div>
                 </div>
               </div>
             </div>
@@ -194,7 +194,7 @@ export default function Signup() {
                 </div>
               </div>
               <div className="legal-box _2-copy">
-                <div className="legal-text _3">© 2021 Flowabl Ltd. All rights reserved.</div>
+                <div className="legal-text _3">© 2021 Devabl, Inc. All rights reserved.</div>
               </div>
             </div>
           </div>

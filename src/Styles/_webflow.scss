@@ -4042,8 +4042,7 @@
     display: block;
     overflow: visible;
     width: auto;
-    -o-object-fit: none;
-    object-fit: none;
+    object-fit: contain;
   }
 
   .image-2 {
