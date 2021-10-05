@@ -4,10 +4,23 @@ const path = require("path");
 const fs = require("fs");
 const cors = require("cors");
 const serialize = require("serialize-javascript");
+const axios = require("axios");
 const boomerangLogger = require("@boomerang-io/logger-middleware")("webapp-spa-server/index.js");
 const health = require("@cloudnative/health-connect");
 const defaultHtmlHeadInjectDataKeys = require("./config").defaultHtmlHeadInjectDataKeys;
 const { Client } = require("@notionhq/client");
+
+if (process.env.NODE_ENV === "development") {
+  require("dotenv").config({
+    path: ".env.local",
+  });
+}
+
+/**
+ * Config
+ */
+const FLOW_WEBOOK_URL = "https://app.flowabl.io/services/listener/webhook";
+const JOIN_EMAIL_WORKFLOW_ID = "61454e2d1000b141daa8f85f";
 
 // Get logger function
 const logger = boomerangLogger.logger;
@@ -73,7 +86,32 @@ function createBoomerangServer({
   app.use("/ready", health.ReadinessEndpoint(healthchecker));
 
   /**
-   * Add endpoint for posting to notion
+   * Endpoints for triggering email
+   */
+  app.post("/email/join", async (req, res) => {
+    const flowAccessToken = process.env.FLOW_EMAIL_ACCESS_TOKEN;
+    if (!flowAccessToken) {
+      res.status(401);
+      res.send({ status: 401, message: "Flow access token not provided by environment" });
+    } else {
+      try {
+        await axios.post(
+          `${FLOW_WEBOOK_URL}?workflowId=${JOIN_EMAIL_WORKFLOW_ID}&type=generic&access_token=${flowAccessToken}`,
+          req.body
+        );
+        res.status(200);
+        res.json({ status: 200, message: "Email triggered successfully" });
+      } catch (err) {
+        const status = err.status ?? 500;
+        res.status(status);
+        res.json({ err });
+      }
+    }
+  });
+  app.post("/email/change", async (req, res) => {});
+
+  /**
+   * Endpoint for posting to notion
    */
   const notion = new Client({
     auth: process.env.NOTION_API_KEY,
@@ -177,7 +215,7 @@ function createBoomerangServer({
  * @param {string} buildDir - build directory for building up path to index.html file
  * @param {string} injectedDataKeys - string of comma delimited values
  * @param {string} injectedScripts - string of comma delimited values
- * @param {string} appRoot - root context off app. Used for script injection
+ * @param {string} appRoot - root context of app. Used for script injection
  */
 function injectEnvDataAndScriptsIntoHTML(res, buildDir, injectedDataKeys, injectedScripts, appRoot) {
   /**

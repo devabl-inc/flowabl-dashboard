@@ -17,4 +17,7 @@ exports.defaultHtmlHeadInjectDataKeys = [
   "PRODUCT_SERVICE_ENV_URL",
   "PRODUCT_APPS_ENV_URL",
   "PRODUCT_ENV_URL",
+  "FLOW_EMAIL_ACCESS_TOKEN",
+  "NOTION_API_KEY",
+  "NOTION_DB_ID",
 ];
