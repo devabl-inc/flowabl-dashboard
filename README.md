@@ -1,3 +1,7 @@
+License
+https://choosealicense.com/no-permission/
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) using the [CRA Boomerang Template](https://github.com/boomerang-io/webapp-packages/tree/feature-cra-boomerang-template/packages/cra-template-boomerang)
 
 ## Template Features
