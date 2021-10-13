@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Button, Link } from "@boomerang-io/carbon-addons-boomerang-react";
 import { Link as RRLink } from "react-router-dom";
 import { useAuth } from "Hooks/useFirebase";

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Switch } from "react-router-dom";
 import { Error404, NotificationsContainer } from "@boomerang-io/carbon-addons-boomerang-react";
 import Login from "Features/Login";

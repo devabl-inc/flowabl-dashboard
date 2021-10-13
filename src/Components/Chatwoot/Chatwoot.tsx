@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React from "react";
+import * as React from "react";
 import { CHATWOOT_TOKEN } from "Config/appConfig";
 
 class ChatwootWidget extends React.Component {

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { waitFor } from "@testing-library/react";
 import { queryCaches } from "react-query";
 import { startApiServer } from "ApiServer";
@@ -19,10 +19,9 @@ describe("App", () => {
   describe("RTL", () => {
     it("Capturing Snapshot of Navbar", async () => {
       const { baseElement } = rtlRender(<Navbar />);
-  
+
       expect(baseElement).toMatchSnapshot();
       await waitFor(() => {});
     });
   });
-  
 });

@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React from "react";
+import * as React from "react";
 import { Helmet } from "react-helmet";
 import { NavLink } from "react-router-dom";
 import { SideNav, SideNavItems, SideNavLink } from "carbon-components-react";

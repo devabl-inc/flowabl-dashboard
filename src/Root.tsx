@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { ReactQueryConfigProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query-devtools";

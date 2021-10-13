@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import AppContext from "State/appContext";
 import { useAuth } from "Hooks/useFirebase";
 import { Header, HeaderName, SkipToContent } from "carbon-components-react";

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import AppContext from "State/appContext";
 import { Router } from "react-router-dom";
 import { navigation, userProfile } from "./ApiServer/fixtures";
