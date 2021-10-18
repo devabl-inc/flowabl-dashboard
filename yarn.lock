@@ -1201,14 +1201,15 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@boomerang-io/carbon-addons-boomerang-react@1.4.0-beta.1":
-  version "1.4.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@boomerang-io/carbon-addons-boomerang-react/-/carbon-addons-boomerang-react-1.4.0-beta.1.tgz#e6580668eebf9abb7441776c4f447b87ff70ffa5"
-  integrity sha512-Z343A4t0H9v9RnLUHq68kEEIU7J9JUvU0rHkjxzJ+6dnV02MrD1Se5LGN5EK50/vEcPNi6xswa+aEiNCcT6qCw==
+"@boomerang-io/carbon-addons-boomerang-react@1.4.0-beta.3":
+  version "1.4.0-beta.3"
+  resolved "https://registry.yarnpkg.com/@boomerang-io/carbon-addons-boomerang-react/-/carbon-addons-boomerang-react-1.4.0-beta.3.tgz#ebd75313c0ef775bb6c23423549e6a69c1d2bbc2"
+  integrity sha512-7KySvLqAe5nwfE4mlj82nLNiqyqRttnBMTfHRc2MfBUhUzAVRj+nKjE6lcrtkKhHmXgcmEamEivsfn9BHIChPA==
   dependencies:
     "@carbon/elements" "^10.21.0"
     "@stomp/stompjs" "^5.4.2"
     "@tippyjs/react" "^4.0.2"
+    carbon-icons "^7.0.7"
     classnames "^2.2.5"
     date-fns "^1.30.1"
     dompurify "^2.0.6"
