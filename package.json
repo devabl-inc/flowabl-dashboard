@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@boomerang-io/carbon-addons-boomerang-react": "1.4.0-beta.3",
+    "@boomerang-io/carbon-addons-boomerang-react": "1.4.0-beta.5",
     "@boomerang-io/styles": "^0.0.2",
     "@carbon/icons-react": "^10.37.0",
     "@carbon/pictograms-react": "^11.17.0",
