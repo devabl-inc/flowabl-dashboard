@@ -31,7 +31,7 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
-          registry: us-west1-docker.pkg.dev/flowabl
+          registry: us-west1-docker.pkg.dev/flowabl-dashboard
           username: _json_key
           password: ${{ secrets.GAR_JSON_KEY }}
       - name: Get the version
@@ -43,6 +43,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: us-west1-docker.pkg.dev/flowabl/flowabl-dashboard:latest,us-west1-docker.pkg.dev/flowabl/flowabl-dashboard:${{ steps.get_version.outputs.VERSION }}
+          tags: us-west1-docker.pkg.dev/flowabl-dashboard/flowabl/flowabl-dashboard:latest,us-west1-docker.pkg.dev/flowabl-dashboard/flowabl/flowabl-dashboard:${{ steps.get_version.outputs.VERSION }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
