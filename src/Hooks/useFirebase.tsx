@@ -1,4 +1,3 @@
-//@ts-nocheck
 import * as React from "react";
 import { useHistory } from "react-router";
 import { auth, db } from "Config/firebaseConfig";
@@ -12,36 +11,45 @@ import {
   User,
   getAdditionalUserInfo
 } from "firebase/auth";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDoc, getDocs, query, where } from "firebase/firestore";
 import { Tiers } from "Config/appConfig";
 import { FlowablSubscription } from "Utils/types";
+import { FirebaseError } from "firebase/app";
 
 const googleProvider = new GoogleAuthProvider();
 
 interface AuthContextInterface {
-  user: User;
-  subscription: FlowablSubscription;
   isAuthenticating: boolean;
-  signInWithPopup: (redirectPath?: string) => void;
-  signInWithEmailLink: () => void;
-  signInWithPopup: () => void;
-  sendSignInLinkToEmail: () => void;
+  subscription?: FlowablSubscription;
+  user?: User;
   logout: () => void;
+  sendSignInLinkToEmail: () => void;
+  signInWithPopup: (args: ISignInArgs) => void;
+  signInWithEmailLink: () => void;
 }
 
+interface ISignInArgs {
+  tier?: string;
+  interval?: string;
+}
+
+//@ts-ignore
 const AuthContext = React.createContext<AuthContextInterface>();
 
 export const useAuth = () => {
   return React.useContext(AuthContext);
 };
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = React.useState<User>(null);
-  const [subscription, setSubscription] = React.useState<FlowablSubscription>(null);
+interface AuthProviderProps {
+  children: React.ReactNode
+}
+export const AuthProvider = ({ children }: AuthProviderProps) => {
+  const [user, setUser] = React.useState<User>();
+  const [subscription, setSubscription] = React.useState<FlowablSubscription>();
   const [isAuthenticating, setIsAuthenticating] = React.useState(true);
-  const history = useHistory();
+  //const history = useHistory();
 
-  const signInWithPopup = async ({ tier, interval }: GetPriceFromProductsArgs) => {
+  const signInWithPopup = async ({ tier, interval }: ISignInArgs) => {
     try {
       const result = await firebaseSignInWithPopup(auth, googleProvider);
 
@@ -50,28 +58,30 @@ export const AuthProvider = ({ children }) => {
       //const token = credential.accessToken;
       setUser(result.user);
 
-      // Redirect to stripe if the user is new
-      if (getAdditionalUserInfo(result)?.isNewUser) {
-        console.log({ userStatus: getAdditionalUserInfo(result)?.isNewUser ?? "Failed"})
-        getPriceFromProducts({ tier, interval});
-      } else {
-        console.log({ userStatus: getAdditionalUserInfo(result)?.isNewUser ?? "Failed"})
-        await getPriceFromProducts({ tier, interval});
-      }
-
       // Set up chat
       if (result.user?.email) {
         window.$crisp.push(["set", "user:email", result.user.email]);
       }
 
-      if (redirectPath) {
-        history.push(redirectPath);
+      // Redirect to stripe if the user is new
+      if (getAdditionalUserInfo(result)?.isNewUser) {
+        console.log({ userStatus: getAdditionalUserInfo(result)?.isNewUser ?? "Failed to get user additional info" })
+        if (tier && interval) {
+          await getPriceFromProducts({ tier, interval });
+        }
+      } else {
+        // TODO: remove this and redirect instead in the future
+        // history.push("");
+        console.log({ userStatus: getAdditionalUserInfo(result)?.isNewUser ?? "Failed to get user additional info" })
+        if (tier && interval) {
+          await getPriceFromProducts({ tier, interval });
+        }
       }
-
     } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      const credential = GoogleAuthProvider.credentialFromError(error);
+      const firebaseError = error as FirebaseError;
+      const errorCode = firebaseError.code;
+      const errorMessage = firebaseError.message;
+      const credential = GoogleAuthProvider.credentialFromError(firebaseError);
       console.error({ credential, error, errorCode, errorMessage });
       // // The email of the user's account used.
       // const email = error.email;
@@ -81,7 +91,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const sendSignInLinkToEmail = (email) => {
+  const sendSignInLinkToEmail = (email: string) => {
     return firebaseSendSignInLinkToEmail(auth, email, {
       url: "http://localhost:3000",
       handleCodeInApp: true,
@@ -90,7 +100,7 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
-  const signInWithEmailLink = (email, code) => {
+  const signInWithEmailLink = (email: string, code: string) => {
     return firebaseSignInWithEmailLink(auth, email, code).then((result) => {
       setUser(result.user);
       return true;
@@ -118,29 +128,30 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     return firebaseSignOut(auth).then(() => {
-      setUser(null);
+      setUser(undefined);
     });
   };
 
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      setUser(user);
+      setUser(user ?? undefined);
       setIsAuthenticating(false);
-
-      try {
-        const collectionRef = collection(db, "customers", user.uid, "subscriptions");
-        const q = query(collectionRef, where("status", "in", ["trialing", "active"]));
-        const querySnapshot = await getDocs(q);
-        if (querySnapshot.docs?.length > 0) {
-          const sub = querySnapshot.docs[0].data();
-          const product = (await sub.product.get()).data();
-          const price = (await sub.price.get()).data();
-          setSubscription({ price: price, product: product, interval: price.interval, name: product });
-        } else {
-          setSubscription({ price: 0, product: Tiers.Maker, interval: "monthly", name: "Maker - Early Access" });
+      if (user) {
+        try {
+          const collectionRef = collection(db, "customers", user.uid, "subscriptions");
+          const q = query(collectionRef, where("status", "in", ["trialing", "active"]));
+          const querySnapshot = await getDocs(q);
+          if (querySnapshot.docs?.length > 0) {
+            const sub = querySnapshot.docs[0].data();
+            const product = (await sub.product.get()).data();
+            const price = (await sub.price.get()).data();
+            setSubscription({ price: price, product: product, interval: price.interval, name: product });
+          } else {
+            setSubscription({ price: 0, product: Tiers.Maker, interval: "monthly", name: "Maker - Early Access" });
+          }
+        } catch (e) {
+          console.log(e);
         }
-      } catch (e) {
-        console.log(e);
       }
     });
     return () => unsubscribe();
@@ -156,33 +167,43 @@ export const AuthProvider = ({ children }) => {
     logout,
   };
 
+  //@ts-ignore
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 };
 
-interface GetPriceFromProductsArgs {
-  tier: string;
-  interval: string;
-}
-
 // //Get Price
-async function getPriceFromProducts({ tier, interval}: GetPriceFromProductsArgs) {
+async function getPriceFromProducts({ tier, interval }: Required<ISignInArgs>) {
   const productsRef = collection(db, "products");
-  const q = query(productsRef, [where('name', '==', tier), where('active', '==', true)])
-  const getDocsQuery = await getDocs(q);
-  const { docs } = getDocsQuery;
-  console.log({ docs });
+  const productsQuery = query(productsRef, where('tier', '==', tier), where('active', '==', true))
+  const productsQueryResult = await getDocs(productsQuery);
+  const { docs: productDocs } = productsQueryResult;
+  console.log({ productDocs });
+
+  if (productDocs.length === 0) {
+    // Early return here if we don't find any docs
+    return;
+  }
+  
+  const productDoc = productDocs[0];
+  console.log({ productDoc, path: `products/${productDoc.id}/prices` })
+  const pricesRef = collection(db, "products", productDoc.id, "prices");
+  const pricesQuery = query(pricesRef, where('interval', '==', interval), where('active', '==', true))
+  const pricesQueryResult = await getDocs(pricesQuery);
+  const { docs: priceDocs } = pricesQueryResult;
+  console.log({ priceDocs })
+  
+  if (priceDocs.length === 0) {
+    
+    // Early return here if we don't find any docs
+    return;
+  }
+
+  const priceDoc = priceDocs[0];
+  console.log({ priceDoc });
   return;
-  // for (const doc of docs) {
-  //   const pricesRef = collection(productsRef, "prices");
-  //   const q = query(pricesRef, [where('interval', '==', interval), where('active', '==', true)])
-  //   const getPricesQuery = await getDocs(q);
-  //   doc.ref.then((priceSnapshot) => {
-  //       priceSnapshot.forEach((doc) => {
-  //         console.log("Price ID: " + doc.id);
-  //         return doc.id;
-  //       });
-  //     });
-  // }
+
+
+  return;
 };
 
 // // Checkout function

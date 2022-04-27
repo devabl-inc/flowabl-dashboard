@@ -23,7 +23,7 @@ import Signup from "Features/Signup";
 // const Signup = React.lazy(() => import(/* webpackChunkName: "Signup" */ "Features/Signup"));
 
 interface MainProps {
-  user: User;
+  user?: User;
 }
 
 function Main({ user }: MainProps) {

@@ -17,7 +17,7 @@ import styles from "./Subscription.module.scss";
 
 export default function Subscription() {
   const { subscription } = useAuth();
-  const [selectedTier, setSelectedTier] = React.useState<FlowablSubscription>(subscription);
+  const [selectedTier, setSelectedTier] = React.useState<FlowablSubscription | undefined>(subscription);
 
   React.useEffect(() => {
     setSelectedTier(subscription);

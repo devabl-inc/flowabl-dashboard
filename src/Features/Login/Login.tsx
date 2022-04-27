@@ -71,7 +71,7 @@ export default function Login() {
                     <button
                       id="loginGoogle"
                       className="social-login w-inline-block"
-                      onClick={() => signInWithPopup("")}
+                      onClick={() => signInWithPopup({})}
                     >
                       <img
                         src="https://uploads-ssl.webflow.com/60d12e51cd5e87607f0568c9/61077e26da023d6c3090c056_G.png"
