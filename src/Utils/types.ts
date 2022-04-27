@@ -17,4 +17,4 @@ export interface FlowablSubscription {
   name: string;
 }
 
-export type Tier = "free" | "starter" | "maker" | "premium";
+export type Tier = "explorer" | "starter" | "maker" | "premium";

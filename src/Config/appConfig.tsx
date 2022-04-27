@@ -41,14 +41,14 @@ export const SUPPORT_EMAIL = "hello@flowabl.io";
 export const DEV_URL = "http://localhost:3000";
 
 export const Tiers: Record<string, Tier> = {
-  Free: "free",
+  Free: "explorer",
   Starter: "starter",
   Maker: "maker",
   Premium: "premium",
 };
 
 export const SubscriptionConfigs: Record<Tier, FlowablSubscription> = {
-  free: {
+  explorer: {
     name: "Free",
     product: Tiers.Free,
     price: 0,

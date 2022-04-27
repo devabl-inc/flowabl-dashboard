@@ -9,11 +9,22 @@ import {
   signOut as firebaseSignOut,
   GoogleAuthProvider,
   User,
-  getAdditionalUserInfo
+  getAdditionalUserInfo,
 } from "firebase/auth";
-import { collection, getDoc, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  onSnapshot,
+  setDoc,
+  getDocs,
+  query,
+  where,
+  DocumentSnapshot,
+  DocumentData,
+  getDoc,
+} from "firebase/firestore";
 import { Tiers } from "Config/appConfig";
-import { FlowablSubscription } from "Utils/types";
+import { FlowablSubscription, Tier } from "Utils/types";
 import { FirebaseError } from "firebase/app";
 
 const googleProvider = new GoogleAuthProvider();
@@ -41,7 +52,7 @@ export const useAuth = () => {
 };
 
 interface AuthProviderProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = React.useState<User>();
@@ -52,29 +63,33 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const signInWithPopup = async ({ tier, interval }: ISignInArgs) => {
     try {
       const result = await firebaseSignInWithPopup(auth, googleProvider);
+      const { user } = result;
 
       // This gives you a Google Access Token. You can use it to access the Google API.
       //const credential = GoogleAuthProvider.credentialFromResult(result);
       //const token = credential.accessToken;
-      setUser(result.user);
+      setUser(user);
 
       // Set up chat
-      if (result.user?.email) {
-        window.$crisp.push(["set", "user:email", result.user.email]);
+      if (user?.email) {
+        window.$crisp.push(["set", "user:email", user.email]);
       }
 
       // Redirect to stripe if the user is new
       if (getAdditionalUserInfo(result)?.isNewUser) {
-        console.log({ userStatus: getAdditionalUserInfo(result)?.isNewUser ?? "Failed to get user additional info" })
+        console.log({ userStatus: getAdditionalUserInfo(result)?.isNewUser ?? "Failed to get user additional info" });
         if (tier && interval) {
-          await getPriceFromProducts({ tier, interval });
+          const priceDocId = await getPriceFromProducts({ tier, interval });
         }
       } else {
         // TODO: remove this and redirect instead in the future
         // history.push("");
-        console.log({ userStatus: getAdditionalUserInfo(result)?.isNewUser ?? "Failed to get user additional info" })
+        console.log({ userStatus: getAdditionalUserInfo(result)?.isNewUser ?? "Failed to get user additional info" });
         if (tier && interval) {
-          await getPriceFromProducts({ tier, interval });
+          const priceDocId = await getPriceFromProducts({ tier, interval });
+          if (priceDocId) {
+            await checkoutUser(user, priceDocId);
+          }
         }
       }
     } catch (error) {
@@ -143,9 +158,17 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           const querySnapshot = await getDocs(q);
           if (querySnapshot.docs?.length > 0) {
             const sub = querySnapshot.docs[0].data();
-            const product = (await sub.product.get()).data();
-            const price = (await sub.price.get()).data();
-            setSubscription({ price: price, product: product, interval: price.interval, name: product });
+            console.log({ sub });
+            const productRef = await getDoc(sub.product);
+            const product = productRef.data() as { name: string; metadata: { tier: Tier } };
+            const priceRef = await getDoc(sub.price);
+            const price = priceRef.data() as { unit_amount: number; interval: string };
+            setSubscription({
+              price: price.unit_amount,
+              product: product.metadata.tier,
+              interval: price.interval,
+              name: product.name,
+            });
           } else {
             setSubscription({ price: 0, product: Tiers.Maker, interval: "monthly", name: "Maker - Early Access" });
           }
@@ -173,62 +196,61 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
 // //Get Price
 async function getPriceFromProducts({ tier, interval }: Required<ISignInArgs>) {
+  // Products query
   const productsRef = collection(db, "products");
-  const productsQuery = query(productsRef, where('tier', '==', tier), where('active', '==', true))
+  const productsQuery = query(productsRef, where("metadata.tier", "==", tier), where("active", "==", true));
   const productsQueryResult = await getDocs(productsQuery);
   const { docs: productDocs } = productsQueryResult;
-  console.log({ productDocs });
-
   if (productDocs.length === 0) {
     // Early return here if we don't find any docs
     return;
   }
-  
+
+  // Prices query
   const productDoc = productDocs[0];
-  console.log({ productDoc, path: `products/${productDoc.id}/prices` })
-  const pricesRef = collection(db, "products", productDoc.id, "prices");
-  const pricesQuery = query(pricesRef, where('interval', '==', interval), where('active', '==', true))
+  const path = `products/${productDoc.id}/prices`;
+  console.log({ productDoc, path, interval });
+  const pricesRef = collection(db, path);
+  const pricesQuery = query(pricesRef, where("interval", "==", interval), where("active", "==", true));
   const pricesQueryResult = await getDocs(pricesQuery);
   const { docs: priceDocs } = pricesQueryResult;
-  console.log({ priceDocs })
-  
+
   if (priceDocs.length === 0) {
-    
     // Early return here if we don't find any docs
     return;
   }
 
+  // Build up Stripe redirect URL
   const priceDoc = priceDocs[0];
-  console.log({ priceDoc });
-  return;
+  return priceDoc.id;
+}
 
+// Checkout function
+async function checkoutUser(user: User, priceId: string) {
+  const sessionDocRef = await doc(collection(db, `customers/${user.uid}`, "checkout_sessions"));
+  await setDoc(sessionDocRef, {
+    price: priceId,
+    success_url: "http://localhost:3000",
+    cancel_url: "https://flowabl.io/pricing",
+  });
 
-  return;
-};
-
-// // Checkout function
-// async function checkoutUser(user, priceId) {
-//   const docRef = await firebase.firestore()
-//     .collection('customers')
-//     .doc(user.uid)
-//     .collection('checkout_sessions')
-//     .add({
-//       price: priceId,
-//       success_url: "https://dashboard.flowabl.io",
-//       cancel_url: window.location.origin,
-//     });
-//   // Wait for the CheckoutSession to get attached by the extension
-//   docRef.onSnapshot((snap) => {
-//     const { error, url } = snap.data();
-//     if (error) {
-//       // Show an error to your customer and 
-//       // inspect your Cloud Function logs in the Firebase console.
-//       console.log("An error occured: " + error.message);
-//     }
-//     if (url) {
-//       // We have a Stripe Checkout URL, let's redirect.
-//       window.location.assign(url);
-//     }
-//   });
-// };
-
+  const unsub = onSnapshot(
+    doc(db, `customers/${user.uid}`, "checkout_sessions", sessionDocRef.id),
+    (doc: DocumentSnapshot<DocumentData>) => {
+      if (!doc.metadata.hasPendingWrites) {
+        const docData = doc.data();
+        if (docData) {
+          if (docData.error) {
+            // Show an error to your customer and
+            // inspect your Cloud Function logs in the Firebase console.
+            console.log("An error occured: " + docData.error.message);
+          }
+          if (docData.url) {
+            // We have a Stripe Checkout URL, let's redirect.
+            window.location.assign(docData.url);
+          }
+        }
+      }
+    }
+  );
+}

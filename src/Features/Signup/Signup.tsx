@@ -1,11 +1,9 @@
-import * as React from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { useAuth } from "Hooks/useFirebase";
 import { AppLink } from "Config/appConfig";
 import { PRODUCT_ENV_URL } from "Config/platformUrlConfig";
 import useQueryParams from "Hooks/useQueryParams";
-import _ from "cypress/types/lodash";
 
 export default function Signup() {
   const { signInWithPopup } = useAuth();
@@ -75,7 +73,12 @@ export default function Signup() {
                     <button
                       id="loginGoogle"
                       className="social-login w-inline-block"
-                      onClick={() => signInWithPopup({ tier: queryParams.get("tier") ?? "", interval: queryParams.get("tier") ?? "" })}
+                      onClick={() =>
+                        signInWithPopup({
+                          tier: queryParams.get("tier") ?? "",
+                          interval: queryParams.get("interval") ?? "",
+                        })
+                      }
                     >
                       <img
                         src="https://uploads-ssl.webflow.com/60d12e51cd5e87607f0568c9/61077e26da023d6c3090c056_G.png"
