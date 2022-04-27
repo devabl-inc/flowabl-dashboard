@@ -147,13 +147,13 @@ function SubmitFeatureRequest(props: { closeModal: () => void }) {
     onSubmit: handleOnSubmit,
   });
 
-  const [createBugMutator, mutationStatus] = useMutation(resolver.postCreateBug);
+  const { mutateAsync: createBugMutator, isLoading, isError } = useMutation(resolver.postCreateBug);
 
-  const submitText = mutationStatus.isError ? "Try again" : mutationStatus.isLoading ? "Submitting..." : "Submit";
+  const submitText = isError ? "Try again" : isLoading ? "Submitting..." : "Submit";
   return (
     <ModalForm onSubmit={formik.handleSubmit}>
-      {mutationStatus.isLoading && <Loading />}
-      {mutationStatus.isError && (
+      {isLoading && <Loading />}
+      {isError  && (
         <InlineNotification
           lowContrast
           kind="error"
@@ -176,7 +176,7 @@ function SubmitFeatureRequest(props: { closeModal: () => void }) {
         <Button kind="secondary" onClick={props.closeModal}>
           Cancel
         </Button>
-        <Button type="submit" disabled={mutationStatus.isLoading || !formik.isValid}>
+        <Button type="submit" disabled={isLoading || !formik.isValid}>
           {submitText}
         </Button>
       </ModalFooter>

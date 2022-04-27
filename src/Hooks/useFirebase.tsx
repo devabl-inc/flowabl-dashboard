@@ -4,12 +4,13 @@ import { useHistory } from "react-router";
 import { auth, db } from "Config/firebaseConfig";
 import {
   onAuthStateChanged,
-  signInWithPopup as fbSignInWithPopup,
-  sendSignInLinkToEmail as fbSendSignInLinkToEmail,
-  signInWithEmailLink as fbSignInWithEmailLink,
-  signOut as fbSignOut,
+  signInWithPopup as firebaseSignInWithPopup,
+  sendSignInLinkToEmail as firebaseSendSignInLinkToEmail,
+  signInWithEmailLink as firebaseSignInWithEmailLink,
+  signOut as firebaseSignOut,
   GoogleAuthProvider,
   User,
+  getAdditionalUserInfo
 } from "firebase/auth";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { Tiers } from "Config/appConfig";
@@ -40,14 +41,23 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticating, setIsAuthenticating] = React.useState(true);
   const history = useHistory();
 
-  const signInWithPopup = async (redirectPath?: string) => {
+  const signInWithPopup = async ({ tier, interval }: GetPriceFromProductsArgs) => {
     try {
-      const result = await fbSignInWithPopup(auth, googleProvider);
+      const result = await firebaseSignInWithPopup(auth, googleProvider);
 
       // This gives you a Google Access Token. You can use it to access the Google API.
       //const credential = GoogleAuthProvider.credentialFromResult(result);
       //const token = credential.accessToken;
       setUser(result.user);
+
+      // Redirect to stripe if the user is new
+      if (getAdditionalUserInfo(result)?.isNewUser) {
+        console.log({ userStatus: getAdditionalUserInfo(result)?.isNewUser ?? "Failed"})
+        getPriceFromProducts({ tier, interval});
+      } else {
+        console.log({ userStatus: getAdditionalUserInfo(result)?.isNewUser ?? "Failed"})
+        await getPriceFromProducts({ tier, interval});
+      }
 
       // Set up chat
       if (result.user?.email) {
@@ -57,6 +67,7 @@ export const AuthProvider = ({ children }) => {
       if (redirectPath) {
         history.push(redirectPath);
       }
+
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -71,7 +82,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const sendSignInLinkToEmail = (email) => {
-    return fbSendSignInLinkToEmail(auth, email, {
+    return firebaseSendSignInLinkToEmail(auth, email, {
       url: "http://localhost:3000",
       handleCodeInApp: true,
     }).then(() => {
@@ -80,7 +91,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const signInWithEmailLink = (email, code) => {
-    return fbSignInWithEmailLink(auth, email, code).then((result) => {
+    return firebaseSignInWithEmailLink(auth, email, code).then((result) => {
       setUser(result.user);
       return true;
     });
@@ -106,7 +117,7 @@ export const AuthProvider = ({ children }) => {
   //   };
 
   const logout = () => {
-    return fbSignOut(auth).then(() => {
+    return firebaseSignOut(auth).then(() => {
       setUser(null);
     });
   };
@@ -147,3 +158,56 @@ export const AuthProvider = ({ children }) => {
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 };
+
+interface GetPriceFromProductsArgs {
+  tier: string;
+  interval: string;
+}
+
+// //Get Price
+async function getPriceFromProducts({ tier, interval}: GetPriceFromProductsArgs) {
+  const productsRef = collection(db, "products");
+  const q = query(productsRef, [where('name', '==', tier), where('active', '==', true)])
+  const getDocsQuery = await getDocs(q);
+  const { docs } = getDocsQuery;
+  console.log({ docs });
+  return;
+  // for (const doc of docs) {
+  //   const pricesRef = collection(productsRef, "prices");
+  //   const q = query(pricesRef, [where('interval', '==', interval), where('active', '==', true)])
+  //   const getPricesQuery = await getDocs(q);
+  //   doc.ref.then((priceSnapshot) => {
+  //       priceSnapshot.forEach((doc) => {
+  //         console.log("Price ID: " + doc.id);
+  //         return doc.id;
+  //       });
+  //     });
+  // }
+};
+
+// // Checkout function
+// async function checkoutUser(user, priceId) {
+//   const docRef = await firebase.firestore()
+//     .collection('customers')
+//     .doc(user.uid)
+//     .collection('checkout_sessions')
+//     .add({
+//       price: priceId,
+//       success_url: "https://dashboard.flowabl.io",
+//       cancel_url: window.location.origin,
+//     });
+//   // Wait for the CheckoutSession to get attached by the extension
+//   docRef.onSnapshot((snap) => {
+//     const { error, url } = snap.data();
+//     if (error) {
+//       // Show an error to your customer and 
+//       // inspect your Cloud Function logs in the Firebase console.
+//       console.log("An error occured: " + error.message);
+//     }
+//     if (url) {
+//       // We have a Stripe Checkout URL, let's redirect.
+//       window.location.assign(url);
+//     }
+//   });
+// };
+

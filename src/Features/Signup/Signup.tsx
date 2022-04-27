@@ -4,9 +4,13 @@ import { Link } from "react-router-dom";
 import { useAuth } from "Hooks/useFirebase";
 import { AppLink } from "Config/appConfig";
 import { PRODUCT_ENV_URL } from "Config/platformUrlConfig";
+import useQueryParams from "Hooks/useQueryParams";
+import _ from "cypress/types/lodash";
 
 export default function Signup() {
   const { signInWithPopup } = useAuth();
+  const queryParams = useQueryParams();
+  
   return (
     <>
       <Helmet>
@@ -57,7 +61,7 @@ export default function Signup() {
                   </div>
                 </div>
                 <div className="legal-box _2">
-                  <div className="legal-text">© 2021 Devabl, Inc. All rights reserved.</div>
+                  <div className="legal-text">© 2022 Devabl, Inc. All rights reserved.</div>
                 </div>
               </div>
             </div>
@@ -72,7 +76,7 @@ export default function Signup() {
                     <button
                       id="loginGoogle"
                       className="social-login w-inline-block"
-                      onClick={() => signInWithPopup("")}
+                      onClick={() => signInWithPopup(queryParams.get("ref") ?? "")}
                     >
                       <img
                         src="https://uploads-ssl.webflow.com/60d12e51cd5e87607f0568c9/61077e26da023d6c3090c056_G.png"
@@ -194,7 +198,7 @@ export default function Signup() {
                 </div>
               </div>
               <div className="legal-box _2-copy">
-                <div className="legal-text _3">© 2021 Devabl, Inc. All rights reserved.</div>
+                <div className="legal-text _3">© 2022 Devabl, Inc. All rights reserved.</div>
               </div>
             </div>
           </div>

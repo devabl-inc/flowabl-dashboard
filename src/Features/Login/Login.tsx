@@ -56,7 +56,7 @@ export default function Login() {
                   </div>
                 </div>
                 <div className="legal-box _2">
-                  <div className="legal-text">© 2021 Devabl, Inc. All rights reserved.</div>
+                  <div className="legal-text">© 2022 Devabl, Inc. All rights reserved.</div>
                 </div>
               </div>
             </div>
@@ -175,7 +175,7 @@ export default function Login() {
                 </div>
               </div>
               <div className="legal-box _2-copy">
-                <div className="legal-text _3">© 2021 Devabl, Inc. All rights reserved.</div>
+                <div className="legal-text _3">© 2022 Devabl, Inc. All rights reserved.</div>
               </div>
             </div>
           </div>

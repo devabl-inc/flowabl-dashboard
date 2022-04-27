@@ -3,7 +3,6 @@ import * as React from "react";
 import { Helmet } from "react-helmet";
 import { NavLink } from "react-router-dom";
 import { SideNav, SideNavItems, SideNavLink } from "carbon-components-react";
-import SuspenseBoundary from "Components/SuspenseBoundary";
 import { AppPath } from "Config/appConfig";
 import styles from "./Layout.module.scss";
 
@@ -55,7 +54,7 @@ function Layout(props: LayoutProps) {
           </SideNavItems>
         </SideNav>
         <div id="content" className={styles.main}>
-          <SuspenseBoundary>{props.children}</SuspenseBoundary>
+          {props.children}
         </div>
       </div>
     </>
