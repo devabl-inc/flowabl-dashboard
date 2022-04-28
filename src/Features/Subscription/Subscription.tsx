@@ -76,10 +76,10 @@ export default function Subscription() {
           <div className={styles.tilesContainer}>
             <RadioTile
               disabled
-              checked={selectedTier.product === Tiers.Free}
-              value={Tiers.Free}
+              checked={selectedTier.product === Tiers.Explorer}
+              value={Tiers.Explorer}
               className={styles.tile}
-              onClick={handleOnClick(SubscriptionConfigs[Tiers.Free])}
+              onClick={handleOnClick(SubscriptionConfigs[Tiers.Explorer])}
             >
               <h2 className={styles.tileTitle}>Explorer</h2>
               <UnorderedList>
