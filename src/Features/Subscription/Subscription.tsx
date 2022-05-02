@@ -2,7 +2,7 @@ import * as React from "react";
 import { useAuth } from "Hooks";
 import {
   Button,
-  RadioTile,
+  Tile,
   UnorderedList,
   ListItem,
   FeatureHeader,
@@ -64,14 +64,21 @@ export default function Subscription() {
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Manage subscription</h2>
           <div className={styles.tilesContainer}>
-            <RadioTile
-              enabled
-              checked={selectedTier.product === Tiers.Explorer}
-              value={Tiers.Explorer}
+            <Tile
               className={styles.tile}
-              onClick={handleOnClick(SubscriptionConfigs[Tiers.Explorer])}
             >
               <h2 className={styles.tileTitle}>Explorer</h2>
+              <div className={styles.tileDescription}>
+                Explore and discover.
+              </div>
+              <div className="tileButtonContainer">
+                <Button
+                  disabled={selectedTier.product === Tiers.Explorer}
+                  kind="tertiary"
+                  onClick={handleOnClick(SubscriptionConfigs[Tiers.Explorer])}
+                  className={styles.tileButton}
+                >{selectedTier.product === Tiers.Explorer ? "Current Plan" : "Change Plan"}</Button>
+              </div>
               <UnorderedList>
                 <ListItem>Visual Drag-and-Drop Workflow Editor</ListItem>
                 <ListItem>Single User</ListItem>
@@ -79,15 +86,22 @@ export default function Subscription() {
                 <ListItem>10 executions per month</ListItem>
                 <ListItem>10 min execution duration</ListItem>
               </UnorderedList>
-            </RadioTile>
-            <RadioTile
-              enabled
-              checked={selectedTier.product === Tiers.Starter}
-              value={Tiers.Starter}
+            </Tile>
+            <Tile
               className={styles.tile}
-              onClick={handleOnClick(SubscriptionConfigs[Tiers.Starter])}
             >
-              <h2 className={`${styles.tileTitle} ${styles.tileTitleSelected}`}>Starter</h2>
+              <h2 className={styles.tileTitle}>Starter</h2>
+              <div className={styles.tileDescription}>
+                Start with the basics.
+              </div>
+              <div className="tileButtonContainer">
+                <Button
+                  disabled={selectedTier.product === Tiers.Starter}
+                  kind="tertiary"
+                  onClick={handleOnClick(SubscriptionConfigs[Tiers.Starter])}
+                  className={styles.tileButton}
+                >{selectedTier.product === Tiers.Starter ? "Current Plan" : "Change Plan"}</Button>
+              </div>
               <UnorderedList>
                 <ListItem>Visual Drag-and-Drop Workflow Editor</ListItem>
                 <ListItem>Single User</ListItem>
@@ -96,15 +110,22 @@ export default function Subscription() {
                 <ListItem>2 concurrent executions</ListItem>
                 <ListItem>1 hr execution duration</ListItem>
               </UnorderedList>
-            </RadioTile>
-            <RadioTile
-              enabled
-              checked={selectedTier.product === Tiers.Maker}
-              value={Tiers.Maker}
+            </Tile>
+            <Tile
               className={styles.tile}
-              onClick={handleOnClick(SubscriptionConfigs[Tiers.Maker])}
             >
               <h2 className={styles.tileTitle}>Maker</h2>
+              <div className={styles.tileDescription}>
+                Expand your automation.
+              </div>
+              <div className="tileButtonContainer">
+                <Button
+                  disabled={selectedTier.product === Tiers.Maker}
+                  kind="primary"
+                  onClick={handleOnClick(SubscriptionConfigs[Tiers.Maker])}
+                  className={styles.tileButton}
+                >{selectedTier.product === Tiers.Maker ? "Current Plan" : "Change Plan"}</Button>
+              </div>
               <UnorderedList>
                 <ListItem>Visual Drag-and-Drop Workflow Editor</ListItem>
                 <ListItem>Unlimited User Teams</ListItem>
@@ -114,15 +135,22 @@ export default function Subscription() {
                 <ListItem>4 hr execution duration</ListItem>
                 <ListItem>Custom Tasks</ListItem>
               </UnorderedList>
-            </RadioTile>
-            <RadioTile
-              enabled
-              checked={selectedTier.product === Tiers.Scaler}
+            </Tile>
+            <Tile
               className={styles.tile}
-              value={Tiers.Scaler}
-              onClick={handleOnClick(SubscriptionConfigs[Tiers.Scaler])}
             >
               <h2 className={styles.tileTitle}>Scaler</h2>
+              <div className={styles.tileDescription}>
+                For established automation.
+              </div>
+              <div className="tileButtonContainer">
+                <Button
+                  disabled={selectedTier.product === Tiers.Scaler}
+                  kind="primary"
+                  onClick={handleOnClick(SubscriptionConfigs[Tiers.Scaler])}
+                  className={styles.tileButton}
+                >{selectedTier.product === Tiers.Scaler ? "Current Plan" : "Change Plan"}</Button>
+              </div>
               <UnorderedList>
                 <ListItem>Visual Drag-and-Drop Workflow Editor</ListItem>
                 <ListItem>Unlimited User Teams</ListItem>
@@ -132,13 +160,10 @@ export default function Subscription() {
                 <ListItem>24 hr execution duration</ListItem>
                 <ListItem>Custom Tasks</ListItem>
               </UnorderedList>
-            </RadioTile>
+            </Tile>
           </div>
         </section>
         <section className={styles.buttonsContainer}>
-          <Button enabled kind="primary" onClick={handleChange}>
-            Change Subscription
-          </Button>
           <Button enabled kind="danger" renderIcon={Delete16} onClick={handleCancel}>
             Cancel Subscription
           </Button>
@@ -147,3 +172,4 @@ export default function Subscription() {
     </article >
   );
 }
+
