@@ -30,6 +30,7 @@ export const BASE_URL = window._SERVER_DATA
 export const serviceUrl = {
   resourceFeatures: () => `${BASE_URL}/features`,
   resourceNavigation: () => `${BASE_URL}/navigation`,
+  resourceSubscription: () => `${BASE_URL}/subscription`,
   resourceUserProfile: () => `${BASE_URL}/profile`,
 };
 
@@ -49,7 +50,9 @@ export const cancellableResolver = ({ url, method, body, ...config }) => {
 export const resolver = {
   query: (url) => () => axios.get(url).then((response) => response.data),
   postMutation: (request) => axios.post(request),
-  postCreateBug: (request) => axios.post(serviceUrl.resourceFeatures(), request),
+  postFeature: (request) => axios.post(serviceUrl.resourceFeatures(), request),
+  postSubscription: (request) => axios.post(serviceUrl.resourceSubscription(), request),
+  putSubscription: (request) => axios.post(serviceUrl.resourceSubscription(), request),
   patchMutation: (request) => axios.patch(request),
   putMutation: (request) => axios.put(request),
 };

@@ -3,6 +3,7 @@
 const path = require("path");
 const fs = require("fs");
 const cors = require("cors");
+const axios = require("axios");
 const serialize = require("serialize-javascript");
 const boomerangLogger = require("@boomerang-io/logger-middleware")("webapp-spa-server/index.js");
 const health = require("@cloudnative/health-connect");
@@ -36,6 +37,9 @@ function createBoomerangServer({
     NEW_RELIC_LICENSE_KEY,
     HTML_HEAD_INJECTED_SCRIPTS,
     BUILD_DIR = "build",
+    FLOW_WEBOOK_URL = "https://app.flowabl.io/services/listener/webhook",
+    JOIN_EMAIL_WORKFLOW_ID = "61454e2d1000b141daa8f85f",
+    FLOW_ACCESS_TOKEN,
   } = process.env;
 
   // Monitoring
@@ -78,6 +82,33 @@ function createBoomerangServer({
   const notion = new Client({
     auth: process.env.NOTION_API_KEY,
   });
+
+  // // Create subscription for user
+  // app.post("/subscription", async (req, res) => {
+  //   console.log({ body: req.body });
+  //   console.log({ data: req.body.data });
+  //   const { name, email, tier } = req.body;
+  //   // await axios.post(
+  //   //   `${FLOW_WEBOOK_URL}?workflowId=${JOIN_EMAIL_WORKFLOW_ID}&type=generic&access_token=${FLOW_ACCESS_TOKEN}`,
+  //   //   {
+  //   //     email,
+  //   //     name,
+  //   //     tier,
+  //   //     type: "create",
+  //   //   }
+  //   // );
+  // });
+
+  // // Update subscription for user
+  // app.put("/subscription", async (req, res) => {
+  //   const { type, name, email, tier } = req.body;
+  //   fetch(`${FLOW_WEBOOK_URL}?workflowId=${JOIN_EMAIL_WORKFLOW_ID}&type=generic&access_token=${FLOW_ACCESS_TOKEN}`, {
+  //     email,
+  //     name,
+  //     tier,
+  //     type, // upgrade, downgrade, cancel
+  //   });
+  // });
 
   app.post("/features", async (req, res) => {
     try {

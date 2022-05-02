@@ -1,4 +1,4 @@
-import { Tier, FlowablSubscription } from "Utils/types";
+import { Tier, FlowablSubscription, SubscriptionInterval } from "Utils/types";
 /**
  * Used for setting up the root context that the application is server on
  * This allows the app to be easily deployed out to multiple environments without recompiling
@@ -44,7 +44,7 @@ export const Tiers: Record<string, Tier> = {
   Explorer: "explorer",
   Starter: "starter",
   Maker: "maker",
-  Premium: "premium",
+  Scaler: "scaler",
 };
 
 export const SubscriptionConfigs: Record<Tier, FlowablSubscription> = {
@@ -52,9 +52,9 @@ export const SubscriptionConfigs: Record<Tier, FlowablSubscription> = {
     name: "",
     product: Tiers.Explorer,
     price: 0,
-    interval: "monthly",
+    interval: "month",
   },
-  starter: { name: "Free", product: Tiers.Starter, price: 0, interval: "monthly" },
-  maker: { name: "Free", product: Tiers.Maker, price: 0, interval: "monthly" },
-  premium: { name: "Free", product: Tiers.Premium, price: 0, interval: "monthly" },
+  starter: { name: "Starter", product: Tiers.Starter, price: 0, interval: "month" },
+  maker: { name: "Maker", product: Tiers.Maker, price: 0, interval: "month" },
+  scaler: { name: "Scaler", product: Tiers.Scaler, price: 0, interval: "month" },
 };

@@ -13,8 +13,10 @@ declare global {
 export interface FlowablSubscription {
   price: number;
   product: Tier;
-  interval: string;
+  interval: SubscriptionInterval;
   name: string;
 }
 
-export type Tier = "explorer" | "starter" | "maker" | "premium";
+export type Tier = "explorer" | "starter" | "maker" | "scaler";
+
+export type SubscriptionInterval = "month" | "year";

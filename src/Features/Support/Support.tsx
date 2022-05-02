@@ -147,13 +147,13 @@ function SubmitFeatureRequest(props: { closeModal: () => void }) {
     onSubmit: handleOnSubmit,
   });
 
-  const { mutateAsync: createBugMutator, isLoading, isError } = useMutation(resolver.postCreateBug);
+  const { mutateAsync: createBugMutator, isLoading, isError } = useMutation(resolver.postFeature);
 
   const submitText = isError ? "Try again" : isLoading ? "Submitting..." : "Submit";
   return (
     <ModalForm onSubmit={formik.handleSubmit}>
       {isLoading && <Loading />}
-      {isError  && (
+      {isError && (
         <InlineNotification
           lowContrast
           kind="error"

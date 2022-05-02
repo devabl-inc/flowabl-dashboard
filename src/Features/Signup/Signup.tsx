@@ -4,9 +4,10 @@ import { useAuth } from "Hooks/useFirebase";
 import { AppLink } from "Config/appConfig";
 import { PRODUCT_ENV_URL } from "Config/platformUrlConfig";
 import useQueryParams from "Hooks/useQueryParams";
+import { SubscriptionInterval, Tier } from "Utils/types";
 
 export default function Signup() {
-  const { signInWithPopup } = useAuth();
+  const { signUpWithPopup } = useAuth();
   const queryParams = useQueryParams();
   return (
     <>
@@ -74,9 +75,9 @@ export default function Signup() {
                       id="loginGoogle"
                       className="social-login w-inline-block"
                       onClick={() =>
-                        signInWithPopup({
-                          tier: queryParams.get("tier") ?? "",
-                          interval: queryParams.get("interval") ?? "",
+                        signUpWithPopup({
+                          tier: (queryParams.get("tier") as Tier) ?? "explorer",
+                          interval: queryParams.get("interval") ?? "month",
                         })
                       }
                     >
