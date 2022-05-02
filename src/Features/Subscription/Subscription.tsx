@@ -9,8 +9,9 @@ import {
   FeatureHeaderTitle,
   FeatureHeaderSubtitle,
   Loading,
+  Link,
 } from "@boomerang-io/carbon-addons-boomerang-react";
-import { Delete16 } from "@carbon/icons-react";
+import { Delete16, Launch16 } from "@carbon/icons-react";
 import { SubscriptionConfigs, Tiers } from "Config/appConfig";
 import { FlowablSubscription } from "Utils/types";
 import styles from "./Subscription.module.scss";
@@ -26,6 +27,10 @@ export default function Subscription() {
   const handleOnClick = (subscription: FlowablSubscription) => () => {
     setSelectedTier(subscription);
   };
+
+  const handleChange = () => {
+    // Do something with selectedTier
+  }
 
   const handleCancel = () => {
     alert(`Are you sure? You will be dropped down to the 'free' tier.`);
@@ -50,7 +55,7 @@ export default function Subscription() {
                 You are on the <strong>{selectedTier.name}</strong> tier.
               </dd>
               <dd className={styles.contentText}>
-                Learn more about what you get.
+                <Link visited={false} href="https://flowabl.io/pricing" renderIcon={Launch16}>Learn more about what you get</Link>
               </dd>
             </div>
           </dl>
@@ -130,7 +135,10 @@ export default function Subscription() {
           </div>
         </section>
         <section className={styles.buttonsContainer}>
-          <Button disabled kind="danger" renderIcon={Delete16} onClick={handleCancel}>
+          <Button enabled kind="primary" onClick={handleChange}>
+            Change Subscription
+          </Button>
+          <Button enabled kind="danger" renderIcon={Delete16} onClick={handleCancel}>
             Cancel Subscription
           </Button>
         </section>
