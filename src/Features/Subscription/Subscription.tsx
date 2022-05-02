@@ -46,36 +46,20 @@ export default function Subscription() {
           <h2 className={styles.sectionTitle}>Your subscription</h2>
           <dl className={styles.contentContainer}>
             <div>
-              <dt className={styles.contentLabel}>Tier</dt>
               <dd className={styles.contentText}>
                 You are on the <strong>{selectedTier.name}</strong> tier.
               </dd>
-            </div>
-            <div>
-              <dt className={styles.contentLabel}>What you get</dt>
               <dd className={styles.contentText}>
-                {" "}
-                <UnorderedList>
-                  <ListItem>Visual Workflow Editor</ListItem>
-                  <ListItem>Teams</ListItem>
-                  <ListItem>Custom Tasks</ListItem>
-                  <ListItem>50 workflows</ListItem>
-                  <ListItem>200 executions per month</ListItem>
-                  <ListItem>5 concurrent executions</ListItem>
-                  <ListItem>2 hr execution duration</ListItem>
-                  <ListItem>Persistent Storage</ListItem>
-                  <ListItem>Insights for 1 year</ListItem>
-                  <ListItem>Premium support (addon)</ListItem>
-                </UnorderedList>
+                Learn more about what you get.
               </dd>
             </div>
           </dl>
         </section>
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Manage subscription (coming soon!)</h2>
+          <h2 className={styles.sectionTitle}>Manage subscription</h2>
           <div className={styles.tilesContainer}>
             <RadioTile
-              disabled
+              enabled
               checked={selectedTier.product === Tiers.Explorer}
               value={Tiers.Explorer}
               className={styles.tile}
@@ -83,35 +67,32 @@ export default function Subscription() {
             >
               <h2 className={styles.tileTitle}>Explorer</h2>
               <UnorderedList>
-                <ListItem>Visual Workflow Editor</ListItem>
+                <ListItem>Visual Drag-and-Drop Workflow Editor</ListItem>
                 <ListItem>Single User</ListItem>
                 <ListItem>2 workflows</ListItem>
                 <ListItem>10 executions per month</ListItem>
-                <ListItem>30 min execution duration</ListItem>
-                <ListItem>Insights for 30 days</ListItem>
+                <ListItem>10 min execution duration</ListItem>
               </UnorderedList>
             </RadioTile>
             <RadioTile
-              disabled
+              enabled
               checked={selectedTier.product === Tiers.Starter}
               value={Tiers.Starter}
               className={styles.tile}
               onClick={handleOnClick(SubscriptionConfigs[Tiers.Starter])}
             >
-              <h2 className={styles.tileTitle}>Starter</h2>
+              <h2 className={`${styles.tileTitle} ${styles.tileTitleSelected}`}>Starter</h2>
               <UnorderedList>
-                <ListItem>Visual Workflow Editor</ListItem>
+                <ListItem>Visual Drag-and-Drop Workflow Editor</ListItem>
                 <ListItem>Single User</ListItem>
-                <ListItem>10 workflows</ListItem>
-                <ListItem>40 executions per month</ListItem>
+                <ListItem>20 workflows</ListItem>
+                <ListItem>100 executions per month</ListItem>
                 <ListItem>2 concurrent executions</ListItem>
-                <ListItem>2 hr execution duration</ListItem>
-                <ListItem>Persistent Storage</ListItem>
-                <ListItem>Insights for 90 days</ListItem>
+                <ListItem>1 hr execution duration</ListItem>
               </UnorderedList>
             </RadioTile>
             <RadioTile
-              disabled
+              enabled
               checked={selectedTier.product === Tiers.Maker}
               value={Tiers.Maker}
               className={styles.tile}
@@ -119,40 +100,31 @@ export default function Subscription() {
             >
               <h2 className={styles.tileTitle}>Maker</h2>
               <UnorderedList>
-                <ListItem>Visual Workflow Editor</ListItem>
-                <ListItem>Teams</ListItem>
+                <ListItem>Visual Drag-and-Drop Workflow Editor</ListItem>
+                <ListItem>Unlimited User Teams</ListItem>
+                <ListItem>200 workflows</ListItem>
+                <ListItem>1,000 executions per month</ListItem>
+                <ListItem>10 concurrent executions</ListItem>
+                <ListItem>4 hr execution duration</ListItem>
                 <ListItem>Custom Tasks</ListItem>
-                <ListItem>50 workflows</ListItem>
-                <ListItem>200 executions per month</ListItem>
-                <ListItem>5 concurrent executions</ListItem>
-                <ListItem>2 hr execution duration</ListItem>
-                <ListItem>Persistent Storage</ListItem>
-                <ListItem>Insights for 1 year</ListItem>
-                <ListItem>Premium support (addon)</ListItem>
               </UnorderedList>
             </RadioTile>
             <RadioTile
-              disabled
-              checked={selectedTier.product === Tiers.Premium}
+              enabled
+              checked={selectedTier.product === Tiers.Scaler}
               className={styles.tile}
-              value={Tiers.Premium}
-              onClick={handleOnClick(SubscriptionConfigs[Tiers.Premium])}
+              value={Tiers.Scaler}
+              onClick={handleOnClick(SubscriptionConfigs[Tiers.Scaler])}
             >
               <h2 className={styles.tileTitle}>Scaler</h2>
               <UnorderedList>
-                <ListItem>Visual Workflow Editor</ListItem>
-                <ListItem>Teams</ListItem>
-                <ListItem>Custom Tasks</ListItem>
-                <ListItem>500 workflows</ListItem>
-                <ListItem>2,000 executions per month</ListItem>
-                <ListItem>5 concurrent executions</ListItem>
+                <ListItem>Visual Drag-and-Drop Workflow Editor</ListItem>
+                <ListItem>Unlimited User Teams</ListItem>
+                <ListItem>1,000 workflows</ListItem>
+                <ListItem>20,000 executions per month</ListItem>
+                <ListItem>100 concurrent executions</ListItem>
                 <ListItem>24 hr execution duration</ListItem>
-                <ListItem>Persistent Storage</ListItem>
-                <ListItem>Insights for 1 year</ListItem>
-                <ListItem>Premium support (addon)</ListItem>
-                <ListItem>Custom Workflows (addon)</ListItem>
-                <ListItem>Roadmap Partnership (addon)</ListItem>
-                <ListItem>Dedicated Instance (addon)</ListItem>
+                <ListItem>Custom Tasks</ListItem>
               </UnorderedList>
             </RadioTile>
           </div>
@@ -162,7 +134,7 @@ export default function Subscription() {
             Cancel Subscription
           </Button>
         </section>
-      </div>
-    </article>
+      </div >
+    </article >
   );
 }
