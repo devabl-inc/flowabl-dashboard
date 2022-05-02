@@ -145,7 +145,7 @@ export default function Subscription() {
               <div className="tileButtonContainer">
                 <Button
                   disabled={selectedTier.product === Tiers.Scaler}
-                  kind="primary"
+                  kind="tertiary"
                   onClick={handleOnClick(SubscriptionConfigs[Tiers.Scaler])}
                   className={styles.tileButton}
                 >{selectedTier.product === Tiers.Scaler ? "Current Plan" : "Change Plan"}</Button>
