@@ -30,7 +30,7 @@ export default function Subscription() {
 
   const handleChange = () => {
     // Do something with selectedTier
-  }
+  };
 
   const handleCancel = () => {
     alert(`Are you sure? You will be dropped down to the 'free' tier.`);
@@ -55,7 +55,15 @@ export default function Subscription() {
                 You are on the <strong>{selectedTier.name}</strong> tier.
               </dd>
               <dd className={styles.contentText}>
-                <Link visited={false} href="https://flowabl.io/pricing" renderIcon={Launch16}>Learn more about what you get</Link>
+                <Link
+                  visited={false}
+                  href="https://flowabl.io/pricing"
+                  renderIcon={Launch16}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Learn more about what you get
+                </Link>
               </dd>
             </div>
           </dl>
@@ -63,20 +71,18 @@ export default function Subscription() {
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Manage subscription</h2>
           <div className={styles.tilesContainer}>
-            <Tile
-              className={styles.tile}
-            >
+            <Tile className={styles.tile}>
               <h2 className={styles.tileTitle}>Explorer</h2>
-              <div className={styles.tileDescription}>
-                Explore and discover.
-              </div>
+              <div className={styles.tileDescription}>Explore and discover.</div>
               <div className="tileButtonContainer">
                 <Button
                   disabled={selectedTier.product === Tiers.Explorer}
                   kind="tertiary"
                   onClick={handleOnClick(SubscriptionConfigs[Tiers.Explorer])}
                   className={styles.tileButton}
-                >{selectedTier.product === Tiers.Explorer ? "Current Plan" : "Change Plan"}</Button>
+                >
+                  {selectedTier.product === Tiers.Explorer ? "Current Plan" : "Change Plan"}
+                </Button>
               </div>
               <UnorderedList>
                 <ListItem>Visual Drag-and-Drop Workflow Editor</ListItem>
@@ -86,20 +92,18 @@ export default function Subscription() {
                 <ListItem>10 min execution duration</ListItem>
               </UnorderedList>
             </Tile>
-            <Tile
-              className={styles.tile}
-            >
+            <Tile className={styles.tile}>
               <h2 className={styles.tileTitle}>Starter</h2>
-              <div className={styles.tileDescription}>
-                Start with the basics.
-              </div>
+              <div className={styles.tileDescription}>Start with the basics.</div>
               <div className="tileButtonContainer">
                 <Button
                   disabled={selectedTier.product === Tiers.Starter}
                   kind="tertiary"
                   onClick={handleOnClick(SubscriptionConfigs[Tiers.Starter])}
                   className={styles.tileButton}
-                >{selectedTier.product === Tiers.Starter ? "Current Plan" : "Change Plan"}</Button>
+                >
+                  {selectedTier.product === Tiers.Starter ? "Current Plan" : "Change Plan"}
+                </Button>
               </div>
               <UnorderedList>
                 <ListItem>Visual Drag-and-Drop Workflow Editor</ListItem>
@@ -110,20 +114,18 @@ export default function Subscription() {
                 <ListItem>1 hr execution duration</ListItem>
               </UnorderedList>
             </Tile>
-            <Tile
-              className={styles.tile}
-            >
+            <Tile className={styles.tile}>
               <h2 className={styles.tileTitle}>Maker</h2>
-              <div className={styles.tileDescription}>
-                Expand your automation.
-              </div>
+              <div className={styles.tileDescription}>Expand your automation.</div>
               <div className="tileButtonContainer">
                 <Button
                   disabled={selectedTier.product === Tiers.Maker}
                   kind="tertiary"
                   onClick={handleOnClick(SubscriptionConfigs[Tiers.Maker])}
                   className={styles.tileButton}
-                >{selectedTier.product === Tiers.Maker ? "Current Plan" : "Change Plan"}</Button>
+                >
+                  {selectedTier.product === Tiers.Maker ? "Current Plan" : "Change Plan"}
+                </Button>
               </div>
               <UnorderedList>
                 <ListItem>Visual Drag-and-Drop Workflow Editor</ListItem>
@@ -135,20 +137,18 @@ export default function Subscription() {
                 <ListItem>Custom Tasks</ListItem>
               </UnorderedList>
             </Tile>
-            <Tile
-              className={styles.tile}
-            >
+            <Tile className={styles.tile}>
               <h2 className={styles.tileTitle}>Scaler</h2>
-              <div className={styles.tileDescription}>
-                For established automation.
-              </div>
+              <div className={styles.tileDescription}>For established automation.</div>
               <div className="tileButtonContainer">
                 <Button
                   disabled={selectedTier.product === Tiers.Scaler}
                   kind="tertiary"
                   onClick={handleOnClick(SubscriptionConfigs[Tiers.Scaler])}
                   className={styles.tileButton}
-                >{selectedTier.product === Tiers.Scaler ? "Current Plan" : "Change Plan"}</Button>
+                >
+                  {selectedTier.product === Tiers.Scaler ? "Current Plan" : "Change Plan"}
+                </Button>
               </div>
               <UnorderedList>
                 <ListItem>Visual Drag-and-Drop Workflow Editor</ListItem>
@@ -167,8 +167,7 @@ export default function Subscription() {
             Cancel Subscription
           </Button>
         </section>
-      </div >
-    </article >
+      </div>
+    </article>
   );
 }
-
