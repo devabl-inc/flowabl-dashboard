@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import { useAuth } from "Hooks/useFirebase";
+import { useAuth } from "Hooks";
 import { AppLink } from "Config/appConfig";
 import { PRODUCT_ENV_URL } from "Config/platformUrlConfig";
 
@@ -19,11 +19,7 @@ export default function Login() {
             <div className="block-1">
               <div className="content-wrapper">
                 <a href={PRODUCT_ENV_URL} className="brand w-nav-brand">
-                  <img
-                    src="https://uploads-ssl.webflow.com/60d12e51cd5e87607f0568c9/614de26b3d8f9c9a66cc9e09_logo.svg"
-                    alt="Flowabl logo"
-                    className="image"
-                  />
+                  <img src="logo.svg" alt="Flowabl logo" className="image" />
                 </a>
                 <div className="content-box">
                   <h1 className="heading-1">

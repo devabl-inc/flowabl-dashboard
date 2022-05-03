@@ -83,21 +83,20 @@ function createBoomerangServer({
     auth: process.env.NOTION_API_KEY,
   });
 
-  // // Create subscription for user
-  // app.post("/subscription", async (req, res) => {
-  //   console.log({ body: req.body });
-  //   console.log({ data: req.body.data });
-  //   const { name, email, tier } = req.body;
-  //   // await axios.post(
-  //   //   `${FLOW_WEBOOK_URL}?workflowId=${JOIN_EMAIL_WORKFLOW_ID}&type=generic&access_token=${FLOW_ACCESS_TOKEN}`,
-  //   //   {
-  //   //     email,
-  //   //     name,
-  //   //     tier,
-  //   //     type: "create",
-  //   //   }
-  //   // );
-  // });
+  // Create subscription for user
+  app.post("/subscription", async (req, res) => {
+    console.log({ body: req.body });
+    const { name, email, tier } = req.body;
+    await axios.post(
+      `${FLOW_WEBOOK_URL}?workflowId=${JOIN_EMAIL_WORKFLOW_ID}&type=generic&access_token=${FLOW_ACCESS_TOKEN}`,
+      {
+        email,
+        name,
+        tier,
+        type: "create",
+      }
+    );
+  });
 
   // // Update subscription for user
   // app.put("/subscription", async (req, res) => {

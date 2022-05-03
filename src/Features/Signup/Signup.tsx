@@ -1,10 +1,10 @@
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import { useAuth } from "Hooks/useFirebase";
+import { useAuth } from "Hooks";
 import { AppLink } from "Config/appConfig";
 import { PRODUCT_ENV_URL } from "Config/platformUrlConfig";
-import useQueryParams from "Hooks/useQueryParams";
-import { SubscriptionInterval, Tier } from "Utils/types";
+import { useQueryParams } from "Hooks";
+import { Tier } from "Utils/types";
 
 export default function Signup() {
   const { signUpWithPopup } = useAuth();

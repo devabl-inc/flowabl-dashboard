@@ -1,11 +1,12 @@
 import * as React from "react";
 import { Switch } from "react-router-dom";
-import { Error404, NotificationsContainer } from "@boomerang-io/carbon-addons-boomerang-react";
+import { Error404, Loading, NotificationsContainer } from "@boomerang-io/carbon-addons-boomerang-react";
 import Login from "Features/Login";
 import Layout from "Components/Layout";
 import PrivateRoute from "Components/PrivateRoute";
+import { useAuth, useQueryParams, getSignUpToken } from "Hooks";
 import { AppPath } from "Config/appConfig";
-import { User } from "@firebase/auth";
+import type { User } from "@firebase/auth";
 import styles from "./main.module.scss";
 
 import Overview from "Features/Overview";
@@ -14,6 +15,7 @@ import Subscription from "Features/Subscription";
 import Support from "Features/Support";
 import Logout from "Features/Logout";
 import Signup from "Features/Signup";
+import { resolver } from "Config/servicesConfig";
 
 // const Overview = React.lazy(() => import(/* webpackChunkName: "Overview" */ "Features/Overview"));
 // const Profile = React.lazy(() => import(/* webpackChunkName: "Profile" */ "Features/Profile"));
@@ -27,46 +29,72 @@ interface MainProps {
 }
 
 function Main({ user }: MainProps) {
+  const { isRedirecting } = useAuth();
+  const queryParams = useQueryParams();
+
+  const signUpToken = queryParams.get("signUpToken");
+
+  React.useEffect(() => {
+    async function getTokenDoc(signUpToken: string, email: string) {
+      const signUpTokenDoc = await getSignUpToken(signUpToken, email);
+      if (signUpTokenDoc) {
+        const data = signUpTokenDoc.data();
+        resolver.postSubscription(data);
+      }
+    }
+    if (signUpToken && user?.email) {
+      getTokenDoc(signUpToken, user.email);
+    }
+  }, [signUpToken]);
+
+  if (isRedirecting) {
+    return (
+      <div className={styles.container}>
+        <Loading />;
+      </div>
+    );
+  }
+
   return (
     <main id="content" className={styles.container}>
-        <Switch>
-          <PrivateRoute exact path={AppPath.Signup} condition={Boolean(!user)} redirectPath="">
-            <Signup />
-          </PrivateRoute>
-          <PrivateRoute exact path={AppPath.Login} condition={Boolean(!user)} redirectPath="">
-            <Login />
-          </PrivateRoute>
-          <PrivateRoute exact path={AppPath.Root} condition={Boolean(user)}>
-            <Layout title="Welcome" description="Welcome page for Flowabl">
-              <Overview />
-            </Layout>
-          </PrivateRoute>
-          <PrivateRoute exact path={AppPath.Profile} condition={Boolean(user)}>
-            <Layout title="Profile" description="Profile page for Flowabl">
-              <Profile />
-            </Layout>
-          </PrivateRoute>
-          <PrivateRoute exact path={AppPath.Subscription} condition={Boolean(user)}>
-            <Layout title="Subscription" description="Subscription page for Flowabl">
-              <Subscription />
-            </Layout>
-          </PrivateRoute>
-          <PrivateRoute exact path={AppPath.Support} condition={Boolean(user)}>
-            <Layout title="Support" description="Support page for Flowabl">
-              <Support />
-            </Layout>
-          </PrivateRoute>
-          <PrivateRoute exact path={AppPath.Logout} condition={Boolean(user)}>
-            <Layout title="Logout" description="Logout page for Flowabl">
-              <Logout />
-            </Layout>
-          </PrivateRoute>
-          <PrivateRoute path={"*"} condition={Boolean(user)}>
-            <Layout title="404" description="404 page not found for Flowabl">
-              <Error404 />
-            </Layout>
-          </PrivateRoute>
-        </Switch>
+      <Switch>
+        <PrivateRoute exact path={AppPath.Signup} condition={Boolean(!user)} redirectPath="/signup">
+          <Signup />
+        </PrivateRoute>
+        <PrivateRoute exact path={AppPath.Login} condition={Boolean(!user)} redirectPath="/login">
+          <Login />
+        </PrivateRoute>
+        <PrivateRoute exact path={AppPath.Root} condition={Boolean(user)}>
+          <Layout title="Welcome" description="Welcome page for Flowabl">
+            <Overview />
+          </Layout>
+        </PrivateRoute>
+        <PrivateRoute exact path={AppPath.Profile} condition={Boolean(user)}>
+          <Layout title="Profile" description="Profile page for Flowabl">
+            <Profile />
+          </Layout>
+        </PrivateRoute>
+        <PrivateRoute exact path={AppPath.Subscription} condition={Boolean(user)}>
+          <Layout title="Subscription" description="Subscription page for Flowabl">
+            <Subscription />
+          </Layout>
+        </PrivateRoute>
+        <PrivateRoute exact path={AppPath.Support} condition={Boolean(user)}>
+          <Layout title="Support" description="Support page for Flowabl">
+            <Support />
+          </Layout>
+        </PrivateRoute>
+        <PrivateRoute exact path={AppPath.Logout} condition={Boolean(user)}>
+          <Layout title="Logout" description="Logout page for Flowabl">
+            <Logout />
+          </Layout>
+        </PrivateRoute>
+        <PrivateRoute path={"*"} condition={Boolean(user)}>
+          <Layout title="404" description="404 page not found for Flowabl">
+            <Error404 />
+          </Layout>
+        </PrivateRoute>
+      </Switch>
       <NotificationsContainer enableMultiContainer />
     </main>
   );

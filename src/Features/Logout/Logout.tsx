@@ -5,7 +5,7 @@ import {
   FeatureHeaderTitle,
   FeatureHeaderSubtitle,
 } from "@boomerang-io/carbon-addons-boomerang-react";
-import { useAuth } from "Hooks/useFirebase";
+import { useAuth } from "Hooks";
 import { ArrowRight16 } from "@carbon/icons-react";
 import styles from "./Logout.module.scss";
 

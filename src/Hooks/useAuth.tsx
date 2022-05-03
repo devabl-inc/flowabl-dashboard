@@ -53,7 +53,7 @@ export function AuthProvider(props: AuthProviderProps) {
   const [user, setUser] = React.useState<User>();
   const [subscription, setSubscription] = React.useState<FlowablSubscription>();
   const [isAuthenticating, setIsAuthenticating] = React.useState(true);
-  const [isRedirecting, setIsRedirecting] = React.useState(true);
+  const [isRedirecting, setIsRedirecting] = React.useState(false);
   const history = useHistory();
 
   const signInWithPopup = React.useCallback(async () => {
@@ -67,12 +67,12 @@ export function AuthProvider(props: AuthProviderProps) {
     }
     /**
      * If a new user attempts to login instead of sign up
-     * we create their user in Firebase and set them to the "explorer" tier
+     * we create their user in Firebase and set them to the "explorer" tier.
+     * If they are an existing user just navigate to the home page
      */
     if (getAdditionalUserInfo(result)?.isNewUser) {
       history.push("/new-user");
     } else {
-      // Existing users get to go home
       history.push("");
     }
   }, []);
@@ -105,7 +105,7 @@ export function AuthProvider(props: AuthProviderProps) {
         // Gets data for selected tier and interval and creates subscription for user
         const priceDocId = await getPriceIdFromProducts({ tier, interval });
         if (priceDocId) {
-          await checkoutUser(user, priceDocId);
+          await checkoutUser(user, priceDocId, tier, interval);
           return;
         }
       } else {
@@ -118,7 +118,7 @@ export function AuthProvider(props: AuthProviderProps) {
           // Gets data for selected tier and interval and creates subscription for user
           const priceDocId = await getPriceIdFromProducts({ tier, interval });
           if (priceDocId) {
-            await checkoutUser(user, priceDocId);
+            await checkoutUser(user, priceDocId, tier, interval);
             return;
           }
         }
@@ -238,9 +238,9 @@ async function getPriceIdFromProducts({ tier, interval }: Required<ISignInArgs>)
   return priceDoc.id;
 }
 
-async function checkoutUser(user: User, priceId: string) {
+async function checkoutUser(user: User, priceId: string, tier: string, interval: string) {
   const sessionDocRef = await doc(collection(db, `customers/${user.uid}`, "checkout_sessions"));
-  const newSubToken = await createSignUpToken();
+  const newSubToken = await createSignUpToken(user.email as string, tier, interval);
   if (newSubToken) {
     await setDoc(sessionDocRef, {
       price: priceId,
@@ -277,14 +277,31 @@ async function checkoutUser(user: User, priceId: string) {
   );
 }
 
-async function createSignUpToken() {
+async function createSignUpToken(email: string, tier: string, interval: string) {
   try {
     const newSubToken = crypto.randomUUID();
     await addDoc(collection(db, "signUpTokens"), {
+      email,
+      tier,
+      interval,
       token: newSubToken,
     });
     return newSubToken;
   } catch (e) {
     console.log(e);
   }
+}
+
+export async function getSignUpToken(token: string, email: string) {
+  const tokenRef = collection(db, "signUpTokens");
+  const tokenQuery = query(tokenRef, where("token", "==", token), where("email", "==", email));
+  const tokenQueryResult = await getDocs(tokenQuery);
+  const { docs: tokenDocs } = tokenQueryResult;
+
+  if (tokenDocs.length === 0) {
+    // Early return here if we don't find any docs
+    return undefined;
+  }
+
+  return tokenDocs[0];
 }
