@@ -100,14 +100,16 @@ export default function Subscription() {
                 <h2 className={styles.tileTitle}>Starter</h2>
                 <p className={styles.tileDescription}>Start with the basics.</p>
               </header>
-              <Button
-                disabled={selectedTier.product === Tiers.Starter}
-                kind="tertiary"
-                onClick={handleOnClick(SubscriptionConfigs[Tiers.Starter])}
-                className={styles.tileButton}
-              >
-                {selectedTier.product === Tiers.Starter ? "Current Plan" : "Change Plan"}
-              </Button>
+              <div>
+                <Button
+                  disabled={selectedTier.product === Tiers.Starter}
+                  kind="tertiary"
+                  onClick={handleOnClick(SubscriptionConfigs[Tiers.Starter])}
+                  className={styles.tileButton}
+                >
+                  {selectedTier.product === Tiers.Starter ? "Current Plan" : "Change Plan"}
+                </Button>
+              </div>
               <UnorderedList>
                 <ListItem>Visual Drag-and-Drop Workflow Editor</ListItem>
                 <ListItem>Single User</ListItem>
