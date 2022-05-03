@@ -73,9 +73,11 @@ export default function Subscription() {
           <h2 className={styles.sectionTitle}>Manage subscription</h2>
           <div className={styles.tilesContainer}>
             <Tile className={styles.tile}>
-              <h2 className={styles.tileTitle}>Explorer</h2>
-              <div className={styles.tileDescription}>Explore and discover.</div>
-              <div className="tileButtonContainer">
+              <header>
+                <h2 className={styles.tileTitle}>Explorer</h2>
+                <p className={styles.tileDescription}>Explore and discover.</p>
+              </header>
+              <div>
                 <Button
                   disabled={selectedTier.product === Tiers.Explorer}
                   kind="tertiary"
@@ -94,18 +96,18 @@ export default function Subscription() {
               </UnorderedList>
             </Tile>
             <Tile className={styles.tile}>
-              <h2 className={styles.tileTitle}>Starter</h2>
-              <div className={styles.tileDescription}>Start with the basics.</div>
-              <div className="tileButtonContainer">
-                <Button
-                  disabled={selectedTier.product === Tiers.Starter}
-                  kind="tertiary"
-                  onClick={handleOnClick(SubscriptionConfigs[Tiers.Starter])}
-                  className={styles.tileButton}
-                >
-                  {selectedTier.product === Tiers.Starter ? "Current Plan" : "Change Plan"}
-                </Button>
-              </div>
+              <header>
+                <h2 className={styles.tileTitle}>Starter</h2>
+                <p className={styles.tileDescription}>Start with the basics.</p>
+              </header>
+              <Button
+                disabled={selectedTier.product === Tiers.Starter}
+                kind="tertiary"
+                onClick={handleOnClick(SubscriptionConfigs[Tiers.Starter])}
+                className={styles.tileButton}
+              >
+                {selectedTier.product === Tiers.Starter ? "Current Plan" : "Change Plan"}
+              </Button>
               <UnorderedList>
                 <ListItem>Visual Drag-and-Drop Workflow Editor</ListItem>
                 <ListItem>Single User</ListItem>
@@ -116,9 +118,11 @@ export default function Subscription() {
               </UnorderedList>
             </Tile>
             <Tile className={styles.tile}>
-              <h2 className={styles.tileTitle}>Maker</h2>
-              <div className={styles.tileDescription}>Expand your automation.</div>
-              <div className="tileButtonContainer">
+              <header>
+                <h2 className={styles.tileTitle}>Maker</h2>
+                <p className={styles.tileDescription}>Expand your automation.</p>
+              </header>
+              <div>
                 <Button
                   disabled={selectedTier.product === Tiers.Maker}
                   kind="tertiary"
@@ -139,9 +143,11 @@ export default function Subscription() {
               </UnorderedList>
             </Tile>
             <Tile className={styles.tile}>
-              <h2 className={styles.tileTitle}>Scaler</h2>
-              <div className={styles.tileDescription}>For established automation.</div>
-              <div className="tileButtonContainer">
+              <header>
+                <h2 className={styles.tileTitle}>Scaler</h2>
+                <p className={styles.tileDescription}>For established automation.</p>
+              </header>
+              <div>
                 <Button
                   disabled={selectedTier.product === Tiers.Scaler}
                   kind="tertiary"

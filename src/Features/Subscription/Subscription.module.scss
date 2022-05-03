@@ -42,15 +42,16 @@
 }
 
 .tile {
-  display: flex !important;
   font-weight: 500;
-  flex-direction: column !important;
   width: 20rem;
   height: auto;
   background: var(--cds-field);
-  border-radius: 0.25rem;
-  box-shadow: 0 10px 25px 3px var(--cds-hover-ui);
-  text-align: center;
+  border-radius: 0.375rem;
+  box-shadow: 0 0.625rem 1.5625rem 0.1875rem var(--cds-hover-ui);
+
+  >*+* {
+    margin-top: 1rem;
+  }
 
   li {
     line-height: 2;
@@ -75,32 +76,29 @@
 }
 
 .tileDescription {
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 2;
   font-style: italic;
   text-align: center;
 }
 
-.tileButton {
+button.tileButton {
   border-style: solid;
   border-width: 1px;
-  border-color: #003d73;
-  background-color: transparent;
-  color: #003d73;
-  text-align: center !important;
-  min-width: 80%;
-  max-width: 80%;
-  padding: 1rem !important;
-  margin: 1rem 0rem !important;
+  border-color: var(--cds-interactive-01);
+  color: var(--cds-interactive-01);
+  justify-content: center;
+  padding: 1rem;
+  width: 100%;
+  &:hover, &:focus {
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--cds-interactive-01);
+    background-color: transparent !important;
+    color: var(--cds-interactive-01);
+  }
 }
 
-.tileButton :hover {
-  border-style: solid;
-  border-width: 1px;
-  border-color: #003d73;
-  background-color: transparent;
-  color: #003d73;
-}
 
 .buttonsContainer {
   display: flex;

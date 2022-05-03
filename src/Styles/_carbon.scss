@@ -9,6 +9,12 @@ $carbon-addons-bmrg--theme: boomerang;
 @import "carbon-components/scss/components/structured-list/structured-list";
 @import "carbon-components/scss/components/tile/tile";
 
-.bx--header__name > img {
+.bx--header__name>img {
   height: 3rem !important;
+}
+
+:root {
+  --cds-interactive-01: #003d73;
+  --cds-interactive-03: #003d73;
+  --cds-interactive-04: #003d73;
 }
