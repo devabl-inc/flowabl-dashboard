@@ -10,7 +10,19 @@ import {
   User,
   getAdditionalUserInfo,
 } from "firebase/auth";
-import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, query, setDoc, where } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  deleteDoc,
+  getDocs,
+  onSnapshot,
+  query,
+  setDoc,
+  where,
+  QueryDocumentSnapshot,
+} from "firebase/firestore";
 import { Tiers } from "Config/appConfig";
 import { auth, db } from "Config/firebaseConfig";
 import type { FirebaseError } from "firebase/app";
@@ -244,7 +256,7 @@ async function checkoutUser(user: User, priceId: string, tier: string, interval:
   if (newSubToken) {
     await setDoc(sessionDocRef, {
       price: priceId,
-      success_url: `http://localhost:3000?signUpToken=${newSubToken}`,
+      success_url: `http://localhost:3000/BMRG_APP_ROOT_CONTEXT?signUpToken=${newSubToken}`,
       cancel_url: "https://flowabl.io/pricing",
     });
   }
@@ -304,4 +316,8 @@ export async function getSignUpToken(token: string, email: string) {
   }
 
   return tokenDocs[0];
+}
+
+export async function deleteSignUpToken(signUpTokeDoc: QueryDocumentSnapshot<DocumentData>) {
+  await deleteDoc(doc(db, "signUpTokens", signUpTokeDoc.id));
 }

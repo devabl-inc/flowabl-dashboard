@@ -19,7 +19,7 @@ const logger = boomerangLogger.logger;
 
 function createBoomerangServer({
   corsConfig = {
-    origin: "*",
+    origin: /.*/g,
     allowedHeaders: "Content-Type, Authorization, Content-Length, X-Requested-With",
     methods: "DELETE,GET,OPTIONS,PATCH,POST,PUT",
   },
@@ -31,7 +31,7 @@ function createBoomerangServer({
    */
   const {
     APP_ROOT = "/",
-    PORT = 3000,
+    PORT = 3001,
     HTML_HEAD_INJECTED_DATA_KEYS = defaultHtmlHeadInjectDataKeys.join(),
     NEW_RELIC_APP_NAME,
     NEW_RELIC_LICENSE_KEY,
@@ -84,18 +84,23 @@ function createBoomerangServer({
   });
 
   // Create subscription for user
-  app.post("/subscription", async (req, res) => {
+  app.post("/api/subscription", async (req, res) => {
     console.log({ body: req.body });
     const { name, email, tier } = req.body;
-    await axios.post(
-      `${FLOW_WEBOOK_URL}?workflowId=${JOIN_EMAIL_WORKFLOW_ID}&type=generic&access_token=${FLOW_ACCESS_TOKEN}`,
-      {
-        email,
-        name,
-        tier,
-        type: "create",
-      }
-    );
+    try {
+      await axios.post(
+        `${FLOW_WEBOOK_URL}?workflowId=${JOIN_EMAIL_WORKFLOW_ID}&type=generic&access_token=${FLOW_ACCESS_TOKEN}`,
+        {
+          email,
+          name,
+          tier,
+          type: "create",
+        }
+      );
+      res.send(200);
+    } catch {
+      res.send(200);
+    }
   });
 
   // // Update subscription for user
@@ -109,7 +114,7 @@ function createBoomerangServer({
   //   });
   // });
 
-  app.post("/features", async (req, res) => {
+  app.post("/api/features", async (req, res) => {
     try {
       const response = await notion.request({
         path: "pages",

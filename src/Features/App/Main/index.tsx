@@ -1,10 +1,10 @@
 import * as React from "react";
-import { Switch } from "react-router-dom";
+import { Switch, useHistory } from "react-router-dom";
 import { Error404, Loading, NotificationsContainer } from "@boomerang-io/carbon-addons-boomerang-react";
 import Login from "Features/Login";
 import Layout from "Components/Layout";
 import PrivateRoute from "Components/PrivateRoute";
-import { useAuth, useQueryParams, getSignUpToken } from "Hooks";
+import { useAuth, useQueryParams, getSignUpToken, deleteSignUpToken } from "Hooks";
 import { AppPath } from "Config/appConfig";
 import type { User } from "@firebase/auth";
 import styles from "./main.module.scss";
@@ -31,23 +31,38 @@ interface MainProps {
 function Main({ user }: MainProps) {
   const { isRedirecting } = useAuth();
   const queryParams = useQueryParams();
+  const history = useHistory();
 
   const signUpToken = queryParams.get("signUpToken");
 
   React.useEffect(() => {
     async function getTokenDoc(signUpToken: string, email: string) {
-      const signUpTokenDoc = await getSignUpToken(signUpToken, email);
+      let signUpTokenDoc;
+      signUpTokenDoc = await getSignUpToken(signUpToken, email);
       if (signUpTokenDoc) {
         const data = signUpTokenDoc.data();
-        resolver.postSubscription(data);
+        const response = await resolver.postSubscription(data);
+        await deleteSignUpToken(signUpTokenDoc);
+        history.push({
+          pathname: "/",
+          search: "",
+        });
+      } else {
+        history.push({
+          pathname: "/",
+          search: "",
+        });
       }
     }
+
     if (signUpToken && user?.email) {
-      getTokenDoc(signUpToken, user.email);
+      getTokenDoc(signUpToken, user.email).catch((e) => {
+        console.log("Something went wrong creating your account. Try again.");
+      });
     }
   }, [signUpToken]);
 
-  if (isRedirecting) {
+  if (isRedirecting || signUpToken) {
     return (
       <div className={styles.container}>
         <Loading />;
@@ -58,10 +73,10 @@ function Main({ user }: MainProps) {
   return (
     <main id="content" className={styles.container}>
       <Switch>
-        <PrivateRoute exact path={AppPath.Signup} condition={Boolean(!user)} redirectPath="/signup">
+        <PrivateRoute exact path={AppPath.Signup} condition={Boolean(!user)} redirectPath="">
           <Signup />
         </PrivateRoute>
-        <PrivateRoute exact path={AppPath.Login} condition={Boolean(!user)} redirectPath="/login">
+        <PrivateRoute exact path={AppPath.Login} condition={Boolean(!user)} redirectPath="">
           <Login />
         </PrivateRoute>
         <PrivateRoute exact path={AppPath.Root} condition={Boolean(user)}>

@@ -25,7 +25,7 @@ import axios, { CancelToken } from "axios";
  */
 export const BASE_URL = window._SERVER_DATA
   ? window._SERVER_DATA?.PRODUCT_SERVICE_ENV_URL ?? "https://dashboard.flowabl.io"
-  : "/api";
+  : "http://localhost:3001/api";
 
 export const serviceUrl = {
   resourceFeatures: () => `${BASE_URL}/features`,
