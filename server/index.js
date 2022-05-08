@@ -31,7 +31,7 @@ function createBoomerangServer({
    */
   const {
     APP_ROOT = "/",
-    PORT = 3001,
+    PORT = 3000,
     HTML_HEAD_INJECTED_DATA_KEYS = defaultHtmlHeadInjectDataKeys.join(),
     NEW_RELIC_APP_NAME,
     NEW_RELIC_LICENSE_KEY,
@@ -98,8 +98,10 @@ function createBoomerangServer({
         }
       );
       res.send(200);
-    } catch {
-      res.send(200);
+    } catch (e) {
+      console.log(`Something went wrong initializing the subscription for the user`);
+      console.log(e);
+      res.send(500);
     }
   });
 
