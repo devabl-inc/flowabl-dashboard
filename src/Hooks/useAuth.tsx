@@ -256,7 +256,7 @@ async function checkoutUser(user: User, priceId: string, tier: string, interval:
   if (newSubToken) {
     await setDoc(sessionDocRef, {
       price: priceId,
-      success_url: `http://localhost:3000/BMRG_APP_ROOT_CONTEXT?signUpToken=${newSubToken}`,
+      success_url: `https://dashboard.flowabl.io?signUpToken=${newSubToken}`,
       cancel_url: "https://flowabl.io/pricing",
     });
   }
