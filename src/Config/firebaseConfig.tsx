@@ -5,7 +5,6 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-console.log(process.env);
 const firebaseConfig = {
   apiKey: window._SERVER_DATA?.FIREBASE_API_KEY || process.env.REACT_APP_FIREBASE_API_KEY,
   appId: window._SERVER_DATA?.FIREBASE_APP_ID || process.env.REACT_APP_FIREBASE_APP_ID,

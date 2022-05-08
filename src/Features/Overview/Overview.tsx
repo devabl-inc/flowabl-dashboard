@@ -1,13 +1,18 @@
 import * as React from "react";
 import { Button, Link } from "@boomerang-io/carbon-addons-boomerang-react";
 import { Link as RRLink } from "react-router-dom";
-import { useAuth } from "Hooks/useFirebase";
+import { useAuth } from "Hooks";
 import { APP_URL, DOCS_URL, OSS_URL, AppLink } from "Config/appConfig";
 import { Rocket24, Upgrade24, WorkspaceImport24, Events24, Launch16, ThumbsUp24 } from "@carbon/icons-react";
 import styles from "./Overview.module.scss";
 
 export default function Overview() {
-  const { user, subscription } = useAuth();
+  const { isAuthenticating, user, subscription } = useAuth();
+
+  if (isAuthenticating) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <article className={styles.container}>
       <header className={styles.header}>

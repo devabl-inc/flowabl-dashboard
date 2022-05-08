@@ -22,4 +22,10 @@ export const handlers = [
     // If authenticated, return a mocked user details
     return res(ctx.status(200), ctx.json({ status: "good job!" }));
   }),
+
+  rest.post(serviceUrl.resourceSubscription(), (req, res, ctx) => {
+    // Check if the user is authenticated in this session
+    // If authenticated, return a mocked user details
+    return res(ctx.status(200), ctx.json({ status: "good job!" }));
+  }),
 ];

@@ -1,12 +1,18 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import { useAuth } from "Hooks/useFirebase";
+import { useAuth } from "Hooks";
 import { AppLink } from "Config/appConfig";
 import { PRODUCT_ENV_URL } from "Config/platformUrlConfig";
 
 export default function Login() {
-  const { signInWithPopup } = useAuth();
+  const { signInWithPopup, user } = useAuth();
+  const history = useHistory();
+
+  if (user) {
+    history.push("/");
+  }
+
   return (
     <>
       <Helmet>
@@ -68,11 +74,7 @@ export default function Login() {
                 <div className="form-box">
                   <h3 className="signup-terms-and-conditions">Use your social profile to log in</h3>
                   <div className="social-box">
-                    <button
-                      id="loginGoogle"
-                      className="social-login w-inline-block"
-                      onClick={() => signInWithPopup({})}
-                    >
+                    <button id="loginGoogle" className="social-login w-inline-block" onClick={signInWithPopup}>
                       <img
                         src="https://uploads-ssl.webflow.com/60d12e51cd5e87607f0568c9/61077e26da023d6c3090c056_G.png"
                         alt=""

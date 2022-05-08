@@ -24,12 +24,13 @@ import axios, { CancelToken } from "axios";
  * and added to the window as a global variable by the @boomerang/boomerang-webapp-server
  */
 export const BASE_URL = window._SERVER_DATA
-  ? window._SERVER_DATA?.PRODUCT_SERVICE_ENV_URL ?? "https://dashboard.flowabl.io"
+  ? window._SERVER_DATA?.PRODUCT_SERVICE_ENV_URL ?? "https://dashboard.flowabl.io/api"
   : "/api";
 
 export const serviceUrl = {
   resourceFeatures: () => `${BASE_URL}/features`,
   resourceNavigation: () => `${BASE_URL}/navigation`,
+  resourceSubscription: () => `${BASE_URL}/subscription`,
   resourceUserProfile: () => `${BASE_URL}/profile`,
 };
 
@@ -49,7 +50,9 @@ export const cancellableResolver = ({ url, method, body, ...config }) => {
 export const resolver = {
   query: (url) => () => axios.get(url).then((response) => response.data),
   postMutation: (request) => axios.post(request),
-  postCreateBug: (request) => axios.post(serviceUrl.resourceFeatures(), request),
+  postFeature: (request) => axios.post(serviceUrl.resourceFeatures(), request),
+  postSubscription: (request) => axios.post(serviceUrl.resourceSubscription(), request),
+  putSubscription: (request) => axios.post(serviceUrl.resourceSubscription(), request),
   patchMutation: (request) => axios.patch(request),
   putMutation: (request) => axios.put(request),
 };
