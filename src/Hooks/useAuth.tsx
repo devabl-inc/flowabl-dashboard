@@ -108,7 +108,8 @@ export function AuthProvider(props: AuthProviderProps) {
        * aka why does Stripe suck here
        */
       if (tier === "explorer") {
-        history.push("");
+        const newSubToken = await createSignUpToken(user.email as string, tier, interval, user.displayName as string);
+        history.push(`?signUpToken=${newSubToken}`);
         return;
       }
 
@@ -254,9 +255,11 @@ async function checkoutUser(user: User, priceId: string, tier: string, interval:
   const sessionDocRef = await doc(collection(db, `customers/${user.uid}`, "checkout_sessions"));
   const newSubToken = await createSignUpToken(user.email as string, tier, interval, user.displayName as string);
   if (newSubToken) {
+    const redirectUrl = new URL("https://dashboard.flowabl.io");
+    redirectUrl.searchParams.append("signUpToken", newSubToken);
     await setDoc(sessionDocRef, {
       price: priceId,
-      success_url: `https://dashboard.flowabl.io?signUpToken=${newSubToken}`,
+      success_url: redirectUrl.toString(),
       cancel_url: "https://flowabl.io/pricing",
     });
   }
