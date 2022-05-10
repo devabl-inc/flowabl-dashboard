@@ -88,15 +88,16 @@ function createBoomerangServer({
     console.log({ body: req.body });
     const { name, email, tier } = req.body;
     try {
-      await axios.post(
-        `${FLOW_WEBOOK_URL}?workflowId=${JOIN_EMAIL_WORKFLOW_ID}&type=generic&access_token=${FLOW_ACCESS_TOKEN}`,
-        {
-          email,
-          name,
-          tier,
-          type: "create",
-        }
-      );
+      const url = new URL(FLOW_WEBOOK_URL);
+      url.searchParams.append("workflowId", JOIN_EMAIL_WORKFLOW_ID);
+      url.searchParams.append("type", "generic");
+      url.searchParams.append("access_token", FLOW_ACCESS_TOKEN);
+      await axios.post(url.toString(), {
+        email,
+        name,
+        tier,
+        type: "create",
+      });
       res.send(200);
     } catch (e) {
       console.log(`Something went wrong initializing the subscription for the user`);

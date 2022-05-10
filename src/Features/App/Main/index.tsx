@@ -29,7 +29,7 @@ interface MainProps {
 }
 
 function Main({ user }: MainProps) {
-  const { isRedirecting } = useAuth();
+  const { isRedirecting, isAuthenticating } = useAuth();
   const queryParams = useQueryParams();
   const history = useHistory();
 
@@ -60,7 +60,7 @@ function Main({ user }: MainProps) {
         console.log("Something went wrong creating your account. Try again.");
       });
     }
-  }, [signUpToken]);
+  }, [signUpToken, user?.email]);
 
   if (isRedirecting || signUpToken) {
     return (
