@@ -2,15 +2,16 @@ import * as React from "react";
 import { useAuth } from "Hooks";
 import {
   Button,
-  RadioTile,
+  Tile,
   UnorderedList,
   ListItem,
   FeatureHeader,
   FeatureHeaderTitle,
   FeatureHeaderSubtitle,
   Loading,
+  Link,
 } from "@boomerang-io/carbon-addons-boomerang-react";
-import { Delete16 } from "@carbon/icons-react";
+import { Delete16, Launch16 } from "@carbon/icons-react";
 import { SubscriptionConfigs, Tiers } from "Config/appConfig";
 import { FlowablSubscription } from "Utils/types";
 import styles from "./Subscription.module.scss";
@@ -26,6 +27,14 @@ export default function Subscription() {
   const handleOnClick = (subscription: FlowablSubscription) => () => {
     setSelectedTier(subscription);
     //TODO add in CustomerPortal part.
+  };
+
+  const handleChange = () => {
+    // Do something with selectedTier
+  };
+
+  const handleChange = () => {
+    // Do something with selectedTier
   };
 
   const handleCancel = () => {
@@ -47,119 +56,127 @@ export default function Subscription() {
           <h2 className={styles.sectionTitle}>Your subscription</h2>
           <dl className={styles.contentContainer}>
             <div>
-              <dt className={styles.contentLabel}>Tier</dt>
               <dd className={styles.contentText}>
                 You are on the <strong>{selectedTier.name}</strong> tier.
               </dd>
-            </div>
-            <div>
-              <dt className={styles.contentLabel}>What you get</dt>
               <dd className={styles.contentText}>
-                {" "}
-                <UnorderedList>
-                  <ListItem>Visual Workflow Editor</ListItem>
-                  <ListItem>Teams</ListItem>
-                  <ListItem>Custom Tasks</ListItem>
-                  <ListItem>50 workflows</ListItem>
-                  <ListItem>200 executions per month</ListItem>
-                  <ListItem>5 concurrent executions</ListItem>
-                  <ListItem>2 hr execution duration</ListItem>
-                  <ListItem>Persistent Storage</ListItem>
-                  <ListItem>Insights for 1 year</ListItem>
-                  <ListItem>Premium support (addon)</ListItem>
-                </UnorderedList>
+                <Link
+                  visited={false}
+                  href="https://flowabl.io/pricing"
+                  renderIcon={Launch16}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Learn more about what you get
+                </Link>
               </dd>
             </div>
           </dl>
         </section>
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Manage subscription (coming soon!)</h2>
+          <h2 className={styles.sectionTitle}>Manage subscription</h2>
           <div className={styles.tilesContainer}>
-            <RadioTile
-              disabled
-              checked={selectedTier.product === Tiers.Explorer}
-              value={Tiers.Explorer}
-              className={styles.tile}
-              onClick={handleOnClick(SubscriptionConfigs[Tiers.Explorer])}
-            >
-              <h2 className={styles.tileTitle}>Explorer</h2>
+            <Tile className={styles.tile}>
+              <header>
+                <h2 className={styles.tileTitle}>Explorer</h2>
+                <p className={styles.tileDescription}>Explore and discover.</p>
+              </header>
+              <div>
+                <Button
+                  disabled={selectedTier.product === Tiers.Explorer}
+                  kind="tertiary"
+                  onClick={handleOnClick(SubscriptionConfigs[Tiers.Explorer])}
+                  className={styles.tileButton}
+                >
+                  {selectedTier.product === Tiers.Explorer ? "Current Plan" : "Change Plan"}
+                </Button>
+              </div>
               <UnorderedList>
-                <ListItem>Visual Workflow Editor</ListItem>
+                <ListItem>Visual Drag-and-Drop Workflow Editor</ListItem>
                 <ListItem>Single User</ListItem>
                 <ListItem>2 workflows</ListItem>
                 <ListItem>10 executions per month</ListItem>
-                <ListItem>30 min execution duration</ListItem>
-                <ListItem>Insights for 30 days</ListItem>
+                <ListItem>10 min execution duration</ListItem>
               </UnorderedList>
-            </RadioTile>
-            <RadioTile
-              disabled
-              checked={selectedTier.product === Tiers.Starter}
-              value={Tiers.Starter}
-              className={styles.tile}
-              onClick={handleOnClick(SubscriptionConfigs[Tiers.Starter])}
-            >
-              <h2 className={styles.tileTitle}>Starter</h2>
+            </Tile>
+            <Tile className={styles.tile}>
+              <header>
+                <h2 className={styles.tileTitle}>Starter</h2>
+                <p className={styles.tileDescription}>Start with the basics.</p>
+              </header>
+              <div>
+                <Button
+                  disabled={selectedTier.product === Tiers.Starter}
+                  kind="tertiary"
+                  onClick={handleOnClick(SubscriptionConfigs[Tiers.Starter])}
+                  className={styles.tileButton}
+                >
+                  {selectedTier.product === Tiers.Starter ? "Current Plan" : "Change Plan"}
+                </Button>
+              </div>
               <UnorderedList>
-                <ListItem>Visual Workflow Editor</ListItem>
+                <ListItem>Visual Drag-and-Drop Workflow Editor</ListItem>
                 <ListItem>Single User</ListItem>
-                <ListItem>10 workflows</ListItem>
-                <ListItem>40 executions per month</ListItem>
+                <ListItem>20 workflows</ListItem>
+                <ListItem>100 executions per month</ListItem>
                 <ListItem>2 concurrent executions</ListItem>
-                <ListItem>2 hr execution duration</ListItem>
-                <ListItem>Persistent Storage</ListItem>
-                <ListItem>Insights for 90 days</ListItem>
+                <ListItem>1 hr execution duration</ListItem>
               </UnorderedList>
-            </RadioTile>
-            <RadioTile
-              disabled
-              checked={selectedTier.product === Tiers.Maker}
-              value={Tiers.Maker}
-              className={styles.tile}
-              onClick={handleOnClick(SubscriptionConfigs[Tiers.Maker])}
-            >
-              <h2 className={styles.tileTitle}>Maker</h2>
+            </Tile>
+            <Tile className={styles.tile}>
+              <header>
+                <h2 className={styles.tileTitle}>Maker</h2>
+                <p className={styles.tileDescription}>Expand your automation.</p>
+              </header>
+              <div>
+                <Button
+                  disabled={selectedTier.product === Tiers.Maker}
+                  kind="tertiary"
+                  onClick={handleOnClick(SubscriptionConfigs[Tiers.Maker])}
+                  className={styles.tileButton}
+                >
+                  {selectedTier.product === Tiers.Maker ? "Current Plan" : "Change Plan"}
+                </Button>
+              </div>
               <UnorderedList>
-                <ListItem>Visual Workflow Editor</ListItem>
-                <ListItem>Teams</ListItem>
+                <ListItem>Visual Drag-and-Drop Workflow Editor</ListItem>
+                <ListItem>Unlimited User Teams</ListItem>
+                <ListItem>200 workflows</ListItem>
+                <ListItem>1,000 executions per month</ListItem>
+                <ListItem>10 concurrent executions</ListItem>
+                <ListItem>4 hr execution duration</ListItem>
                 <ListItem>Custom Tasks</ListItem>
-                <ListItem>50 workflows</ListItem>
-                <ListItem>200 executions per month</ListItem>
-                <ListItem>5 concurrent executions</ListItem>
-                <ListItem>2 hr execution duration</ListItem>
-                <ListItem>Persistent Storage</ListItem>
-                <ListItem>Insights for 1 year</ListItem>
-                <ListItem>Premium support (addon)</ListItem>
               </UnorderedList>
-            </RadioTile>
-            <RadioTile
-              disabled
-              checked={selectedTier.product === Tiers.Premium}
-              className={styles.tile}
-              value={Tiers.Premium}
-              onClick={handleOnClick(SubscriptionConfigs[Tiers.Premium])}
-            >
-              <h2 className={styles.tileTitle}>Scaler</h2>
+            </Tile>
+            <Tile className={styles.tile}>
+              <header>
+                <h2 className={styles.tileTitle}>Scaler</h2>
+                <p className={styles.tileDescription}>For established automation.</p>
+              </header>
+              <div>
+                <Button
+                  disabled={selectedTier.product === Tiers.Scaler}
+                  kind="tertiary"
+                  onClick={handleOnClick(SubscriptionConfigs[Tiers.Scaler])}
+                  className={styles.tileButton}
+                >
+                  {selectedTier.product === Tiers.Scaler ? "Current Plan" : "Change Plan"}
+                </Button>
+              </div>
               <UnorderedList>
-                <ListItem>Visual Workflow Editor</ListItem>
-                <ListItem>Teams</ListItem>
-                <ListItem>Custom Tasks</ListItem>
-                <ListItem>500 workflows</ListItem>
-                <ListItem>2,000 executions per month</ListItem>
-                <ListItem>5 concurrent executions</ListItem>
+                <ListItem>Visual Drag-and-Drop Workflow Editor</ListItem>
+                <ListItem>Unlimited User Teams</ListItem>
+                <ListItem>1,000 workflows</ListItem>
+                <ListItem>20,000 executions per month</ListItem>
+                <ListItem>100 concurrent executions</ListItem>
                 <ListItem>24 hr execution duration</ListItem>
-                <ListItem>Persistent Storage</ListItem>
-                <ListItem>Insights for 1 year</ListItem>
-                <ListItem>Premium support (addon)</ListItem>
-                <ListItem>Custom Workflows (addon)</ListItem>
-                <ListItem>Roadmap Partnership (addon)</ListItem>
-                <ListItem>Dedicated Instance (addon)</ListItem>
+                <ListItem>Custom Tasks</ListItem>
               </UnorderedList>
-            </RadioTile>
+            </Tile>
           </div>
         </section>
         <section className={styles.buttonsContainer}>
-          <Button disabled kind="danger" renderIcon={Delete16} onClick={handleCancel}>
+          <Button enabled kind="danger" renderIcon={Delete16} onClick={handleCancel}>
             Cancel Subscription
           </Button>
         </section>
