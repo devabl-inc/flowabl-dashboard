@@ -84,7 +84,13 @@ export function AuthProvider(props: AuthProviderProps) {
      * If they are an existing user just navigate to the home page
      */
     if (getAdditionalUserInfo(result)?.isNewUser) {
-      history.push("/new-user");
+      const newSubToken = await createSignUpToken(
+        user.email as string,
+        "explorer",
+        "month",
+        user.displayName as string
+      );
+      history.push(`?signUpToken=${newSubToken}`);
     } else {
       history.push("");
     }
@@ -97,7 +103,6 @@ export function AuthProvider(props: AuthProviderProps) {
 
       // This gives you a Google Access Token. You can use it to access the Google API.
       setUser(user);
-      setIsRedirecting(true);
 
       // Set up chat
       if (user?.email) {
@@ -114,6 +119,7 @@ export function AuthProvider(props: AuthProviderProps) {
         return;
       }
 
+      setIsRedirecting(true);
       // Redirect to Stripe if the user is new
       if (getAdditionalUserInfo(result)?.isNewUser) {
         // Gets data for selected tier and interval and creates subscription for user

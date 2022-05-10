@@ -29,7 +29,7 @@ interface MainProps {
 }
 
 function Main({ user }: MainProps) {
-  const { isRedirecting, isAuthenticating } = useAuth();
+  const { isRedirecting } = useAuth();
   const queryParams = useQueryParams();
   const history = useHistory();
 
@@ -41,7 +41,7 @@ function Main({ user }: MainProps) {
       signUpTokenDoc = await getSignUpToken(signUpToken, email);
       if (signUpTokenDoc) {
         const data = signUpTokenDoc.data();
-        const response = await resolver.postSubscription(data);
+        await resolver.postSubscription(data);
         await deleteSignUpToken(signUpTokenDoc);
         history.push({
           pathname: "/",
