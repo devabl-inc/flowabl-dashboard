@@ -25,6 +25,7 @@ export default function Subscription() {
 
   const handleOnClick = (subscription: FlowablSubscription) => () => {
     setSelectedTier(subscription);
+    //TODO add in CustomerPortal part.
   };
 
   const handleCancel = () => {

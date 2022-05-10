@@ -25,6 +25,7 @@ import {
 } from "firebase/firestore";
 import { Tiers } from "Config/appConfig";
 import { auth, db } from "Config/firebaseConfig";
+import { getFunctions, httpsCallable } from "firebase/functions";
 import type { FirebaseError } from "firebase/app";
 import type { DocumentData, DocumentSnapshot } from "firebase/firestore";
 import type { SubscriptionInterval, FlowablSubscription, Tier } from "Utils/types";
@@ -287,6 +288,17 @@ async function checkoutUser(user: User, priceId: string, tier: string, interval:
       }
     }
   );
+}
+
+async function createCustomerPortal() {
+  //TODO: need to pass through the Firebase app?!?!
+  const functions = getFunctions(app, 'us-west2');
+  const createPortalLink = await httpsCallable(functions, 'ext-firestore-stripe-subscriptions-createPortalLink');
+  //I think subToken needs to handle a type in the token as well of create, upgrade, downgrade, etc
+  const { data } = createPortalLink({ returnUrl: 'https://dashboard.flowabl.io?signUpToken=${newSubToken}' });
+  if (data.url) {
+    window.location.assign(data.url);
+  }
 }
 
 async function createSignUpToken(email: string, tier: string, interval: string, name: string) {
