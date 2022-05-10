@@ -33,6 +33,10 @@ export default function Subscription() {
     // Do something with selectedTier
   };
 
+  const handleChange = () => {
+    // Do something with selectedTier
+  };
+
   const handleCancel = () => {
     alert(`Are you sure? You will be dropped down to the 'free' tier.`);
   };
