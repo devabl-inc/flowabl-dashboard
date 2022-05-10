@@ -28,7 +28,7 @@ jobs:
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 7
+          version: 6
           run_install: false
 
       - name: Get pnpm store directory
@@ -50,7 +50,7 @@ jobs:
       - name: Build application
         run: pnpm run build
 
-      - name: Move build files
+      - name: Move build artifacts
         run: pnpm run postbuild
 
       - name: Set up QEMU
