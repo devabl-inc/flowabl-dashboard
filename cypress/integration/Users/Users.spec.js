@@ -13,7 +13,7 @@ afterEach(() => {
 
 describe("Users Detailed", function () {
   beforeEach(() => {
-    cy.visit(`http://localhost:3000/BMRG_APP_ROOT_CONTEXT${AppLink.Users()}`);
+    cy.visit(`http://localhost:3000${AppLink.Users()}`);
   });
 
   it("should render the corrent landing page", function () {
@@ -24,5 +24,4 @@ describe("Users Detailed", function () {
     cy.findByText("All Users").click();
     cy.url().should("contain", AppLink.UsersList());
   });
-
 });

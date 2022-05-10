@@ -6,15 +6,15 @@ import "Styles/styles.scss";
 
 async function main() {
   if (process.env.NODE_ENV === "development") {
-    if (window.location.pathname === "/BMRG_APP_ROOT_CONTEXT") {
-      window.location.pathname = "/BMRG_APP_ROOT_CONTEXT/";
+    if (window.location.pathname === "") {
+      window.location.pathname = "/";
       return;
     }
     const { worker } = require("./mocks/browser");
     await worker.start({
       onUnhandledRequest: "bypass",
       serviceWorker: {
-        url: "/BMRG_APP_ROOT_CONTEXT/mockServiceWorker.js",
+        url: "/mockServiceWorker.js",
       },
     });
   }

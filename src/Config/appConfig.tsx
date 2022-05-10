@@ -6,9 +6,7 @@ import { Tier, FlowablSubscription, SubscriptionInterval } from "Utils/types";
  * and added to the window as a global variable by the @boomerang/boomerang-webapp-server
  */
 export const APP_ROOT =
-  window._SERVER_DATA && window._SERVER_DATA.APP_ROOT !== undefined
-    ? window._SERVER_DATA.APP_ROOT
-    : "/BMRG_APP_ROOT_CONTEXT";
+  window._SERVER_DATA && window._SERVER_DATA.APP_ROOT !== undefined ? window._SERVER_DATA.APP_ROOT : "/";
 
 export const isDevEnv = process.env.NODE_ENV === "development";
 export const isTestEnv = process.env.NODE_ENV === "test";

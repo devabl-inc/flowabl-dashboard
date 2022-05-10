@@ -252,7 +252,7 @@ async function getPriceIdFromProducts({ tier, interval }: Required<ISignInArgs>)
 
 async function checkoutUser(user: User, priceId: string, tier: string, interval: string) {
   const sessionDocRef = await doc(collection(db, `customers/${user.uid}`, "checkout_sessions"));
-  const newSubToken = await createSignUpToken(user.email as string, tier, interval);
+  const newSubToken = await createSignUpToken(user.email as string, tier, interval, user.displayName as string);
   if (newSubToken) {
     await setDoc(sessionDocRef, {
       price: priceId,
@@ -289,10 +289,11 @@ async function checkoutUser(user: User, priceId: string, tier: string, interval:
   );
 }
 
-async function createSignUpToken(email: string, tier: string, interval: string) {
+async function createSignUpToken(email: string, tier: string, interval: string, name: string) {
   try {
     const newSubToken = crypto.randomUUID();
     await addDoc(collection(db, "signUpTokens"), {
+      name,
       email,
       tier,
       interval,
