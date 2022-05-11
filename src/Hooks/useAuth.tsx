@@ -93,6 +93,7 @@ export function AuthProvider(props: AuthProviderProps) {
       );
       history.push(`?signUpToken=${newSubToken}`);
     } else {
+      setIsRedirecting(true);
       history.push("");
     }
   }, []);
