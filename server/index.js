@@ -77,6 +77,13 @@ function createBoomerangServer({
   app.use("/ready", health.ReadinessEndpoint(healthchecker));
 
   /**
+   * Add Slack App 302 Redirect endpoint
+   */
+  app.get('/install-slack', (req, res) => {
+    res.redirect('https://slack.com/oauth/v2/authorize?client_id=1165425521975.3617708239458&scope=chat:write,commands,users:read,users:read.email&user_scope=');
+  });
+
+  /**
    * Add endpoint for posting to notion
    */
   const notion = new Client({
@@ -230,8 +237,8 @@ function injectEnvDataAndScriptsIntoHTML(res, buildDir, injectedDataKeys, inject
   // Build up string of scripts to append, absolute path
   const headScriptsTags = injectedScripts
     ? injectedScripts
-        .split(",")
-        .reduce((acc, currentValue) => `${acc}<script src="${appRoot}/${currentValue}"></script>`, "")
+      .split(",")
+      .reduce((acc, currentValue) => `${acc}<script src="${appRoot}/${currentValue}"></script>`, "")
     : "";
   // Set the response type so browser interprets it as an html file
   res.type(".html");
