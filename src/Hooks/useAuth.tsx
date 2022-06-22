@@ -24,7 +24,7 @@ import {
   QueryDocumentSnapshot,
 } from "firebase/firestore";
 import { Tiers } from "Config/appConfig";
-import { auth, db } from "Config/firebaseConfig";
+import { app, auth, db } from "Config/firebaseConfig";
 import { getFunctions, httpsCallable } from "firebase/functions";
 import type { FirebaseError } from "firebase/app";
 import type { DocumentData, DocumentSnapshot } from "firebase/firestore";
@@ -111,18 +111,18 @@ export function AuthProvider(props: AuthProviderProps) {
         window.$crisp.push(["set", "user:email", user.email]);
       }
 
-      /**
-       * First check on tier for "explorer" to NOT create Stripe subscription
-       * aka why does Stripe suck here
-       */
-      if (tier === "explorer") {
-        const newSubToken = await createSignUpToken(user.email as string, tier, interval, user.displayName as string);
-        history.push(`?signUpToken=${newSubToken}`);
-        return;
-      }
-
       // Redirect to Stripe if the user is new
       if (getAdditionalUserInfo(result)?.isNewUser) {
+        /**
+         * First check on tier for "explorer" to NOT create Stripe subscription
+         * aka why does Stripe suck here
+         */
+
+        if (tier === "explorer") {
+          const newSubToken = await createSignUpToken(user.email as string, tier, interval, user.displayName as string);
+          history.push(`?signUpToken=${newSubToken}`);
+          return;
+        }
         // Gets data for selected tier and interval and creates subscription for user
         const priceDocId = await getPriceIdFromProducts({ tier, interval });
         if (priceDocId) {
@@ -207,6 +207,7 @@ export function AuthProvider(props: AuthProviderProps) {
     subscription,
     isAuthenticating,
     isRedirecting,
+    setIsRedirecting,
     signInWithPopup,
     signUpWithPopup,
     logout,
@@ -300,16 +301,17 @@ async function checkoutUser(user: User, priceId: string, tier: string, interval:
   );
 }
 
-async function createCustomerPortal() {
-  //TODO: need to pass through the Firebase app?!?!
-  const functions = getFunctions(app, 'us-west2');
-  const createPortalLink = await httpsCallable(functions, 'ext-firestore-stripe-subscriptions-createPortalLink');
-  //I think subToken needs to handle a type in the token as well of create, upgrade, downgrade, etc
-  const { data } = createPortalLink({ returnUrl: 'https://dashboard.flowabl.io?signUpToken=${newSubToken}' });
-  if (data.url) {
-    window.location.assign(data.url);
-  }
-}
+// async function createCustomerPortal() {
+//   //TODO: need to pass through the Firebase app?!?!
+//   const functions = getFunctions(app, "us-west2");
+//   const createPortalLink = await httpsCallable(functions, "ext-firestore-stripe-subscriptions-createPortalLink");
+//   //I think subToken needs to handle a type in the token as well of create, upgrade, downgrade, etc
+//   const { data } = createPortalLink({ returnUrl: "https://dashboard.flowabl.io?signUpToken=${newSubToken}" });
+
+//   if (data.url) {
+//     window.location.assign(data.url);
+//   }
+// }
 
 async function createSignUpToken(email: string, tier: string, interval: string, name: string) {
   try {
